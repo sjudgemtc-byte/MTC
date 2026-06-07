@@ -326,6 +326,19 @@
       font-weight: 600;
     }
 
+    .scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: #fffdf0;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -602,6 +615,7 @@
           return `
             <div class="table-box">
               <h3>Transport and logistics data table</h3>
+              <div class="scroll-hint" aria-label="Scroll left and right hint">← Scroll left and right →</div>
               <div class="table-wrap">
                 <table class="wide-table">
                   <thead>
