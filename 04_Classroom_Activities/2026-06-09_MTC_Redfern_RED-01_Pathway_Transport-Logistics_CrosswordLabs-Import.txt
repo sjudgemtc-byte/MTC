@@ -1,0 +1,17 @@
+CANVAS online course site used in class
+MODULE section of a course in Canvas
+TYPING using a keyboard to enter words
+KEYBOARD tool used for typing on a computer
+LOGISTICS moving goods from one place to another
+TRANSPORT moving people or goods from one place to another
+DELIVERY taking goods to a person or place
+WAREHOUSE building where goods are stored
+DRIVER person who drives a vehicle for work
+ESTIMATE a calculated guess of cost or amount
+SURVEY a set of questions students answer
+TABLE rows and columns used to organise information
+DATAENTRY typing information into boxes or a table
+FILE a document saved on a computer
+LICENCE official permission to drive
+CHECKLIST list used to check work
+PROGRESS how well the work is going

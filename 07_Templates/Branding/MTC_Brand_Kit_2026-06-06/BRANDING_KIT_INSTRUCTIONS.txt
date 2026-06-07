@@ -1,0 +1,229 @@
+MTC Branding Kit Instructions
+
+Saved: 2026-06-06
+
+Purpose: practical guidance for building MTC teaching collateral, slide decks, handouts, and simple branded assets using the files saved in this brand kit.
+
+Important note:
+- This guide is based on the public MTC FutureReady website, the saved Living Our Brand Guidebook PDF, and the downloaded logo and icon files in this folder.
+- It should be treated as a working collateral guide, not a replacement for any internal master brand manual.
+
+Source material reviewed
+
+- Website: https://www.mtcfutureready.org.au/
+- Brand guide PDF: Brand_Guidelines/MTC FutureReady_LivingOurBrand_July2025.pdf
+- Logos: RGB and CMYK logo files in this folder
+- Icons: Icons/
+
+Brand essence
+
+Use collateral that feels:
+- optimistic
+- practical
+- encouraging
+- human
+- future-focused
+- clear rather than corporate-heavy
+
+Key brand language drawn from the guidebook:
+- Our purpose is helping you find yours.
+- Start here. Think big.
+- The further we look, the further we'll go.
+- We're with you all the way.
+- We'll be your biggest cheerleader.
+
+Core values to reflect in teaching collateral:
+- Empathy
+- Achievement
+- Innovation
+- Collaboration
+
+Visual direction
+
+The overall MTC look is:
+- bold and high-contrast
+- simple and modern
+- black, white, and bright yellow as the main visual anchors
+- supported by flat illustration and iconography
+- generous with whitespace
+- friendly, not overly formal
+
+For classroom materials, prefer:
+- strong headings
+- short supportive copy
+- one key message per section
+- large icons or illustrations rather than dense decoration
+
+Colour guidance
+
+Primary colours observed across the site and collateral:
+- MTC yellow: #FEF153
+- Black: #000000
+- White: #FFFFFF
+
+Secondary/support colours seen lightly on the public site:
+- Dark charcoal: #3F474F
+- Accent blue: #2EA3F2
+
+Recommended collateral use:
+- Use #FEF153 as the hero background, highlight block, callout strip, or accent panel.
+- Use black text on yellow or white for strongest readability.
+- Use white logo or white text only on dark backgrounds.
+- Keep blue and other secondary colours to a minimum unless the source material clearly calls for them.
+
+Typography
+
+Public web styling strongly suggests:
+- Rethink Sans as the preferred modern brand face
+
+Practical use:
+- If Rethink Sans is available, use it for headings and subheadings.
+- If it is not available in PowerPoint or Word, use a clean sans-serif fallback such as Arial, Aptos, or Calibri.
+- Keep headings bold and large.
+- Keep body copy straightforward and readable.
+
+Typography style:
+- headlines should be bold, simple, and confident
+- body text should be short, conversational, and uncluttered
+- avoid decorative fonts
+- avoid compressed text blocks
+
+Logo use
+
+Main logo files:
+- MTC_Logo_RGB.png
+- MTC_Logo_Black_RGB.png
+- MTC_Logo_White_RGB.png
+- MTC_Logo_Rev_RGB.png
+- CMYK equivalents for print
+
+Recommended use:
+- Use RGB files for PowerPoint, Word, online handouts, and screen use.
+- Use CMYK files only for print workflows.
+- Use the standard colour logo by default.
+- Use the black logo on very light backgrounds where the standard logo feels too busy.
+- Use the white logo on dark photographic or dark colour backgrounds.
+
+Logo placement:
+- top left or bottom left works well for teaching materials
+- keep plenty of clear space around the logo
+- do not stretch, recolour, or add effects
+- do not crowd the logo with other graphics
+
+Icon use
+
+Icon library:
+- see Icons/
+
+The icon style is:
+- simple
+- bold
+- friendly
+- easy to read at a glance
+- suitable for services, steps, themes, and activity categories
+
+Use icons:
+- one icon per idea or topic block
+- at a generous size so they remain legible
+- consistently across a deck or worksheet
+- near headings, section dividers, process steps, or program summaries
+
+Avoid:
+- mixing too many icon styles in one piece
+- using several small icons where one larger icon would be clearer
+- placing icons so close to text that the layout feels cramped
+
+Imagery and illustration
+
+From the website and guidebook, the supporting style leans toward:
+- people-first imagery
+- real participants and practical outcomes
+- optimistic, supportive scenes
+- clean illustration with strong outlines
+
+For teaching collateral:
+- choose images that show participation, progress, confidence, and support
+- prefer warm, genuine photos over glossy stock imagery
+- if using illustration, keep it simple and high-contrast
+
+Tone of voice
+
+Write in a way that is:
+- encouraging
+- direct
+- practical
+- calm
+- positive
+- inclusive
+
+Good writing cues:
+- help people feel capable
+- focus on progress and possibility
+- speak with warmth, not hype
+- be clear about the next step
+
+Useful phrases already aligned to the brand:
+- Start here. Think big.
+- Ready to create your future?
+- We're with you all the way.
+- Helping you take practical steps towards the future you want.
+- With us by your side, you're never alone.
+
+Avoid writing that feels:
+- cold
+- overly bureaucratic
+- jargon-heavy
+- pushy
+- negative or deficit-framed
+
+PowerPoint and teaching collateral rules
+
+For slide decks:
+- Use one bold title and one supporting message per slide.
+- Use yellow feature slides to break up sections.
+- Use icons to introduce modules, activities, or learning themes.
+- Keep text short and readable from the back of a room.
+- Use black text on white or yellow backgrounds as the default.
+
+Suggested slide structure:
+- title slide with strong yellow field and logo
+- section divider slides using one icon and a short phrase
+- content slides with simple headings, short bullets, and clear spacing
+- closing slide with logo and an encouraging call to action
+
+For handouts and worksheets:
+- keep margins open
+- use strong section headers
+- use icons to label exercises or categories
+- avoid overfilling pages with text
+
+Simple do and don't guide
+
+Do:
+- use the saved MTC logos and icons from this kit
+- keep layouts bold and uncluttered
+- lean on yellow, black, and white
+- write in a supportive and forward-looking tone
+- keep the content human and practical
+
+Don't:
+- invent a different colour system unless a specific program requires it
+- use overly formal corporate templates
+- crowd slides with text
+- stretch or restyle the logo
+- mix unrelated illustration styles
+
+Asset locations
+
+- Logos: this folder
+- Icons: Icons/
+- Brand PDF: Brand_Guidelines/MTC FutureReady_LivingOurBrand_July2025.pdf
+
+Best use in future work
+
+When building new MTC collateral, default to:
+1. yellow, black, and white
+2. bold sans-serif headings
+3. simple icon-led sections
+4. supportive future-focused wording
+5. one clear message per visual block

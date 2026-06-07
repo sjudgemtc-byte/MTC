@@ -1,0 +1,41 @@
+.DS_Store
+**/.DS_Store
+
+# Live or sensitive working areas stay in iCloud / local workspace
+00_Admin/
+01_Lesson_Plans/
+02_Assessments/
+03_Learner_Guides/
+05_Kahoots_Quizzes/
+06_Student_Evidence/
+08_Apps_Tools/
+99_Archive/
+Activities/
+outputs/
+
+# Generated working files are excluded by default unless explicitly whitelisted
+generated/*
+!generated/activity_notes/
+!generated/activity_notes/**
+!generated/scripts/
+!generated/scripts/**
+!generated/build_weekly_lesson_plan_*.py
+!generated/search_files_for_week.sh
+
+# Ignore generated scratch, previews, and temporary bundles
+generated/rendered_*/
+generated/tmp_*/
+
+# Keep the reusable systems and templates
+!04_Classroom_Activities/
+!04_Classroom_Activities/**
+!07_Templates/
+!07_Templates/**
+!templates/
+!templates/presentations/
+!templates/presentations/**
+
+# Re-ignore low-value files after whitelisting reusable folders
+**/.DS_Store
+07_Templates/Branding/**/source-archive*.zip
+07_Templates/Branding/**/_index/*.png
