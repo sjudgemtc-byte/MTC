@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Virtual Gallery Practice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --line: #d9d9d9;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --soft: #f5f5f5;
+      --success: #1d6b37;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Rethink Sans", Arial, sans-serif; color: var(--ink); background:
+      radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+      linear-gradient(180deg, #ffffff 0%, #fafafa 100%); min-height: 100vh; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 18px 44px; }
+    .hero { background:
+      linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid #111111; border-radius: 28px; padding: 28px 24px 26px; box-shadow: var(--shadow); margin-bottom: 20px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; right: -60px; bottom: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(17, 17, 17, 0.06); }
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; position: relative; z-index: 1; }
+    .brand-home { display: inline-block; line-height: 0; }
+    .brand-lockup { max-width: 170px; width: 100%; height: auto; }
+    .hero h1 { margin: 0 0 10px; font-size: 2.35rem; line-height: 1.02; letter-spacing: -0.03em; }
+    .hero p { margin: 0; max-width: 64ch; line-height: 1.55; font-size: 1.02rem; }
+    .hero-copy { max-width: 690px; }
+    .hero-kicker { display: inline-block; margin-bottom: 12px; padding: 7px 12px; border-radius: 999px; border: 1.5px solid #111111; background: rgba(255, 255, 255, 0.72); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+    .activity-menu { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+    .activity-menu a { display: inline-block; padding: 10px 14px; border-radius: 999px; border: 1.5px solid #111111; background: #ffffff; color: #111111; text-decoration: none; font-weight: 800; }
+    .activity-menu a.current { background: var(--brand); }
+    .layout { display: grid; grid-template-columns: 280px 1fr; gap: 18px; }
+    .side, .main { background: var(--panel); border: 1.5px solid #111111; border-radius: 22px; box-shadow: var(--shadow); }
+    .side { padding: 18px; align-self: start; position: sticky; top: 18px; }
+    .side h2 { margin: 0 0 12px; font-size: 1.04rem; }
+    .step-list { display: grid; gap: 10px; }
+    .step-button { width: 100%; text-align: left; border: 1.5px solid #111111; background: #fff; border-radius: 16px; padding: 12px 14px; cursor: pointer; font-size: 0.96rem; font-weight: 800; color: var(--ink); transition: transform 120ms ease, background 120ms ease; }
+    .step-button:hover { transform: translateY(-1px); }
+    .step-button.active { background: var(--brand); border-color: #111111; }
+    .side-note { margin-top: 14px; padding: 12px; border-radius: 16px; background: #f6f6f6; border: 1px solid #111111; color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+    .main { padding: 22px; }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; background: var(--brand); border: 1.5px solid #111111; font-size: 0.84rem; font-weight: 800; color: #111111; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .lesson-title { margin: 0 0 10px; font-size: 1.9rem; line-height: 1.08; letter-spacing: -0.02em; }
+    .lesson-text { margin: 0 0 16px; line-height: 1.55; color: #2e2e28; }
+    .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0 18px; }
+    .card { border: 1.5px solid #111111; background: #fff; border-radius: 18px; padding: 14px; }
+    .card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .card p, .card li { line-height: 1.45; margin: 0; }
+    .card a, .practice-box a, .reflection-box a { color: #111111; font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .checklist { display: grid; gap: 10px; margin: 14px 0 18px; }
+    .check-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border-radius: 16px; background: #fff; border: 1.5px solid #111111; }
+    .check-row input { margin-top: 2px; transform: scale(1.2); }
+    .practice-box, .quiz-card, .reflection-box { margin-top: 18px; padding: 16px; border: 1.5px solid #111111; border-radius: 20px; background: #ffffff; }
+    .practice-box h3, .reflection-box h3 { margin: 0 0 10px; }
+    .practice-box ol, .reflection-box ul { margin: 0; padding-left: 20px; line-height: 1.55; }
+    .nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 22px; }
+    .nav button, .action-row button { border: 0; border-radius: 999px; padding: 12px 18px; font-size: 0.98rem; font-weight: 800; cursor: pointer; border: 1.5px solid #111111; }
+    .primary { background: var(--brand); color: #111111; }
+    .secondary { background: #ffffff; color: var(--ink); }
+    .quiz { display: grid; gap: 14px; margin-top: 18px; }
+    .quiz-card p { margin: 0 0 10px; font-weight: 800; }
+    .quiz-card label { display: block; margin: 8px 0; font-weight: 400; cursor: pointer; }
+    .quiz-result { margin-top: 14px; font-weight: 700; color: var(--success); }
+    .footer-note { margin-top: 18px; padding-top: 14px; border-top: 2px solid #111111; font-size: 0.92rem; color: var(--muted); }
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .card-grid { grid-template-columns: 1fr; }
+      .hero-top { flex-direction: column-reverse; }
+      .brand-lockup { max-width: 150px; }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Virtual Gallery Practice</h1>
+          <p>Learn how to enter a virtual gallery in Google Arts &amp; Culture, move around the space, and explore artworks with confidence.</p>
+        </div>
+        <a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="../">All activities</a>
+      <a href="../google-tasks-practice/">Google Tasks Practice</a>
+      <a href="../apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+      <a href="./" class="current">Virtual Gallery Practice</a>
+      <a href="../winter-travel-comparison/">Winter Travel Comparison 2026</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note">
+          Tip: if the gallery feels confusing at first, go slowly. Try one click at a time and look for the main button that says <strong>Enter Gallery</strong>.
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">Virtual galleries are a good way to build confidence with links, buttons, on-screen navigation, and exploring online spaces.</div>
+        <div class="nav">
+          <button class="secondary" id="prevBtn">Previous</button>
+          <button class="primary" id="nextBtn">Next</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const galleryUrl = "https://artsandculture.google.com/pocketgallery/2QXBS8ilfIZKNA";
+
+    const lessons = [
+      {
+        title: "What is a virtual gallery?",
+        text: "A virtual gallery is an online art space that you can explore on a computer, tablet, or phone.",
+        render() { return `
+            <div class="card-grid">
+              <div class="card"><h3>What you can do</h3><ul><li>open the gallery link</li><li>enter the space</li><li>look at artworks</li><li>move from one area to another</li></ul></div>
+              <div class="card"><h3>Why this matters</h3><p>This builds digital confidence with links, buttons, visual navigation, and exploring online spaces independently.</p></div>
+            </div>
+            <div class="practice-box"><h3>Quick discussion</h3><ol><li>Have you used a virtual tour before?</li><li>What do you think might be easy or difficult about entering an online gallery?</li></ol></div>`; }
+      },
+      {
+        title: "Open the gallery page",
+        text: "Start by opening the Google Arts & Culture gallery link.",
+        render() { return `
+            <div class="card-grid">
+              <div class="card"><h3>Gallery link</h3><p><a href="${galleryUrl}" target="_blank" rel="noopener noreferrer">Open the virtual gallery</a></p><p>This gallery is called <strong>The Barilla Collection of Modern Art in Parma</strong>.</p></div>
+              <div class="card"><h3>What you should see</h3><p>Look for the gallery title, a short description, and a main button that says <strong>Enter Gallery</strong>.</p></div>
+            </div>
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>I can open the gallery link.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can find the main page for the gallery.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can see the button that says <strong>Enter Gallery</strong>.</span></label>
+            </div>`; }
+      },
+      {
+        title: "Enter the gallery",
+        text: "Click the main button to go into the virtual space.",
+        render() { return `
+            <div class="practice-box"><h3>Steps</h3><ol><li>Open the gallery page.</li><li>Find the button that says <strong>Enter Gallery</strong>.</li><li>Click or tap the button once.</li><li>Wait while the gallery loads.</li></ol></div>
+            <div class="card-grid">
+              <div class="card"><h3>If it loads slowly</h3><p>Be patient and wait a moment. Some virtual spaces take a little longer to open.</p></div>
+              <div class="card"><h3>If you get stuck</h3><p>Try refreshing the page, checking your internet, or asking for help with the first click.</p></div>
+            </div>`; }
+      },
+      {
+        title: "Move around the space",
+        text: "Use the on-screen controls or your device controls to look around and move through the gallery.",
+        render() { return `
+            <div class="card-grid">
+              <div class="card"><h3>On a computer</h3><ul><li>use your mouse or trackpad</li><li>click where you want to move</li><li>look for arrows or movement points</li></ul></div>
+              <div class="card"><h3>On a phone or tablet</h3><ul><li>tap the screen</li><li>swipe to look around</li><li>follow any on-screen directions</li></ul></div>
+            </div>
+            <div class="reflection-box"><h3>Think about it</h3><ul><li>What happens when you click or tap inside the gallery?</li><li>How do you know where to move next?</li></ul></div>`; }
+      },
+      {
+        title: "Look closely at artworks",
+        text: "Take time to stop, look, and notice details in the artworks around you.",
+        render() { return `
+            <div class="card-grid">
+              <div class="card"><h3>Things to notice</h3><ul><li>colour</li><li>size</li><li>style</li><li>how the artwork makes you feel</li></ul></div>
+              <div class="card"><h3>Good learner habit</h3><p>Move slowly and read any labels or information boxes you find.</p></div>
+            </div>
+            <div class="practice-box"><h3>Practice task</h3><ol><li>Find one artwork you like.</li><li>Say why you chose it.</li><li>Describe one detail you noticed.</li></ol></div>`; }
+      },
+      {
+        title: "Talk about your experience",
+        text: "After using the gallery, practise speaking or writing about what you did.",
+        render() { return `
+            <div class="practice-box"><h3>Speaking or writing prompts</h3><ol><li>Was it easy or difficult to enter the gallery?</li><li>How did you move around the space?</li><li>What artwork did you notice?</li><li>Would you like to use a virtual gallery again?</li></ol></div>
+            <div class="card-grid">
+              <div class="card"><h3>Helpful sentence starters</h3><ul><li>I opened the gallery by...</li><li>I found the Enter Gallery button...</li><li>I moved around by...</li><li>I liked this artwork because...</li></ul></div>
+              <div class="card"><h3>Digital skill focus</h3><p>This activity practises opening links, finding buttons, following on-screen instructions, and speaking about digital tasks.</p></div>
+            </div>`; }
+      },
+      {
+        title: "Quick check",
+        text: "Answer the questions below to check what you learned.",
+        render() { return `
+            <div class="quiz">
+              <div class="quiz-card"><p>1. What button do you need to click to go into the gallery?</p><label><input type="radio" name="q1" value="a"> Exit</label><label><input type="radio" name="q1" value="b"> Enter Gallery</label><label><input type="radio" name="q1" value="c"> Translate</label></div>
+              <div class="quiz-card"><p>2. What should you do if the gallery takes time to load?</p><label><input type="radio" name="q2" value="a"> Wait a moment</label><label><input type="radio" name="q2" value="b"> Turn the computer off</label><label><input type="radio" name="q2" value="c"> Delete the page</label></div>
+              <div class="quiz-card"><p>3. What is one thing you can practise in a virtual gallery?</p><label><input type="radio" name="q3" value="a"> Opening links and moving around online</label><label><input type="radio" name="q3" value="b"> Cooking dinner</label><label><input type="radio" name="q3" value="c"> Washing clothes</label></div>
+            </div>
+            <div class="nav" style="margin-top:18px;"><div></div><button class="primary" onclick="checkQuiz()">Check answers</button></div>
+            <div class="quiz-result" id="quizResult"></div>`; }
+      }
+    ];
+    let currentStep = 0;
+    function renderStepList() { const stepList = document.getElementById("stepList"); stepList.innerHTML = ""; lessons.forEach((lesson, index) => { const button = document.createElement("button"); button.className = "step-button" + (index === currentStep ? " active" : ""); button.textContent = `${index + 1}. ${lesson.title}`; button.addEventListener("click", () => { currentStep = index; renderLesson(); }); stepList.appendChild(button); }); }
+    function renderLesson() { const lesson = lessons[currentStep]; document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`; document.getElementById("lessonTitle").textContent = lesson.title; document.getElementById("lessonText").textContent = lesson.text; document.getElementById("lessonContent").innerHTML = lesson.render(); document.getElementById("prevBtn").disabled = currentStep === 0; document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1; renderStepList(); }
+    function checkQuiz() { let score = 0; if (document.querySelector('input[name="q1"]:checked')?.value === "b") score++; if (document.querySelector('input[name="q2"]:checked')?.value === "a") score++; if (document.querySelector('input[name="q3"]:checked')?.value === "a") score++; document.getElementById("quizResult").textContent = `You got ${score} out of 3 correct.`; }
+    document.getElementById("prevBtn").addEventListener("click", () => { if (currentStep > 0) { currentStep--; renderLesson(); } });
+    document.getElementById("nextBtn").addEventListener("click", () => { if (currentStep < lessons.length - 1) { currentStep++; renderLesson(); } });
+    renderLesson();
+  </script>
+</body>
+</html>

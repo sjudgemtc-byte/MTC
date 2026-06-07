@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Winter Travel Comparison 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --line: #d9d9d9;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --soft: #f5f5f5;
+      --success: #1d6b37;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 18px 44px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid #111111;
+      border-radius: 28px;
+      padding: 28px 24px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-lockup {
+      max-width: 170px;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2.35rem;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 68ch;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .activity-menu a.current {
+      background: var(--brand);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 18px;
+    }
+
+    .side,
+    .main {
+      background: var(--panel);
+      border: 1.5px solid #111111;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .side {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .side h2 {
+      margin: 0 0 12px;
+      font-size: 1.04rem;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step-button {
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid #111111;
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--ink);
+      transition: transform 120ms ease, background 120ms ease;
+    }
+
+    .step-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .step-button.active {
+      background: var(--brand);
+    }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #f6f6f6;
+      border: 1px solid #111111;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .main {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand);
+      border: 1.5px solid #111111;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #111111;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .lesson-title {
+      margin: 0 0 10px;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .lesson-text {
+      margin: 0 0 16px;
+      line-height: 1.55;
+      color: #2e2e28;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+
+    .card {
+      border: 1.5px solid #111111;
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .card p,
+    .card li {
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .card a,
+    .practice-box a,
+    .assignment-box a {
+      color: #111111;
+      font-weight: 800;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .practice-box,
+    .assignment-box,
+    .reflection-box,
+    .quiz-card {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1.5px solid #111111;
+      border-radius: 20px;
+      background: #ffffff;
+    }
+
+    .practice-box h3,
+    .assignment-box h3,
+    .reflection-box h3 {
+      margin: 0 0 10px;
+    }
+
+    .practice-box ol,
+    .reflection-box ul,
+    .assignment-box ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.55;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1.5px solid #111111;
+    }
+
+    .check-row input {
+      margin-top: 2px;
+      transform: scale(1.2);
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button,
+    .button-link {
+      border: 1.5px solid #111111;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      cursor: pointer;
+      background: #ffffff;
+      color: #111111;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .primary {
+      background: var(--brand);
+    }
+
+    .assignment-box {
+      background: #fffdf0;
+    }
+
+    .assignment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .assignment-card {
+      border: 1.5px solid #111111;
+      border-radius: 18px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .assignment-card h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .assignment-card p {
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    .field-row {
+      display: grid;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #111111;
+      border-radius: 14px;
+      font: inherit;
+    }
+
+    .copy-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1.5px dashed #111111;
+      background: #ffffff;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .quiz {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .quiz-card p {
+      margin: 0 0 10px;
+      font-weight: 800;
+    }
+
+    .quiz-card label {
+      display: block;
+      margin: 8px 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .quiz-result {
+      margin-top: 14px;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2px solid #111111;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        position: static;
+      }
+
+      .card-grid,
+      .assignment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-top {
+        flex-direction: column-reverse;
+      }
+
+      .brand-lockup {
+        max-width: 150px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Winter Travel Comparison 2026</h1>
+          <p>Learn how to compare two travel destinations for Australian winter 2026, research useful information, and enter your findings into a spreadsheet template.</p>
+        </div>
+        <a class="brand-home" href="https://sjudgemtc-byte.github.io/MTC/" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="/Users/simonjudge/Documents/MTC/07_Templates/Branding/MTC_Brand_Kit_2026-06-06/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="https://sjudgemtc-byte.github.io/MTC/">All activities</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/google-tasks-practice/">Google Tasks Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/virtual-gallery-practice/">Virtual Gallery Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/winter-travel-comparison/" class="current">Winter Travel Comparison 2026</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note">
+          Tip: this task is about <strong>Australian winter</strong>, which means <strong>June, July, and August 2026</strong>. In the northern hemisphere, that may be summer.
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">This activity builds skills in research, spreadsheet use, comparing information, understanding seasons in different countries, and making a simple recommendation.</div>
+        <div class="action-row" style="justify-content: space-between; margin-top: 22px;">
+          <button id="prevBtn">Previous</button>
+          <button id="nextBtn" class="primary">Next</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const templateUrl = "https://docs.google.com/spreadsheets/d/1bAc8WtISGNAb1BMkhVbe3VutZMXjzkEsJjOxGa9oCl0/edit?gid=0#gid=0";
+
+    const destinations = [
+      {
+        name: "Queenstown, New Zealand",
+        country: "New Zealand",
+        winterType: "June to August is cold winter, snow, ski season",
+        activities: "skiing, lake views, adventure tourism",
+        budget: "medium to high"
+      },
+      {
+        name: "Cairns, Australia",
+        country: "Australia",
+        winterType: "June to August is dry season, mild winter",
+        activities: "reef trips, warm weather, nature",
+        budget: "medium"
+      },
+      {
+        name: "Tokyo, Japan",
+        country: "Japan",
+        winterType: "June to August is summer in the northern hemisphere",
+        activities: "shopping, food, culture, day trips",
+        budget: "medium to high"
+      },
+      {
+        name: "Hobart, Tasmania",
+        country: "Australia",
+        winterType: "June to August is cool winter",
+        activities: "museums, food, markets, nature",
+        budget: "medium"
+      },
+      {
+        name: "Seoul, South Korea",
+        country: "South Korea",
+        winterType: "June to August is summer in the northern hemisphere",
+        activities: "city sights, culture, food, shopping",
+        budget: "medium"
+      },
+      {
+        name: "Perth, Australia",
+        country: "Australia",
+        winterType: "June to August is mild winter",
+        activities: "city break, beaches, local travel",
+        budget: "medium"
+      },
+      {
+        name: "Vancouver, Canada",
+        country: "Canada",
+        winterType: "June to August is summer in the northern hemisphere",
+        activities: "city sightseeing, mountains, museums",
+        budget: "high"
+      },
+      {
+        name: "Bali, Indonesia",
+        country: "Indonesia",
+        winterType: "June to August is dry season, warm weather",
+        activities: "beaches, relaxation, culture, food",
+        budget: "low to medium"
+      },
+      {
+        name: "Melbourne, Australia",
+        country: "Australia",
+        winterType: "June to August is cool winter",
+        activities: "sport, laneways, food, events",
+        budget: "medium"
+      },
+      {
+        name: "Christchurch, New Zealand",
+        country: "New Zealand",
+        winterType: "June to August is cold winter",
+        activities: "city touring, nearby snow, gardens",
+        budget: "medium"
+      }
+    ];
+
+    let currentStep = 0;
+    let assignment = null;
+
+    function getRandomPair() {
+      const shuffled = [...destinations].sort(() => Math.random() - 0.5);
+      return [shuffled[0], shuffled[1]];
+    }
+
+    function ensureAssignment() {
+      if (!assignment) {
+        const [first, second] = getRandomPair();
+        assignment = { first, second };
+      }
+    }
+
+    function buildAssignmentText() {
+      const studentName = document.getElementById("studentName")?.value.trim() || "Student";
+      ensureAssignment();
+      return `${studentName}\nWinter Travel Comparison 2026\n\nThis task is about Australian winter: June, July, and August 2026.\n\nDestination 1: ${assignment.first.name}\nDestination 2: ${assignment.second.name}\n\nTemplate link:\n${templateUrl}\n\nResearch these areas:\n- weather in June to August 2026\n- cost or budget\n- flights or travel time\n- accommodation\n- activities or attractions\n- why each place could be a good choice at that time of year\n\nFinal task:\nChoose one destination and explain your reason.`;
+    }
+
+    const lessons = [
+      {
+        title: "What is this activity?",
+        text: "You will compare two travel destinations for Australian winter 2026 and enter your ideas into a spreadsheet template.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>You will practise</h3>
+                <ul>
+                  <li>opening a spreadsheet</li>
+                  <li>researching simple travel information</li>
+                  <li>comparing two places</li>
+                  <li>making a final choice</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Important season idea</h3>
+                <p>Australian winter is <strong>June, July, and August</strong>. At the same time, places in the northern hemisphere may be in <strong>summer</strong>.</p>
+              </div>
+              <div class="card">
+                <h3>Beginner to intermediate support</h3>
+                <p>Start with key facts and short notes. If you can, add more detail and explain your opinion clearly.</p>
+              </div>
+            </div>
+            <div class="practice-box">
+              <h3>Class question</h3>
+              <ol>
+                <li>What information helps you choose a holiday destination?</li>
+                <li>Would you prefer a cold winter place in Australia or a summer destination in the northern hemisphere?</li>
+              </ol>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Open the spreadsheet template",
+        text: "Open the travel comparison spreadsheet template and look at the columns before you start typing.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>Template</h3>
+                <p><a href="${templateUrl}" target="_blank" rel="noopener noreferrer">Open the Google Sheets template</a></p>
+                <p>Look across the top row and notice what information the sheet is asking for.</p>
+              </div>
+              <div class="card">
+                <h3>What to do first</h3>
+                <p>Read the headings, click into one cell, and make sure you know where you will type your answers.</p>
+              </div>
+            </div>
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>I can open the spreadsheet link.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can find the heading row.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I know where I will type my answers.</span></label>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Get a random destination pair",
+        text: "Each student can get two different destinations to compare.",
+        render() {
+          ensureAssignment();
+          return `
+            <div class="assignment-box">
+              <h3>Student assignment</h3>
+              <div class="field-row">
+                <label for="studentName">Student name</label>
+                <input id="studentName" type="text" placeholder="Type your name">
+              </div>
+              <div class="assignment-grid">
+                <div class="assignment-card">
+                  <h4>Destination 1</h4>
+                  <p><strong>${assignment.first.name}</strong></p>
+                  <p>${assignment.first.country}</p>
+                  <p>${assignment.first.winterType}</p>
+                </div>
+                <div class="assignment-card">
+                  <h4>Destination 2</h4>
+                  <p><strong>${assignment.second.name}</strong></p>
+                  <p>${assignment.second.country}</p>
+                  <p>${assignment.second.winterType}</p>
+                </div>
+              </div>
+              <div class="action-row">
+                <button class="primary" onclick="rerollDestinations()">Get new destinations</button>
+                <button onclick="copyAssignment()">Copy assignment</button>
+              </div>
+              <div class="copy-box" id="assignmentOutput">${buildAssignmentText()}</div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Research the destinations",
+        text: "Look for simple facts that help you compare the two places during Australian winter 2026.",
+        render() {
+          ensureAssignment();
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>Research ideas</h3>
+                <ul>
+                  <li>weather in June to August 2026</li>
+                  <li>cost or budget</li>
+                  <li>things to do</li>
+                  <li>travel time</li>
+                  <li>where to stay</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Keep it simple</h3>
+                <p>Use short notes first. For example: <strong>cold winter</strong>, <strong>northern hemisphere summer</strong>, <strong>cheaper flights</strong>.</p>
+              </div>
+            </div>
+            <div class="practice-box">
+              <h3>Suggested searches</h3>
+              <ol>
+                <li>${assignment.first.name} weather in July 2026</li>
+                <li>${assignment.second.name} weather in July 2026</li>
+                <li>${assignment.first.name} flights from Sydney</li>
+                <li>${assignment.second.name} accommodation cost</li>
+              </ol>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Enter information into the sheet",
+        text: "Type facts into the spreadsheet one section at a time.",
+        render() {
+          return `
+            <div class="practice-box">
+              <h3>Step-by-step</h3>
+              <ol>
+                <li>Click into the correct cell.</li>
+                <li>Type one short answer.</li>
+                <li>Move to the next cell.</li>
+                <li>Compare the second destination in the matching area.</li>
+              </ol>
+            </div>
+            <div class="card-grid">
+              <div class="card">
+                <h3>Beginner option</h3>
+                <p>Use key words and short phrases only.</p>
+              </div>
+              <div class="card">
+                <h3>Intermediate option</h3>
+                <p>Add a short reason, such as why one place is better value or more suitable during Australian winter.</p>
+              </div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Compare and decide",
+        text: "After you fill in the facts, choose the better destination and explain why.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>Questions to ask</h3>
+                <ul>
+                  <li>Which place is cheaper?</li>
+                  <li>Which place has better weather for me during Australian winter?</li>
+                  <li>Which place has more interesting activities?</li>
+                  <li>Which place would I choose?</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Sentence starters</h3>
+                <ul>
+                  <li>I would choose...</li>
+                  <li>This destination is better because...</li>
+                  <li>It is more suitable for Australian winter because...</li>
+                  <li>In July this place would be...</li>
+                </ul>
+              </div>
+            </div>
+            <div class="reflection-box">
+              <h3>Teacher prompt</h3>
+              <ul>
+                <li>Tell your partner which destination you chose.</li>
+                <li>Give one fact and one opinion.</li>
+              </ul>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Quick check",
+        text: "Answer the questions below to check what you learned.",
+        render() {
+          return `
+            <div class="quiz">
+              <div class="quiz-card">
+                <p>1. What is the main job in this activity?</p>
+                <label><input type="radio" name="q1" value="a"> Compare two travel destinations for Australian winter</label>
+                <label><input type="radio" name="q1" value="b"> Draw a picture</label>
+                <label><input type="radio" name="q1" value="c"> Watch a movie</label>
+              </div>
+              <div class="quiz-card">
+                <p>2. If it is Australian winter, what season might it be in Japan or Canada?</p>
+                <label><input type="radio" name="q2" value="a"> Summer</label>
+                <label><input type="radio" name="q2" value="b"> Always winter</label>
+                <label><input type="radio" name="q2" value="c"> Spring only</label>
+              </div>
+              <div class="quiz-card">
+                <p>3. What should you do after comparing the facts?</p>
+                <label><input type="radio" name="q3" value="a"> Choose one destination and explain why</label>
+                <label><input type="radio" name="q3" value="b"> Delete the spreadsheet</label>
+                <label><input type="radio" name="q3" value="c"> Stop without deciding</label>
+              </div>
+            </div>
+            <div class="action-row">
+              <button class="primary" onclick="checkQuiz()">Check answers</button>
+            </div>
+            <div class="quiz-result" id="quizResult"></div>
+          `;
+        }
+      }
+    ];
+
+    function renderStepList() {
+      const stepList = document.getElementById("stepList");
+      stepList.innerHTML = "";
+
+      lessons.forEach((lesson, index) => {
+        const button = document.createElement("button");
+        button.className = "step-button" + (index === currentStep ? " active" : "");
+        button.textContent = `${index + 1}. ${lesson.title}`;
+        button.addEventListener("click", () => {
+          currentStep = index;
+          renderLesson();
+        });
+        stepList.appendChild(button);
+      });
+    }
+
+    function renderLesson() {
+      const lesson = lessons[currentStep];
+      document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`;
+      document.getElementById("lessonTitle").textContent = lesson.title;
+      document.getElementById("lessonText").textContent = lesson.text;
+      document.getElementById("lessonContent").innerHTML = lesson.render();
+      document.getElementById("prevBtn").disabled = currentStep === 0;
+      document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1;
+      renderStepList();
+    }
+
+    function rerollDestinations() {
+      assignment = null;
+      ensureAssignment();
+      renderLesson();
+    }
+
+    function copyAssignment() {
+      const output = buildAssignmentText();
+      const outputBox = document.getElementById("assignmentOutput");
+      if (outputBox) outputBox.textContent = output;
+      navigator.clipboard.writeText(output).then(() => {
+        alert("Assignment copied.");
+      }).catch(() => {
+        alert("Could not copy automatically. Please copy the text manually.");
+      });
+    }
+
+    function checkQuiz() {
+      let score = 0;
+      if (document.querySelector('input[name="q1"]:checked')?.value === "a") score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === "a") score++;
+      if (document.querySelector('input[name="q3"]:checked')?.value === "a") score++;
+
+      const result = document.getElementById("quizResult");
+      result.textContent = `You got ${score} out of 3 correct.`;
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        renderLesson();
+      }
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (currentStep < lessons.length - 1) {
+        currentStep++;
+        renderLesson();
+      }
+    });
+
+    renderLesson();
+  </script>
+</body>
+</html>

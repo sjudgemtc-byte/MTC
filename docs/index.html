@@ -69,6 +69,11 @@
       max-width: 690px;
     }
 
+    .brand-home {
+      display: inline-block;
+      line-height: 0;
+    }
+
     .hero-kicker {
       display: inline-block;
       margin-bottom: 12px;
@@ -116,6 +121,12 @@
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.8);
       font-weight: 500;
+    }
+
+    .section-title {
+      margin: 26px 0 10px;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
     }
 
     .card {
@@ -173,10 +184,13 @@
           <h1>MTC Student Activities</h1>
           <p>Simple browser-based learning activities for students. These pages are designed for practical digital literacy teaching and easy colleague testing.</p>
         </div>
-        <img class="brand-lockup" src="./assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        <a class="brand-home" href="./" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="./assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
       </div>
     </section>
-    <div class="menu-note">This page is the growing activity menu. Each new student app can be added here as we build it.</div>
+    <div class="menu-note">This is the master menu page. Students can return here at any time by clicking the MTC logo on an activity page.</div>
+    <h2 class="section-title">Current Activities</h2>
     <div class="grid">
       <article class="card">
         <h2>Google Tasks Practice</h2>
@@ -187,6 +201,16 @@
         <h2>Apps to Make Everyday Life Easier</h2>
         <p>Explore useful apps for medication reminders, getting around, and saving money, with safety tips and practical discussion tasks.</p>
         <a href="./apps-everyday-life/">Open activity</a>
+      </article>
+      <article class="card">
+        <h2>Virtual Gallery Practice</h2>
+        <p>Learn how to enter a Google Arts &amp; Culture virtual gallery, move around the space, and talk about artworks with confidence.</p>
+        <a href="./virtual-gallery-practice/">Open activity</a>
+      </article>
+      <article class="card">
+        <h2>Winter Travel Comparison 2026</h2>
+        <p>Compare two destinations for Australian winter 2026, use the spreadsheet template, and make a recommendation based on research.</p>
+        <a href="./winter-travel-comparison/">Open activity</a>
       </article>
     </div>
   </div>
