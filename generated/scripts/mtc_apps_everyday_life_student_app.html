@@ -113,6 +113,28 @@
       gap: 18px;
     }
 
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .activity-menu a.current {
+      background: var(--brand);
+    }
+
     .side, .main {
       background: var(--panel);
       border: 1.5px solid #111111;
@@ -373,6 +395,12 @@
         <img class="brand-lockup" src="/Users/simonjudge/Documents/MTC/07_Templates/Branding/MTC_Brand_Kit_2026-06-06/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
       </div>
     </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="https://sjudgemtc-byte.github.io/MTC/">All activities</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/google-tasks-practice/">Google Tasks Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/apps-everyday-life/" class="current">Apps to Make Everyday Life Easier</a>
+    </nav>
 
     <div class="layout">
       <aside class="side">

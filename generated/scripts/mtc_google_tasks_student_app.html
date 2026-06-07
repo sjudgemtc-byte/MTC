@@ -61,6 +61,29 @@
       gap: 18px;
     }
 
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .activity-menu a.current {
+      background: #fff1bf;
+      border-color: #d7b44f;
+    }
+
     .side,
     .main {
       background: var(--panel);
@@ -302,6 +325,12 @@
       <h1>Google Tasks Practice</h1>
       <p>Learn how to use Google Tasks to remember work, study, and everyday jobs. This activity is designed for adult learners and classroom practice.</p>
     </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="https://sjudgemtc-byte.github.io/MTC/">All activities</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/google-tasks-practice/" class="current">Google Tasks Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+    </nav>
 
     <div class="layout">
       <aside class="side">
