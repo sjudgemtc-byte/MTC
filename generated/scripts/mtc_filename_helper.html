@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Filename Helper</title>
+  <style>
+    :root {
+      --bg: #f4f1e8;
+      --panel: #fffaf0;
+      --ink: #1f1f1a;
+      --line: #d8cfbd;
+      --accent: #f2c230;
+      --accent-dark: #a17300;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #efe7d5 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 28px 18px 40px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 12px 28px rgba(62, 46, 16, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .intro {
+      margin: 0 0 20px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .mode-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .mode-card {
+      flex: 1 1 260px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .mode-card input {
+      margin-right: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-size: 1rem;
+      background: #fff;
+    }
+
+    input:disabled {
+      background: #f2efe7;
+      color: #7b7465;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #1f1f1a;
+    }
+
+    .secondary {
+      background: #ece4d1;
+      color: var(--ink);
+    }
+
+    .result-box {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .result-label {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .result {
+      width: 100%;
+      border: 1px solid #d6c8a5;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: Menlo, Consolas, monospace;
+      font-size: 0.98rem;
+      background: #fffdf8;
+    }
+
+    .tip {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <h1>MTC Filename Helper</h1>
+      <p class="intro">Create clear, audit-safe filenames for student records, worksheets, trainer files, presentations, and teaching resources.</p>
+
+      <div class="mode-row">
+        <label class="mode-card">
+          <input type="radio" name="mode" value="student" checked>
+          <strong>Student file</strong><br>
+          Use for assessment comments, evidence, participant work, and student records.
+        </label>
+        <label class="mode-card">
+          <input type="radio" name="mode" value="resource">
+          <strong>Teaching resource or general file</strong><br>
+          Use for worksheets, trainer notes, PowerPoints, templates, and class resources.
+        </label>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="date">Date</label>
+          <input id="date" type="date">
+        </div>
+        <div class="field">
+          <label for="documentType">Document type</label>
+          <input id="documentType" type="text" value="Worksheet">
+        </div>
+        <div class="field">
+          <label for="unitOrTask">Unit or task</label>
+          <input id="unitOrTask" type="text" placeholder="BSBTEC203 or Task-3">
+        </div>
+        <div class="field">
+          <label for="extension">Extension</label>
+          <input id="extension" type="text" value="docx">
+        </div>
+        <div class="field" id="surnameField">
+          <label for="surname">Student surname</label>
+          <input id="surname" type="text">
+        </div>
+        <div class="field" id="firstNameField">
+          <label for="firstName">Student first name</label>
+          <input id="firstName" type="text">
+        </div>
+        <div class="field full" id="resourceField">
+          <label for="resourceTitle">Resource title</label>
+          <input id="resourceTitle" type="text" value="Digital Literacy Activity">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="generateBtn">Generate Filename</button>
+        <button class="secondary" id="copyBtn">Copy Filename</button>
+        <button class="secondary" id="resetBtn">Reset Form</button>
+      </div>
+
+      <div class="result-box">
+        <div class="result-label">Generated filename</div>
+        <input class="result" id="result" type="text" readonly>
+      </div>
+
+      <p class="tip">Tip: Open this file in any browser on your MacBook Air or iMac. It works without Python or a special app install.</p>
+    </div>
+  </div>
+
+  <script>
+    const defaultDate = new Date().toISOString().slice(0, 10);
+    const prefix = ["MTC", "Redfern", "RED-01", "Pathway"];
+
+    const dateInput = document.getElementById("date");
+    const documentTypeInput = document.getElementById("documentType");
+    const unitOrTaskInput = document.getElementById("unitOrTask");
+    const extensionInput = document.getElementById("extension");
+    const surnameInput = document.getElementById("surname");
+    const firstNameInput = document.getElementById("firstName");
+    const resourceTitleInput = document.getElementById("resourceTitle");
+    const resultInput = document.getElementById("result");
+    const resourceField = document.getElementById("resourceField");
+    const surnameField = document.getElementById("surnameField");
+    const firstNameField = document.getElementById("firstNameField");
+
+    dateInput.value = defaultDate;
+
+    function slugify(value, allowUnderscores = false) {
+      const normalised = value
+        .normalize("NFKD")
+        .replace(/[^\x00-\x7F]/g, "")
+        .replace(/&/g, " and ")
+        .trim();
+
+      const pattern = allowUnderscores ? /[^A-Za-z0-9_-]+/g : /[^A-Za-z0-9-]+/g;
+      return normalised
+        .replace(pattern, "-")
+        .replace(/-{2,}/g, "-")
+        .replace(/^[-_]+|[-_]+$/g, "");
+    }
+
+    function cleanExtension(value) {
+      const trimmed = value.trim().toLowerCase();
+      if (!trimmed) return "docx";
+      return trimmed.startsWith(".") ? trimmed.slice(1) : trimmed;
+    }
+
+    function currentMode() {
+      return document.querySelector('input[name="mode"]:checked').value;
+    }
+
+    function updateMode() {
+      const student = currentMode() === "student";
+      surnameInput.disabled = !student;
+      firstNameInput.disabled = !student;
+      resourceTitleInput.disabled = student;
+      surnameField.style.opacity = student ? "1" : "0.55";
+      firstNameField.style.opacity = student ? "1" : "0.55";
+      resourceField.style.opacity = student ? "0.55" : "1";
+    }
+
+    function generate() {
+      const mode = currentMode();
+      const datePart = slugify(dateInput.value);
+      const documentType = slugify(documentTypeInput.value || "Worksheet", true);
+      const unitOrTask = slugify(unitOrTaskInput.value, true);
+      const extension = cleanExtension(extensionInput.value);
+      const parts = [datePart, ...prefix];
+
+      if (mode === "student") {
+        if (!surnameInput.value.trim() || !firstNameInput.value.trim()) {
+          alert("Enter the student surname and first name.");
+          return;
+        }
+        parts.push(`${slugify(surnameInput.value)}-${slugify(firstNameInput.value)}`);
+      } else {
+        if (!resourceTitleInput.value.trim()) {
+          alert("Enter a resource title.");
+          return;
+        }
+        parts.push(slugify(resourceTitleInput.value, true));
+      }
+
+      parts.push(documentType);
+      if (unitOrTask) parts.push(unitOrTask);
+      resultInput.value = `${parts.join("_")}.${extension}`;
+    }
+
+    async function copyResult() {
+      if (!resultInput.value) generate();
+      if (!resultInput.value) return;
+
+      try {
+        await navigator.clipboard.writeText(resultInput.value);
+        alert("Filename copied to clipboard.");
+      } catch {
+        resultInput.focus();
+        resultInput.select();
+        document.execCommand("copy");
+        alert("Filename copied to clipboard.");
+      }
+    }
+
+    function resetForm() {
+      document.querySelector('input[name="mode"][value="student"]').checked = true;
+      dateInput.value = defaultDate;
+      documentTypeInput.value = "Worksheet";
+      unitOrTaskInput.value = "";
+      extensionInput.value = "docx";
+      surnameInput.value = "";
+      firstNameInput.value = "";
+      resourceTitleInput.value = "Digital Literacy Activity";
+      resultInput.value = "";
+      updateMode();
+    }
+
+    document.querySelectorAll('input[name="mode"]').forEach(input => {
+      input.addEventListener("change", updateMode);
+    });
+    document.getElementById("generateBtn").addEventListener("click", generate);
+    document.getElementById("copyBtn").addEventListener("click", copyResult);
+    document.getElementById("resetBtn").addEventListener("click", resetForm);
+
+    updateMode();
+  </script>
+</body>
+</html>
