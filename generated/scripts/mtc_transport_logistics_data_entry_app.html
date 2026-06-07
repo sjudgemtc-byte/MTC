@@ -301,8 +301,11 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 980px;
       background: #fff;
+    }
+
+    table.wide-table {
+      min-width: 980px;
     }
 
     th,
@@ -571,7 +574,7 @@
             <div class="table-box">
               <h3>Transport and logistics data table</h3>
               <div class="table-wrap">
-                <table>
+                <table class="wide-table">
                   <thead>
                     <tr>
                       <th>No.</th><th>Job Title</th><th>Company</th><th>Suburb</th><th>State</th><th>Start Time</th><th>Finish Time</th><th>Shift Type</th><th>Pay Rate</th><th>Licence Required</th><th>Main Task</th><th>Notes</th>
