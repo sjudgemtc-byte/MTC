@@ -25,6 +25,8 @@ Do not use it as the main live workspace for:
 - `iCloud / local working folders` = live daily work
 - `GitHub` = stable systems, templates, and reusable project structure
 
+See also: [GITHUB_WORKFLOW_RULE.md](/Users/simonjudge/Documents/MTC/GITHUB_WORKFLOW_RULE.md)
+
 ## Included areas
 
 - `04_Classroom_Activities/`

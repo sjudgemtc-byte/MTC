@@ -37,5 +37,6 @@ generated/tmp_*/
 
 # Re-ignore low-value files after whitelisting reusable folders
 **/.DS_Store
+**/__pycache__/
 07_Templates/Branding/**/source-archive*.zip
 07_Templates/Branding/**/_index/*.png
