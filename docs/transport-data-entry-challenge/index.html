@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Transport And Logistics Data Entry Challenge</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --line: #d9d9d9;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --soft: #f5f5f5;
+      --success: #1d6b37;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 18px 44px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid #111111;
+      border-radius: 28px;
+      padding: 28px 24px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-home {
+      display: inline-block;
+      line-height: 0;
+    }
+
+    .brand-lockup {
+      max-width: 170px;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2.2rem;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 68ch;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      background: #ffffff;
+      color: #111111;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .activity-menu a.current {
+      background: var(--brand);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 18px;
+    }
+
+    .side,
+    .main {
+      background: var(--panel);
+      border: 1.5px solid #111111;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .side {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .side h2 {
+      margin: 0 0 12px;
+      font-size: 1.04rem;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step-button {
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid #111111;
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--ink);
+      transition: transform 120ms ease, background 120ms ease;
+    }
+
+    .step-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .step-button.active {
+      background: var(--brand);
+    }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #f6f6f6;
+      border: 1px solid #111111;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .main {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand);
+      border: 1.5px solid #111111;
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: #111111;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .lesson-title {
+      margin: 0 0 10px;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .lesson-text {
+      margin: 0 0 16px;
+      line-height: 1.55;
+      color: #2e2e28;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+
+    .card,
+    .practice-box,
+    .reflection-box,
+    .table-box,
+    .quiz-card {
+      border: 1.5px solid #111111;
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .card h3,
+    .practice-box h3,
+    .reflection-box h3,
+    .table-box h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .card p,
+    .card li,
+    .practice-box li,
+    .reflection-box li,
+    .table-box p {
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .card a,
+    .practice-box a {
+      color: #111111;
+      font-weight: 800;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1.5px solid #111111;
+    }
+
+    .check-row input {
+      margin-top: 2px;
+      transform: scale(1.2);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 12px;
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border: 1px solid #111111;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.93rem;
+      line-height: 1.35;
+    }
+
+    th {
+      background: var(--brand);
+      font-weight: 800;
+    }
+
+    .practice-box,
+    .reflection-box,
+    .table-box,
+    .quiz-card {
+      margin-top: 18px;
+    }
+
+    .practice-box ol,
+    .reflection-box ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.55;
+    }
+
+    .copy-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1.5px dashed #111111;
+      background: #ffffff;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 1.5px solid #111111;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      cursor: pointer;
+      background: #ffffff;
+      color: #111111;
+    }
+
+    .primary {
+      background: var(--brand);
+    }
+
+    .quiz {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .quiz-card p {
+      margin: 0 0 10px;
+      font-weight: 800;
+    }
+
+    .quiz-card label {
+      display: block;
+      margin: 8px 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .quiz-result {
+      margin-top: 14px;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 2px solid #111111;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 940px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        position: static;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-top {
+        flex-direction: column-reverse;
+      }
+
+      .brand-lockup {
+        max-width: 150px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Transport And Logistics Data Entry Challenge</h1>
+          <p>Practise choosing an application, entering workplace-style transport and logistics data accurately, checking your work carefully, and using AI only after your first attempt.</p>
+        </div>
+        <a class="brand-home" href="https://sjudgemtc-byte.github.io/MTC/" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="/Users/simonjudge/Documents/MTC/07_Templates/Branding/MTC_Brand_Kit_2026-06-06/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="https://sjudgemtc-byte.github.io/MTC/">All activities</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/google-tasks-practice/">Google Tasks Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/virtual-gallery-practice/">Virtual Gallery Practice</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/winter-travel-comparison/">Winter Travel Comparison 2026</a>
+      <a href="https://sjudgemtc-byte.github.io/MTC/transport-data-entry-challenge/" class="current">Transport Data Entry Challenge</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note">
+          Important rule: do not use AI for the first version. Enter the data yourself first. AI may only be used later to edit, check, and improve your work.
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">This activity builds data entry accuracy, file naming, checking skills, spreadsheet or document skills, and responsible AI use.</div>
+        <div class="action-row" style="justify-content: space-between; margin-top: 22px;">
+          <button id="prevBtn">Previous</button>
+          <button id="nextBtn" class="primary">Next</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const aiPrompt = `I have completed a transport and logistics data entry table. Please help me check for spelling, formatting, unclear headings, and possible data entry mistakes. Do not add new jobs or invent information.`;
+
+    const tableRows = `
+      <tr><td>1</td><td>Delivery Driver</td><td>Metro Freight</td><td>Redfern</td><td>NSW</td><td>7:00 am</td><td>3:00 pm</td><td>Day</td><td>$31.50</td><td>Car licence</td><td>Deliver small parcels</td><td>Must use GPS carefully</td></tr>
+      <tr><td>2</td><td>Warehouse Assistant</td><td>Sydney Storage Co.</td><td>Mascot</td><td>NSW</td><td>8:30 am</td><td>4:30 pm</td><td>Day</td><td>$29.00</td><td>No</td><td>Pick and pack orders</td><td>Safety boots required</td></tr>
+      <tr><td>3</td><td>Courier</td><td>QuickRun Couriers</td><td>Alexandria</td><td>NSW</td><td>6:30 am</td><td>2:30 pm</td><td>Morning</td><td>$32.75</td><td>Motorbike licence</td><td>Deliver urgent documents</td><td>Must be punctual</td></tr>
+      <tr><td>4</td><td>Forklift Operator</td><td>Portside Logistics</td><td>Botany</td><td>NSW</td><td>6:00 am</td><td>2:00 pm</td><td>Morning</td><td>$34.25</td><td>Forklift licence</td><td>Move pallets safely</td><td>High attention to detail</td></tr>
+      <tr><td>5</td><td>Transport Admin Assistant</td><td>CityLink Transport</td><td>Parramatta</td><td>NSW</td><td>9:00 am</td><td>5:00 pm</td><td>Day</td><td>$30.00</td><td>No</td><td>Enter delivery records</td><td>Basic computer skills needed</td></tr>
+      <tr><td>6</td><td>Pick Packer</td><td>FreshBox Foods</td><td>Lidcombe</td><td>NSW</td><td>7:30 am</td><td>3:30 pm</td><td>Day</td><td>$28.75</td><td>No</td><td>Pack grocery orders</td><td>Cold room work possible</td></tr>
+      <tr><td>7</td><td>Truck Driver</td><td>HeavyHaul Logistics</td><td>Wetherill Park</td><td>NSW</td><td>5:00 am</td><td>1:00 pm</td><td>Early morning</td><td>$38.50</td><td>Heavy vehicle licence</td><td>Transport large goods</td><td>Must complete logbook</td></tr>
+      <tr><td>8</td><td>Inventory Assistant</td><td>StockRight Warehousing</td><td>Auburn</td><td>NSW</td><td>10:00 am</td><td>6:00 pm</td><td>Day</td><td>$29.80</td><td>No</td><td>Count stock items</td><td>Accuracy is very important</td></tr>
+      <tr><td>9</td><td>Customer Service Officer</td><td>Parcel Help Desk</td><td>Sydney CBD</td><td>NSW</td><td>9:30 am</td><td>5:30 pm</td><td>Day</td><td>$31.20</td><td>No</td><td>Answer delivery questions</td><td>Phone and email work</td></tr>
+      <tr><td>10</td><td>Logistics Coordinator</td><td>MoveWell Logistics</td><td>Homebush</td><td>NSW</td><td>8:00 am</td><td>4:00 pm</td><td>Day</td><td>$35.00</td><td>No</td><td>Organise delivery schedules</td><td>Uses spreadsheets daily</td></tr>
+      <tr><td>11</td><td>Mailroom Assistant</td><td>OfficePost Services</td><td>North Sydney</td><td>NSW</td><td>8:15 am</td><td>4:15 pm</td><td>Day</td><td>$28.90</td><td>No</td><td>Sort incoming mail</td><td>Must label items clearly</td></tr>
+      <tr><td>12</td><td>Removalist Assistant</td><td>EasyMove Removals</td><td>Marrickville</td><td>NSW</td><td>7:00 am</td><td>3:30 pm</td><td>Day</td><td>$30.75</td><td>No</td><td>Move boxes and furniture</td><td>Physical work required</td></tr>
+      <tr><td>13</td><td>Delivery Scheduler</td><td>SmartRoute Transport</td><td>Rhodes</td><td>NSW</td><td>10:30 am</td><td>6:30 pm</td><td>Afternoon</td><td>$33.10</td><td>No</td><td>Update delivery times</td><td>Must check details carefully</td></tr>
+      <tr><td>14</td><td>Dockhand</td><td>Harbour Freight</td><td>Port Botany</td><td>NSW</td><td>6:00 am</td><td>2:00 pm</td><td>Morning</td><td>$32.40</td><td>No</td><td>Load and unload freight</td><td>PPE required</td></tr>
+      <tr><td>15</td><td>Bus Depot Cleaner</td><td>TransitCare Services</td><td>Leichhardt</td><td>NSW</td><td>5:30 am</td><td>1:30 pm</td><td>Morning</td><td>$27.95</td><td>No</td><td>Clean buses and depot areas</td><td>Follow safety instructions</td></tr>
+      <tr><td>16</td><td>Fuel Station Attendant</td><td>Highway Fuel Stop</td><td>Liverpool</td><td>NSW</td><td>2:00 pm</td><td>10:00 pm</td><td>Afternoon</td><td>$29.50</td><td>No</td><td>Serve customers and record sales</td><td>Cash handling required</td></tr>
+      <tr><td>17</td><td>Dispatch Assistant</td><td>RapidSend Logistics</td><td>Bankstown</td><td>NSW</td><td>11:00 am</td><td>7:00 pm</td><td>Afternoon</td><td>$30.60</td><td>No</td><td>Prepare items for dispatch</td><td>Must scan barcodes correctly</td></tr>
+      <tr><td>18</td><td>Parcel Sorter</td><td>National Parcel Hub</td><td>Chullora</td><td>NSW</td><td>4:00 pm</td><td>12:00 am</td><td>Evening</td><td>$33.75</td><td>No</td><td>Sort parcels by postcode</td><td>Repetitive lifting</td></tr>
+      <tr><td>19</td><td>Train Station Assistant</td><td>Rail Support Services</td><td>Strathfield</td><td>NSW</td><td>6:30 am</td><td>2:30 pm</td><td>Morning</td><td>$32.00</td><td>No</td><td>Help passengers with directions</td><td>Customer service skills needed</td></tr>
+      <tr><td>20</td><td>Fleet Assistant</td><td>BlueFleet Transport</td><td>Silverwater</td><td>NSW</td><td>8:45 am</td><td>4:45 pm</td><td>Day</td><td>$31.85</td><td>Car licence</td><td>Check vehicle records</td><td>Uses online forms</td></tr>
+      <tr><td>21</td><td>Delivery Van Driver</td><td>Local Drop Deliveries</td><td>Newtown</td><td>NSW</td><td>9:00 am</td><td>5:00 pm</td><td>Day</td><td>$32.25</td><td>Car licence</td><td>Deliver packages to homes</td><td>Must read delivery notes</td></tr>
+      <tr><td>22</td><td>Warehouse Cleaner</td><td>CleanSite Logistics</td><td>Moorebank</td><td>NSW</td><td>3:00 pm</td><td>11:00 pm</td><td>Evening</td><td>$28.60</td><td>No</td><td>Clean warehouse areas</td><td>Follow WHS procedures</td></tr>
+      <tr><td>23</td><td>Transport Receptionist</td><td>Gateway Freight</td><td>Zetland</td><td>NSW</td><td>8:30 am</td><td>4:30 pm</td><td>Day</td><td>$30.45</td><td>No</td><td>Greet visitors and answer calls</td><td>Professional communication needed</td></tr>
+      <tr><td>24</td><td>Stock Controller</td><td>ValueStock Warehousing</td><td>Blacktown</td><td>NSW</td><td>7:00 am</td><td>3:00 pm</td><td>Day</td><td>$34.00</td><td>No</td><td>Update stock records</td><td>Spreadsheet experience helpful</td></tr>
+      <tr><td>25</td><td>Airport Baggage Handler</td><td>SkyPort Services</td><td>Mascot</td><td>NSW</td><td>5:00 am</td><td>1:00 pm</td><td>Early morning</td><td>$36.50</td><td>No</td><td>Move luggage safely</td><td>Security check required</td></tr>
+    `;
+
+    const lessons = [
+      {
+        title: "What is this activity?",
+        text: "You will choose an application, copy a transport and logistics data table accurately, complete checking tasks, and only use AI after your first attempt.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>You will practise</h3>
+                <ul>
+                  <li>choosing the right application</li>
+                  <li>copying workplace-style data accurately</li>
+                  <li>checking details carefully</li>
+                  <li>using AI responsibly for editing only</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Important rule</h3>
+                <p>Do the first version yourself. AI can help later with editing, checking, and improving your work, but not with the first copy.</p>
+              </div>
+            </div>
+            <div class="practice-box">
+              <h3>Class question</h3>
+              <ol>
+                <li>Why is accuracy important in transport and logistics work?</li>
+                <li>What could happen if times, pay rates, or licence details are entered incorrectly?</li>
+              </ol>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Choose your application",
+        text: "Pick one application and be ready to explain why it is a good choice for this task.",
+        render() {
+          return `
+            <div class="table-box">
+              <h3>Application choices</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Application</th><th>Good for practising</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Microsoft Word</td><td>Creating a neat table in a document</td></tr>
+                    <tr><td>Google Docs</td><td>Creating and formatting a simple workplace document</td></tr>
+                    <tr><td>Microsoft Excel</td><td>Entering data into rows and columns</td></tr>
+                    <tr><td>Google Sheets</td><td>Practising spreadsheet data entry</td></tr>
+                    <tr><td>Apple Numbers</td><td>Using a spreadsheet on a Mac or iPad</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>I chose one application.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can explain why it is a good choice.</span></label>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Copy the data accurately",
+        text: "Copy the full table into your chosen application. Check spelling, capital letters, dollar amounts, times, and licence information carefully.",
+        render() {
+          return `
+            <div class="table-box">
+              <h3>Transport and logistics data table</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>No.</th><th>Job Title</th><th>Company</th><th>Suburb</th><th>State</th><th>Start Time</th><th>Finish Time</th><th>Shift Type</th><th>Pay Rate</th><th>Licence Required</th><th>Main Task</th><th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>${tableRows}</tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Complete the tasks",
+        text: "After copying the table, complete the checking and thinking tasks without AI first.",
+        render() {
+          return `
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>Add a clear heading: <strong>Transport and Logistics Data Entry Challenge</strong>.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Write the name of the application you chose at the top of your page.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Copy the full data table accurately.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Make the heading bold.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Check that all dollar amounts include the dollar sign and two decimal places.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Check that all suburb names start with a capital letter.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Check that all start and finish times are copied correctly.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Highlight or mark three jobs that require a licence.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Identify the highest pay rate.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Identify the lowest pay rate.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Write one sentence explaining which job you would choose and why.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>Save the file using this name: <strong>FirstName_Data_Entry_Transport_2026-06-08</strong>.</span></label>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Use AI only after your first attempt",
+        text: "Only after you complete the first version yourself, you may use AI to help edit and check your work.",
+        render() {
+          return `
+            <div class="practice-box">
+              <h3>AI editing prompt</h3>
+              <div class="copy-box" id="aiPrompt">${aiPrompt}</div>
+              <div class="action-row">
+                <button class="primary" onclick="copyPrompt()">Copy AI prompt</button>
+              </div>
+            </div>
+            <div class="reflection-box">
+              <h3>Remember</h3>
+              <ul>
+                <li>AI should not do the first version for you.</li>
+                <li>AI should only help with editing, spelling, formatting, and checking.</li>
+                <li>Do not let AI invent new jobs or change the data.</li>
+              </ul>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Reflect on your work",
+        text: "Answer the reflection questions after you finish the task.",
+        render() {
+          return `
+            <div class="table-box">
+              <h3>Reflection questions</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Question</th><th>My answer</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Which application did you choose?</td><td></td></tr>
+                    <tr><td>Why did you choose that application?</td><td></td></tr>
+                    <tr><td>What was easy about this task?</td><td></td></tr>
+                    <tr><td>What was difficult?</td><td></td></tr>
+                    <tr><td>Did AI help you edit your work?</td><td></td></tr>
+                    <tr><td>What did AI help with?</td><td></td></tr>
+                    <tr><td>What did you still need to check yourself?</td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Trainer observation focus",
+        text: "These are the main areas the trainer can observe during the activity.",
+        render() {
+          return `
+            <div class="table-box">
+              <h3>Trainer observation notes</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Evidence area</th><th>What to observe</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Application choice</td><td>Student selects an appropriate application and can explain the choice.</td></tr>
+                    <tr><td>Data entry</td><td>Student copies rows and columns accurately.</td></tr>
+                    <tr><td>Attention to detail</td><td>Student checks spelling, times, pay rates, capital letters, and licence details.</td></tr>
+                    <tr><td>File management</td><td>Student saves the file with a clear audit-friendly file name.</td></tr>
+                    <tr><td>AI literacy</td><td>Student completes first attempt without AI, then uses AI appropriately for editing and checking only.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Quick check",
+        text: "Answer the questions below to check what you learned.",
+        render() {
+          return `
+            <div class="quiz">
+              <div class="quiz-card">
+                <p>1. When can you use AI in this activity?</p>
+                <label><input type="radio" name="q1" value="a"> At the very start to copy the table</label>
+                <label><input type="radio" name="q1" value="b"> Only after you finish the first version yourself</label>
+                <label><input type="radio" name="q1" value="c"> Any time without checking</label>
+              </div>
+              <div class="quiz-card">
+                <p>2. Which details should you check carefully?</p>
+                <label><input type="radio" name="q2" value="a"> Only the colours</label>
+                <label><input type="radio" name="q2" value="b"> Times, pay rates, capital letters, and licence details</label>
+                <label><input type="radio" name="q2" value="c"> Nothing after typing</label>
+              </div>
+              <div class="quiz-card">
+                <p>3. What is one purpose of this task?</p>
+                <label><input type="radio" name="q3" value="a"> Practise workplace-style data entry</label>
+                <label><input type="radio" name="q3" value="b"> Build a video game</label>
+                <label><input type="radio" name="q3" value="c"> Ignore file names</label>
+              </div>
+            </div>
+            <div class="action-row">
+              <button class="primary" onclick="checkQuiz()">Check answers</button>
+            </div>
+            <div class="quiz-result" id="quizResult"></div>
+          `;
+        }
+      }
+    ];
+
+    let currentStep = 0;
+
+    function renderStepList() {
+      const stepList = document.getElementById("stepList");
+      stepList.innerHTML = "";
+
+      lessons.forEach((lesson, index) => {
+        const button = document.createElement("button");
+        button.className = "step-button" + (index === currentStep ? " active" : "");
+        button.textContent = `${index + 1}. ${lesson.title}`;
+        button.addEventListener("click", () => {
+          currentStep = index;
+          renderLesson();
+        });
+        stepList.appendChild(button);
+      });
+    }
+
+    function renderLesson() {
+      const lesson = lessons[currentStep];
+      document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`;
+      document.getElementById("lessonTitle").textContent = lesson.title;
+      document.getElementById("lessonText").textContent = lesson.text;
+      document.getElementById("lessonContent").innerHTML = lesson.render();
+      document.getElementById("prevBtn").disabled = currentStep === 0;
+      document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1;
+      renderStepList();
+    }
+
+    function copyPrompt() {
+      navigator.clipboard.writeText(aiPrompt).then(() => {
+        alert("AI prompt copied.");
+      }).catch(() => {
+        alert("Could not copy automatically. Please copy the prompt manually.");
+      });
+    }
+
+    function checkQuiz() {
+      let score = 0;
+      if (document.querySelector('input[name="q1"]:checked')?.value === "b") score++;
+      if (document.querySelector('input[name="q2"]:checked')?.value === "b") score++;
+      if (document.querySelector('input[name="q3"]:checked')?.value === "a") score++;
+      document.getElementById("quizResult").textContent = `You got ${score} out of 3 correct.`;
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        renderLesson();
+      }
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (currentStep < lessons.length - 1) {
+        currentStep++;
+        renderLesson();
+      }
+    });
+
+    renderLesson();
+  </script>
+</body>
+</html>
