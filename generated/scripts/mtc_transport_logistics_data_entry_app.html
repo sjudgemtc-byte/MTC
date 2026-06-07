@@ -296,6 +296,32 @@
       overflow-x: auto;
       margin-top: 12px;
       border-radius: 14px;
+      padding-bottom: 8px;
+      scrollbar-width: auto;
+      scrollbar-color: #111111 #f3f3f3;
+    }
+
+    .table-wrap::-webkit-scrollbar {
+      height: 14px;
+    }
+
+    .table-wrap::-webkit-scrollbar-track {
+      background: #f3f3f3;
+      border-radius: 999px;
+      border: 1px solid #111111;
+    }
+
+    .table-wrap::-webkit-scrollbar-thumb {
+      background: var(--brand);
+      border-radius: 999px;
+      border: 1px solid #111111;
+    }
+
+    .scroll-note {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 600;
     }
 
     table {
@@ -583,6 +609,7 @@
                   <tbody>${tableRows}</tbody>
                 </table>
               </div>
+              <p class="scroll-note">Scroll left and right to see the full table on smaller screens.</p>
             </div>
           `;
         }
