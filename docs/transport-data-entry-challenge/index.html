@@ -294,11 +294,13 @@
 
     .table-wrap {
       overflow-x: auto;
+      overflow-y: hidden;
       margin-top: 12px;
       border-radius: 14px;
       padding-bottom: 8px;
       scrollbar-width: auto;
       scrollbar-color: #111111 #f3f3f3;
+      -webkit-overflow-scrolling: touch;
     }
 
     .table-wrap::-webkit-scrollbar {
@@ -331,7 +333,8 @@
     }
 
     table.wide-table {
-      min-width: 980px;
+      width: max-content;
+      min-width: 1400px;
     }
 
     th,
