@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Google Tasks Practice</title>
+  <style>
+    :root {
+      --bg: #f4efe3;
+      --panel: #fffaf2;
+      --line: #d8cfbd;
+      --ink: #1f1f1a;
+      --muted: #6d685d;
+      --brand: #f2c230;
+      --brand-dark: #9c7000;
+      --soft: #ebe3d1;
+      --success: #2e6e41;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(242, 194, 48, 0.18), transparent 26%),
+        linear-gradient(180deg, #ede4d3 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 26px 18px 40px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #f2c230 0%, #f6dc7b 100%);
+      border-radius: 24px;
+      padding: 26px 24px;
+      box-shadow: 0 18px 38px rgba(73, 55, 18, 0.08);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2.1rem;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 62ch;
+      line-height: 1.5;
+      font-size: 1rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+    }
+
+    .side,
+    .main {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 12px 28px rgba(72, 54, 17, 0.06);
+    }
+
+    .side {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .side h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step-button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .step-button.active {
+      background: #fff1bf;
+      border-color: #d7b44f;
+    }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #f6f1e3;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .main {
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f8efcf;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #705100;
+      margin-bottom: 10px;
+    }
+
+    .lesson-title {
+      margin: 0 0 10px;
+      font-size: 1.65rem;
+    }
+
+    .lesson-text {
+      margin: 0 0 16px;
+      line-height: 1.55;
+      color: #2e2e28;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .card p,
+    .card li {
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 18px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .check-row input {
+      margin-top: 2px;
+      transform: scale(1.2);
+    }
+
+    .practice-box,
+    .reflection-box {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fffdfa;
+    }
+
+    .practice-box h3,
+    .reflection-box h3 {
+      margin: 0 0 10px;
+    }
+
+    .practice-box ol,
+    .reflection-box ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.55;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .nav button,
+    .action-row button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--brand);
+      color: #1f1f1a;
+    }
+
+    .secondary {
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    .action-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .progress {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #f7f2e5;
+      border: 1px dashed #d4c39d;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .quiz {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .quiz-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .quiz-card p {
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    .quiz-card label {
+      display: block;
+      margin: 8px 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .quiz-result {
+      margin-top: 14px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        position: static;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Google Tasks Practice</h1>
+      <p>Learn how to use Google Tasks to remember work, study, and everyday jobs. This activity is designed for adult learners and classroom practice.</p>
+    </section>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Lesson steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note">
+          Tip: move through the lesson one step at a time. Tick the checklist items as you go.
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="nav">
+          <button class="secondary" id="prevBtn">Previous</button>
+          <button class="primary" id="nextBtn">Next</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const lessons = [
+      {
+        title: "What is Google Tasks?",
+        text: "Google Tasks is a simple to-do list tool. You can use it to remember tasks, tick them off, and keep track of what you still need to do.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>Use Google Tasks for</h3>
+                <ul>
+                  <li>homework</li>
+                  <li>class jobs</li>
+                  <li>appointments to remember</li>
+                  <li>small workplace tasks</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Why it helps</h3>
+                <p>It helps you remember what to do next and gives you a clear place to keep simple jobs.</p>
+              </div>
+            </div>
+            <div class="practice-box">
+              <h3>Quick discussion</h3>
+              <ol>
+                <li>What tasks do you sometimes forget?</li>
+                <li>What could you keep in Google Tasks?</li>
+              </ol>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Where to find Google Tasks",
+        text: "Google Tasks can be opened from Gmail, Google Calendar, or in the Google Tasks mobile app.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>On a computer</h3>
+                <p>Open Gmail or Google Calendar. Look for the side panel on the right and click the Tasks icon.</p>
+              </div>
+              <div class="card">
+                <h3>On a phone</h3>
+                <p>Open the Google Tasks app if it is installed, or open Gmail/Calendar and look for Tasks there.</p>
+              </div>
+            </div>
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>I can open Gmail.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can find the side panel or Tasks icon.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can say where Tasks is on my device.</span></label>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Create a new task",
+        text: "A task is one job you want to remember. Keep the task short and clear.",
+        render() {
+          return `
+            <div class="practice-box">
+              <h3>How to create a task</h3>
+              <ol>
+                <li>Open Google Tasks.</li>
+                <li>Click <strong>Add a task</strong>.</li>
+                <li>Type a short task name.</li>
+                <li>Press Enter or click away.</li>
+              </ol>
+            </div>
+            <div class="card-grid">
+              <div class="card">
+                <h3>Good task names</h3>
+                <ul>
+                  <li>Email trainer</li>
+                  <li>Bring charger</li>
+                  <li>Finish worksheet</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Not so good</h3>
+                <ul>
+                  <li>Stuff</li>
+                  <li>Things to do</li>
+                  <li>Work</li>
+                </ul>
+              </div>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Add more details",
+        text: "You can make a task more useful by adding details like notes, a date, or a time.",
+        render() {
+          return `
+            <div class="card-grid">
+              <div class="card">
+                <h3>Helpful details</h3>
+                <ul>
+                  <li>what to do</li>
+                  <li>when to do it</li>
+                  <li>extra notes</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Example</h3>
+                <p><strong>Task:</strong> Bring ID<br><strong>Date:</strong> Friday<br><strong>Notes:</strong> Bring photo ID for appointment</p>
+              </div>
+            </div>
+            <div class="checklist">
+              <label class="check-row"><input type="checkbox"> <span>I can add a due date.</span></label>
+              <label class="check-row"><input type="checkbox"> <span>I can add a short note.</span></label>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Mark a task as complete",
+        text: "When you finish a task, tick it off. This helps you see what is done and what is still left.",
+        render() {
+          return `
+            <div class="practice-box">
+              <h3>Practice task</h3>
+              <ol>
+                <li>Create a task called <strong>Open Google Tasks</strong>.</li>
+                <li>Tick it when you finish.</li>
+                <li>Look at the completed task list.</li>
+              </ol>
+            </div>
+            <div class="card">
+              <h3>Why ticking tasks matters</h3>
+              <p>It helps you feel organised and shows you the progress you have made.</p>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Make a useful student task list",
+        text: "A good task list should help you with real things you need to remember this week.",
+        render() {
+          return `
+            <div class="practice-box">
+              <h3>Try making this list</h3>
+              <ol>
+                <li>Charge laptop</li>
+                <li>Check Canvas</li>
+                <li>Finish workbook task</li>
+                <li>Bring headphones</li>
+              </ol>
+            </div>
+            <div class="reflection-box">
+              <h3>Think about it</h3>
+              <ul>
+                <li>Which task is the most important?</li>
+                <li>Which task should be done first?</li>
+              </ul>
+            </div>
+          `;
+        }
+      },
+      {
+        title: "Quick check",
+        text: "Answer these questions to check what you remember about Google Tasks.",
+        render() {
+          return `
+            <div class="quiz">
+              <div class="quiz-card">
+                <p>1. What is Google Tasks mainly used for?</p>
+                <label><input type="radio" name="q1" value="a"> Watching videos</label>
+                <label><input type="radio" name="q1" value="b"> Remembering and managing tasks</label>
+                <label><input type="radio" name="q1" value="c"> Drawing pictures</label>
+              </div>
+              <div class="quiz-card">
+                <p>2. What should a good task name be like?</p>
+                <label><input type="radio" name="q2" value="a"> Short and clear</label>
+                <label><input type="radio" name="q2" value="b"> Long and confusing</label>
+                <label><input type="radio" name="q2" value="c"> Only one letter</label>
+              </div>
+              <div class="quiz-card">
+                <p>3. What do you do when a task is finished?</p>
+                <label><input type="radio" name="q3" value="a"> Delete Gmail</label>
+                <label><input type="radio" name="q3" value="b"> Tick the task as complete</label>
+                <label><input type="radio" name="q3" value="c"> Turn off the computer</label>
+              </div>
+            </div>
+            <div class="action-row">
+              <button class="primary" id="checkQuizBtn">Check answers</button>
+            </div>
+            <div class="quiz-result" id="quizResult"></div>
+          `;
+        },
+        afterRender() {
+          const btn = document.getElementById("checkQuizBtn");
+          const result = document.getElementById("quizResult");
+          btn.addEventListener("click", () => {
+            let score = 0;
+            if (document.querySelector('input[name="q1"]:checked')?.value === "b") score += 1;
+            if (document.querySelector('input[name="q2"]:checked')?.value === "a") score += 1;
+            if (document.querySelector('input[name="q3"]:checked')?.value === "b") score += 1;
+            result.textContent = `You got ${score} out of 3 correct.`;
+          });
+        }
+      }
+    ];
+
+    const stepList = document.getElementById("stepList");
+    const lessonTag = document.getElementById("lessonTag");
+    const lessonTitle = document.getElementById("lessonTitle");
+    const lessonText = document.getElementById("lessonText");
+    const lessonContent = document.getElementById("lessonContent");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentStep = 0;
+
+    function renderStepButtons() {
+      stepList.innerHTML = "";
+      lessons.forEach((lesson, index) => {
+        const button = document.createElement("button");
+        button.className = "step-button" + (index === currentStep ? " active" : "");
+        button.textContent = `${index + 1}. ${lesson.title}`;
+        button.addEventListener("click", () => {
+          currentStep = index;
+          renderLesson();
+        });
+        stepList.appendChild(button);
+      });
+    }
+
+    function renderLesson() {
+      const lesson = lessons[currentStep];
+      lessonTag.textContent = `Step ${currentStep + 1} of ${lessons.length}`;
+      lessonTitle.textContent = lesson.title;
+      lessonText.textContent = lesson.text;
+      lessonContent.innerHTML = lesson.render();
+      renderStepButtons();
+      prevBtn.disabled = currentStep === 0;
+      nextBtn.textContent = currentStep === lessons.length - 1 ? "Start Again" : "Next";
+
+      if (typeof lesson.afterRender === "function") {
+        lesson.afterRender();
+      }
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep -= 1;
+        renderLesson();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < lessons.length - 1) {
+        currentStep += 1;
+      } else {
+        currentStep = 0;
+      }
+      renderLesson();
+    });
+
+    renderLesson();
+  </script>
+</body>
+</html>
