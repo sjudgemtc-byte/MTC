@@ -1,1 +1,75 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Apps to Make Everyday Life Easier</title><style>@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');:root{--ink:#111;--muted:#4e4e4e;--brand:#fef153;--line:#111;--shadow:0 18px 38px rgba(17,17,17,.08)}*{box-sizing:border-box}body{margin:0;font-family:"Rethink Sans",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff,#fafafa)}.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 44px}.hero,.main,.side,.card,.notice{border:1.5px solid var(--line);background:#fff;border-radius:22px;box-shadow:var(--shadow)}.hero{border-width:2px;padding:28px 24px;margin-bottom:18px;background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%)}.hero-top{display:flex;justify-content:space-between;gap:18px}.hero-copy{max-width:720px}.kicker{display:inline-block;margin-bottom:12px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.72);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.placeholder-logo{min-width:150px;min-height:92px;border:2px solid var(--line);border-radius:22px;background:rgba(255,255,255,.82);display:grid;place-items:center;padding:14px;text-align:center}.placeholder-logo strong{display:block;font-size:1.02rem;line-height:1.05}.placeholder-logo span{display:inline-block;margin-top:8px;padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--brand);font-size:.72rem;font-weight:800;letter-spacing:.08em}h1{margin:0 0 10px;font-size:2.25rem;line-height:1.04}.hero p,.card p,.notice p{margin:0;color:var(--muted);line-height:1.55}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}.nav a{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-weight:800}.nav .current{background:var(--brand)}.layout{display:grid;grid-template-columns:280px 1fr;gap:18px}.side,.main{padding:18px}.side{position:sticky;top:18px;align-self:start}.main{padding:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.card,.notice{padding:16px;box-shadow:none}.notice{background:#fffdf0;margin:14px 0}label{display:flex;gap:10px;line-height:1.45;margin:10px 0}input{width:20px;height:20px;accent-color:#1d6b37}textarea{width:100%;min-height:86px;border:1.5px solid var(--line);border-radius:14px;padding:12px;font:inherit}@media(max-width:860px){.hero-top{flex-direction:column-reverse}.layout,.grid{grid-template-columns:1fr}.side{position:static}}</style></head><body><div class="wrap"><section class="hero"><div class="hero-top"><div class="hero-copy"><div class="kicker">Digital Skills Practice</div><h1>Apps to Make Everyday Life Easier</h1><p>Explore useful everyday apps and discuss how to use them safely.</p></div><div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div></div></section><nav class="nav"><a href="../">Home</a><a class="current" href="./">Everyday Apps</a><a href="../google-alerts-practice/">Google Alerts</a><a href="../creative-commons-image-search/">Image Search</a></nav><div class="layout"><aside class="side"><h2>Focus</h2><div class="notice"><p>Testing draft. Do not enter private information into unfamiliar apps.</p></div></aside><main class="main"><h2>Activity</h2><div class="grid"><div class="card"><h3>Medication reminders</h3><p>How can reminders help someone remember a task?</p></div><div class="card"><h3>Getting around</h3><p>How can maps or transport apps help with travel?</p></div><div class="card"><h3>Saving money</h3><p>How can shopping or budgeting apps help compare choices?</p></div><div class="card"><h3>Safety</h3><p>What private information should we protect?</p></div></div><div class="card"><h3>Checklist</h3><label><input type="checkbox"> I named one useful app.</label><label><input type="checkbox"> I explained what the app helps with.</label><label><input type="checkbox"> I named one safety rule.</label></div><h3>Reflection</h3><textarea placeholder="One app that could help me is... A safety rule is..."></textarea></main></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apps to Make Everyday Life Easier</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root { --ink:#111; --muted:#4f4f4f; --brand:#fef153; --soft:#fffdf0; --line:#111; --good:#126b35; --shadow:0 18px 38px rgba(17,17,17,.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Rethink Sans", Arial, sans-serif; color:var(--ink); background:linear-gradient(180deg,#fff,#f7f7f7); }
+    .wrap { max-width:1120px; margin:0 auto; padding:24px 18px 44px; }
+    .hero,.panel,.sidebar,.notice,.practice-box,.quiz-card { border:1.5px solid var(--line); background:#fff; border-radius:18px; box-shadow:var(--shadow); }
+    .hero { border-width:2px; padding:28px 24px; margin-bottom:18px; background:linear-gradient(135deg,var(--brand) 0%,var(--brand) 68%,#fff 68%); }
+    .hero-top { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .hero-copy { max-width:720px; }
+    .kicker { display:inline-block; margin-bottom:12px; padding:7px 12px; border-radius:999px; border:1.5px solid var(--line); background:rgba(255,255,255,.72); font-size:.82rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    .placeholder-logo { min-width:150px; min-height:92px; border:2px solid var(--line); border-radius:18px; background:rgba(255,255,255,.85); display:grid; place-items:center; padding:14px; text-align:center; }
+    .placeholder-logo strong { display:block; font-size:1.02rem; line-height:1.05; }
+    .placeholder-logo span { display:inline-block; margin-top:8px; padding:4px 8px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-size:.72rem; font-weight:800; letter-spacing:.08em; }
+    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.04; }
+    h2,h3 { margin-top:0; }
+    p,li { line-height:1.55; }
+    .hero p,.muted { color:var(--muted); }
+    .nav { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
+    .nav a { display:inline-block; padding:10px 14px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink); text-decoration:none; font-weight:800; }
+    .nav .current { background:var(--brand); }
+    .layout { display:grid; grid-template-columns:300px 1fr; gap:18px; }
+    .sidebar,.panel { padding:18px; }
+    .sidebar { position:sticky; top:18px; align-self:start; }
+    .steps { display:grid; gap:10px; }
+    .step-button { width:100%; text-align:left; border:1.5px solid var(--line); background:#fff; border-radius:14px; padding:12px 14px; cursor:pointer; font:inherit; font-weight:800; color:var(--ink); }
+    .step-button:hover,.step-button.active { background:var(--brand); }
+    .tag { display:inline-block; padding:6px 10px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-weight:800; font-size:.82rem; }
+    .notice,.practice-box,.quiz-card { padding:16px; box-shadow:none; margin-top:16px; }
+    .notice { background:var(--soft); }
+    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:16px; }
+    .app-card { border:1.5px solid var(--line); border-radius:16px; padding:14px; background:#fff; }
+    .action-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    button.primary, button.secondary { border:1.5px solid var(--line); border-radius:999px; padding:11px 15px; background:var(--brand); font:inherit; font-weight:800; cursor:pointer; }
+    button.secondary { background:#fff; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    label { display:block; margin:10px 0; line-height:1.45; }
+    input[type="checkbox"], input[type="radio"] { width:18px; height:18px; accent-color:#1d6b37; margin-right:8px; }
+    textarea { width:100%; min-height:92px; border:1.5px solid var(--line); border-radius:14px; padding:12px; font:inherit; }
+    .quiz { display:grid; gap:14px; margin-top:16px; }
+    .quiz-result { margin-top:14px; font-weight:800; color:var(--good); }
+    @media(max-width:860px){ .hero-top{flex-direction:column-reverse;} .layout,.cards{grid-template-columns:1fr;} .sidebar{position:static;} h1{font-size:1.9rem;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero"><div class="hero-top"><div class="hero-copy"><div class="kicker">Digital Skills Practice</div><h1>Apps to Make Everyday Life Easier</h1><p>Explore useful everyday apps, match apps to real-life needs, and practise safe decision-making.</p></div><div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div></div></section>
+    <nav class="nav"><a href="../">Home</a><a class="current" href="./">Everyday Apps</a><a href="../google-alerts-practice/">Google Alerts</a><a href="../creative-commons-image-search/">Image Search</a></nav>
+    <div class="layout"><aside class="sidebar"><h2>Activity Steps</h2><div class="steps" id="stepList"></div><div class="notice"><strong>Safety reminder</strong><p class="muted">Only use public examples. Do not type private information into unfamiliar apps.</p></div></aside><main class="panel"><span class="tag" id="lessonTag">Step 1</span><h2 id="lessonTitle"></h2><p class="muted" id="lessonText"></p><div id="lessonContent"></div><div class="action-row"><button class="secondary" id="prevBtn">Previous</button><button class="primary" id="nextBtn">Next</button></div></main></div>
+  </div>
+  <script>
+    const lessons = [
+      { title:"What Problem Are We Solving?", text:"Think about everyday problems where an app might help.", render:()=>`<div class="practice-box"><h3>Choose two everyday needs</h3><label><input type="checkbox"> Remembering appointments or tasks</label><label><input type="checkbox"> Getting directions or transport times</label><label><input type="checkbox"> Comparing prices or saving money</label><label><input type="checkbox"> Communicating with a service or workplace</label></div>` },
+      { title:"Match Apps to Needs", text:"Match common app types with what they help people do.", render:()=>`<div class="cards"><div class="app-card"><h3>Calendar or Tasks</h3><p>Reminders, appointments, to-do lists.</p></div><div class="app-card"><h3>Maps or Transport</h3><p>Directions, travel time, public transport.</p></div><div class="app-card"><h3>Banking or Budgeting</h3><p>Checking spending and planning money safely.</p></div><div class="app-card"><h3>Health or Service Apps</h3><p>Bookings, reminders, information, support.</p></div></div>` },
+      { title:"Check Before Installing", text:"Practise checking whether an app looks safe and suitable.", render:()=>`<div class="practice-box"><h3>Before installing, check:</h3><ol><li>Who made the app?</li><li>What rating and reviews does it have?</li><li>What information does it ask for?</li><li>Can you use the website instead?</li></ol><label><input type="checkbox"> I can name one safety check.</label></div>` },
+      { title:"Class Scenario", text:"Choose a helpful app for a simple real-life scenario.", render:()=>`<div class="practice-box"><h3>Scenario</h3><p>A learner needs to remember when class starts, save the classroom address, and plan their trip.</p><p><strong>Which app types could help?</strong></p><textarea placeholder="I would use... because..."></textarea></div>` },
+      { title:"Quick Check", text:"Answer the questions to check understanding.", render:()=>`<div class="quiz"><div class="quiz-card"><p><strong>1. Which app type helps with directions?</strong></p><label><input type="radio" name="q1" value="a"> Maps</label><label><input type="radio" name="q1" value="b"> Photo filter</label><label><input type="radio" name="q1" value="c"> Game only</label></div><div class="quiz-card"><p><strong>2. What should you check before installing an app?</strong></p><label><input type="radio" name="q2" value="a"> Reviews, developer, and permissions</label><label><input type="radio" name="q2" value="b"> Only the colour</label><label><input type="radio" name="q2" value="c"> Nothing at all</label></div><div class="quiz-card"><p><strong>3. What information should you avoid entering into unknown apps?</strong></p><label><input type="radio" name="q3" value="a"> Passwords or banking details</label><label><input type="radio" name="q3" value="b"> A fictional example</label><label><input type="radio" name="q3" value="c"> A public website name</label></div></div><div class="action-row"><button class="primary" onclick="checkQuiz()">Check answers</button></div><div class="quiz-result" id="quizResult"></div>` },
+      { title:"Reflection", text:"Write one practical way an app could help you or a workplace.", render:()=>`<div class="practice-box"><h3>Reflection</h3><textarea placeholder="One app that could help is... It would help by... A safety rule is..."></textarea><p class="muted">Evidence: explain your chosen app type and one safety rule.</p></div>` }
+    ];
+    let currentStep=0;
+    function renderStepButtons(){ const list=document.getElementById("stepList"); list.innerHTML=""; lessons.forEach((lesson,index)=>{ const button=document.createElement("button"); button.className="step-button"+(index===currentStep?" active":""); button.textContent=`${index+1}. ${lesson.title}`; button.addEventListener("click",()=>{ currentStep=index; renderLesson(); }); list.appendChild(button); }); }
+    function renderLesson(){ const lesson=lessons[currentStep]; document.getElementById("lessonTag").textContent=`Step ${currentStep+1}`; document.getElementById("lessonTitle").textContent=lesson.title; document.getElementById("lessonText").textContent=lesson.text; document.getElementById("lessonContent").innerHTML=lesson.render(); document.getElementById("prevBtn").disabled=currentStep===0; document.getElementById("nextBtn").disabled=currentStep===lessons.length-1; renderStepButtons(); }
+    function checkQuiz(){ let score=0; if(document.querySelector('input[name="q1"]:checked')?.value==="a") score++; if(document.querySelector('input[name="q2"]:checked')?.value==="a") score++; if(document.querySelector('input[name="q3"]:checked')?.value==="a") score++; document.getElementById("quizResult").textContent=`You got ${score} out of 3 correct.`; }
+    document.getElementById("prevBtn").addEventListener("click",()=>{ if(currentStep>0){ currentStep--; renderLesson(); } });
+    document.getElementById("nextBtn").addEventListener("click",()=>{ if(currentStep<lessons.length-1){ currentStep++; renderLesson(); } });
+    renderLesson();
+  </script>
+</body>
+</html>
