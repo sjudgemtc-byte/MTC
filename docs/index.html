@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MTC Student Activities</title>
+  <title>Student Activities</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
 
@@ -65,13 +65,39 @@
       z-index: 1;
     }
 
-    .hero-copy {
-      max-width: 690px;
+    .hero-copy { max-width: 690px; }
+
+    .placeholder-logo {
+      flex: 0 0 auto;
+      min-width: 150px;
+      min-height: 92px;
+      border: 2px solid #111111;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.82);
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 0 10px 22px rgba(17, 17, 17, 0.08);
     }
 
-    .brand-home {
+    .placeholder-logo strong {
+      display: block;
+      font-size: 1.02rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .placeholder-logo span {
       display: inline-block;
-      line-height: 0;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border: 1.5px solid #111111;
+      border-radius: 999px;
+      background: #fef153;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
     }
 
     .hero-kicker {
@@ -85,12 +111,6 @@
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-    }
-
-    .brand-lockup {
-      max-width: 170px;
-      width: 100%;
-      height: auto;
     }
 
     h1 {
@@ -136,9 +156,7 @@
       max-width: 68ch;
     }
 
-    .category {
-      margin-top: 26px;
-    }
+    .category { margin-top: 26px; }
 
     .card {
       background: var(--panel);
@@ -172,17 +190,8 @@
     }
 
     @media (max-width: 860px) {
-      .hero-top {
-        flex-direction: column-reverse;
-      }
-
-      .brand-lockup {
-        max-width: 150px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
+      .hero-top { flex-direction: column-reverse; }
+      h1 { font-size: 2rem; }
     }
   </style>
 </head>
@@ -191,16 +200,14 @@
     <section class="hero">
       <div class="hero-top">
         <div class="hero-copy">
-          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
-          <h1>MTC Student Activities</h1>
+          <div class="hero-kicker">Digital Skills Practice</div>
+          <h1>Student Activities</h1>
           <p>Simple browser-based learning activities for students. These pages are designed for practical digital literacy teaching and easy colleague testing.</p>
         </div>
-        <a class="brand-home" href="./" aria-label="Return to MTC Student Activities home page">
-          <img class="brand-lockup" src="./assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
-        </a>
+        <div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div>
       </div>
     </section>
-    <div class="menu-note">This is the master menu page. Students can return here at any time by clicking the MTC logo on an activity page. New apps should be grouped under the most suitable heading below as the site grows.</div>
+    <div class="menu-note">This is the master menu page. Students can return here at any time from an activity page. New apps should be grouped under the most suitable heading below as the site grows.</div>
 
     <section class="category">
       <h2 class="section-title">Digital Tools</h2>
