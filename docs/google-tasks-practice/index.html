@@ -1,1 +1,95 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Google Tasks Practice</title><style>@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');:root{--ink:#111;--muted:#4e4e4e;--brand:#fef153;--line:#111;--soft:#f5f5f5;--shadow:0 18px 38px rgba(17,17,17,.08)}*{box-sizing:border-box}body{margin:0;font-family:"Rethink Sans",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff,#fafafa)}.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 44px}.hero,.main,.side,.card,.notice{border:1.5px solid var(--line);background:#fff;border-radius:22px;box-shadow:var(--shadow)}.hero{border-width:2px;padding:28px 24px;margin-bottom:18px;background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%)}.hero-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.hero-copy{max-width:720px}.kicker{display:inline-block;margin-bottom:12px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.72);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.placeholder-logo{min-width:150px;min-height:92px;border:2px solid var(--line);border-radius:22px;background:rgba(255,255,255,.82);display:grid;place-items:center;padding:14px;text-align:center}.placeholder-logo strong{display:block;font-size:1.02rem;line-height:1.05}.placeholder-logo span{display:inline-block;margin-top:8px;padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--brand);font-size:.72rem;font-weight:800;letter-spacing:.08em}h1{margin:0 0 10px;font-size:2.25rem;line-height:1.04}.hero p,.card p,.notice p{margin:0;color:var(--muted);line-height:1.55}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}.nav a{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-weight:800}.nav .current{background:var(--brand)}.layout{display:grid;grid-template-columns:280px 1fr;gap:18px}.side,.main{padding:18px}.side{position:sticky;top:18px;align-self:start}.main{padding:22px}.step,.card,.notice{padding:16px}.steps{display:grid;gap:10px}.step{border:1.5px solid var(--line);border-radius:16px;background:#fff;font-weight:800}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.notice{background:#fffdf0;margin:14px 0;box-shadow:none}.card{box-shadow:none}label{display:flex;gap:10px;line-height:1.45;margin:10px 0}input{width:20px;height:20px;accent-color:#1d6b37}textarea{width:100%;min-height:86px;border:1.5px solid var(--line);border-radius:14px;padding:12px;font:inherit}@media(max-width:860px){.hero-top{flex-direction:column-reverse}.layout,.grid{grid-template-columns:1fr}.side{position:static}}</style></head><body><div class="wrap"><section class="hero"><div class="hero-top"><div class="hero-copy"><div class="kicker">Digital Skills Practice</div><h1>Google Tasks Practice</h1><p>Practise opening Google Tasks, creating a task, adding details, and marking a task complete.</p></div><div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div></div></section><nav class="nav"><a href="../">Home</a><a class="current" href="./">Google Tasks</a><a href="../google-alerts-practice/">Google Alerts</a><a href="../transport-data-entry-challenge/">Data Entry</a></nav><div class="layout"><aside class="side"><h2>Activity Steps</h2><div class="steps"><div class="step">1. Open Google Tasks</div><div class="step">2. Create a task</div><div class="step">3. Add details</div><div class="step">4. Mark complete</div><div class="step">5. Reflect</div></div><div class="notice"><p>Testing draft. Use safe classroom examples only.</p></div></aside><main class="main"><h2>Task Practice</h2><div class="grid"><div class="card"><h3>Example task</h3><p>Finish digital literacy worksheet.</p></div><div class="card"><h3>Example detail</h3><p>Ask Simon if I need help saving the file.</p></div></div><div class="card"><h3>Checklist</h3><label><input type="checkbox"> I opened Google Tasks.</label><label><input type="checkbox"> I created one task.</label><label><input type="checkbox"> I added a detail or due date.</label><label><input type="checkbox"> I marked a task complete.</label></div><h3>Reflection</h3><textarea placeholder="One way Google Tasks could help me is..."></textarea></main></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Tasks Practice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root { --ink:#111; --muted:#4f4f4f; --brand:#fef153; --soft:#fffdf0; --line:#111; --good:#126b35; --shadow:0 18px 38px rgba(17,17,17,.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Rethink Sans", Arial, sans-serif; color:var(--ink); background:linear-gradient(180deg,#fff,#f7f7f7); }
+    .wrap { max-width:1120px; margin:0 auto; padding:24px 18px 44px; }
+    .hero,.panel,.sidebar,.notice,.practice-box,.quiz-card { border:1.5px solid var(--line); background:#fff; border-radius:18px; box-shadow:var(--shadow); }
+    .hero { border-width:2px; padding:28px 24px; margin-bottom:18px; background:linear-gradient(135deg,var(--brand) 0%,var(--brand) 68%,#fff 68%); }
+    .hero-top { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }
+    .hero-copy { max-width:720px; }
+    .kicker { display:inline-block; margin-bottom:12px; padding:7px 12px; border-radius:999px; border:1.5px solid var(--line); background:rgba(255,255,255,.72); font-size:.82rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
+    .placeholder-logo { min-width:150px; min-height:92px; border:2px solid var(--line); border-radius:18px; background:rgba(255,255,255,.85); display:grid; place-items:center; padding:14px; text-align:center; }
+    .placeholder-logo strong { display:block; font-size:1.02rem; line-height:1.05; }
+    .placeholder-logo span { display:inline-block; margin-top:8px; padding:4px 8px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-size:.72rem; font-weight:800; letter-spacing:.08em; }
+    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.04; }
+    h2,h3 { margin-top:0; }
+    p,li { line-height:1.55; }
+    .hero p,.muted { color:var(--muted); }
+    .nav { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
+    .nav a { display:inline-block; padding:10px 14px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink); text-decoration:none; font-weight:800; }
+    .nav .current { background:var(--brand); }
+    .layout { display:grid; grid-template-columns:300px 1fr; gap:18px; }
+    .sidebar,.panel { padding:18px; }
+    .sidebar { position:sticky; top:18px; align-self:start; }
+    .steps { display:grid; gap:10px; }
+    .step-button { width:100%; text-align:left; border:1.5px solid var(--line); background:#fff; border-radius:14px; padding:12px 14px; cursor:pointer; font:inherit; font-weight:800; color:var(--ink); }
+    .step-button:hover,.step-button.active { background:var(--brand); }
+    .tag { display:inline-block; padding:6px 10px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-weight:800; font-size:.82rem; }
+    .notice,.practice-box,.quiz-card { padding:16px; box-shadow:none; margin-top:16px; }
+    .notice { background:var(--soft); }
+    .action-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    button.primary, button.secondary { border:1.5px solid var(--line); border-radius:999px; padding:11px 15px; background:var(--brand); font:inherit; font-weight:800; cursor:pointer; }
+    button.secondary { background:#fff; }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    label { display:block; margin:10px 0; line-height:1.45; }
+    input[type="checkbox"], input[type="radio"] { width:18px; height:18px; accent-color:#1d6b37; margin-right:8px; }
+    textarea { width:100%; min-height:92px; border:1.5px solid var(--line); border-radius:14px; padding:12px; font:inherit; }
+    .quiz { display:grid; gap:14px; margin-top:16px; }
+    .quiz-result { margin-top:14px; font-weight:800; color:var(--good); }
+    @media(max-width:860px){ .hero-top{flex-direction:column-reverse;} .layout{grid-template-columns:1fr;} .sidebar{position:static;} h1{font-size:1.9rem;} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="kicker">Digital Skills Practice</div>
+          <h1>Google Tasks Practice</h1>
+          <p>Practise opening Google Tasks, creating a task, adding details, setting a date, and marking a task complete.</p>
+        </div>
+        <div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div>
+      </div>
+    </section>
+    <nav class="nav"><a href="../">Home</a><a class="current" href="./">Google Tasks</a><a href="../google-alerts-practice/">Google Alerts</a><a href="../transport-data-entry-challenge/">Data Entry</a></nav>
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Activity Steps</h2>
+        <div class="steps" id="stepList"></div>
+        <div class="notice"><strong>Privacy reminder</strong><p class="muted">Use classroom examples only. Do not enter passwords, banking details, health information, or private family information.</p></div>
+      </aside>
+      <main class="panel">
+        <span class="tag" id="lessonTag">Step 1</span>
+        <h2 id="lessonTitle"></h2>
+        <p class="muted" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="action-row"><button class="secondary" id="prevBtn">Previous</button><button class="primary" id="nextBtn">Next</button></div>
+      </main>
+    </div>
+  </div>
+  <script>
+    const lessons = [
+      { title:"Open Google Tasks", text:"Open Google Tasks from Gmail, Google Calendar, or tasks.google.com.", render:()=>`<div class="practice-box"><h3>Student task</h3><ol><li>Open Gmail or Google Calendar.</li><li>Look for the Tasks icon on the right side panel.</li><li>If needed, open <strong>tasks.google.com</strong>.</li></ol><label><input type="checkbox"> I found Google Tasks.</label></div>` },
+      { title:"Create a Task", text:"Create one simple task that would help you organise learning or work.", render:()=>`<div class="practice-box"><h3>Example task ideas</h3><ul><li>Finish digital literacy worksheet</li><li>Save today&apos;s document in Google Drive</li><li>Ask trainer for help with screenshots</li></ul><label><input type="checkbox"> I created one task.</label></div>` },
+      { title:"Add Details", text:"Add useful information so the task is clear when you come back later.", render:()=>`<div class="practice-box"><h3>Details to add</h3><ol><li>Add a short note in Details.</li><li>Add a date if your version shows a Date option.</li><li>Check that the wording is clear.</li></ol><label><input type="checkbox"> I added details or a date.</label></div>` },
+      { title:"Mark Complete", text:"Practise finishing the task by marking it complete.", render:()=>`<div class="practice-box"><h3>Completion practice</h3><p>Tick the circle next to your task. Notice where completed tasks go.</p><label><input type="checkbox"> I marked a task complete.</label><label><input type="checkbox"> I found where completed tasks are shown.</label></div>` },
+      { title:"Quick Check", text:"Answer the questions to check understanding.", render:()=>`<div class="quiz"><div class="quiz-card"><p><strong>1. What is Google Tasks mainly used for?</strong></p><label><input type="radio" name="q1" value="a"> Making and tracking tasks</label><label><input type="radio" name="q1" value="b"> Editing photos</label><label><input type="radio" name="q1" value="c"> Watching videos</label></div><div class="quiz-card"><p><strong>2. What should a good task include?</strong></p><label><input type="radio" name="q2" value="a"> A clear action</label><label><input type="radio" name="q2" value="b"> A password</label><label><input type="radio" name="q2" value="c"> Private banking details</label></div><div class="quiz-card"><p><strong>3. What does marking complete show?</strong></p><label><input type="radio" name="q3" value="a"> The task is finished</label><label><input type="radio" name="q3" value="b"> The task is deleted forever</label><label><input type="radio" name="q3" value="c"> The internet is off</label></div></div><div class="action-row"><button class="primary" onclick="checkQuiz()">Check answers</button></div><div class="quiz-result" id="quizResult"></div>` },
+      { title:"Reflection", text:"Write a short reflection about how this tool could help you.", render:()=>`<div class="practice-box"><h3>Reflection</h3><textarea placeholder="One way Google Tasks could help me is..."></textarea><p class="muted">Evidence: show your completed task or explain your steps to the trainer.</p></div>` }
+    ];
+    let currentStep = 0;
+    function renderStepButtons(){ const list=document.getElementById("stepList"); list.innerHTML=""; lessons.forEach((lesson,index)=>{ const button=document.createElement("button"); button.className="step-button"+(index===currentStep?" active":""); button.textContent=`${index+1}. ${lesson.title}`; button.addEventListener("click",()=>{ currentStep=index; renderLesson(); }); list.appendChild(button); }); }
+    function renderLesson(){ const lesson=lessons[currentStep]; document.getElementById("lessonTag").textContent=`Step ${currentStep+1}`; document.getElementById("lessonTitle").textContent=lesson.title; document.getElementById("lessonText").textContent=lesson.text; document.getElementById("lessonContent").innerHTML=lesson.render(); document.getElementById("prevBtn").disabled=currentStep===0; document.getElementById("nextBtn").disabled=currentStep===lessons.length-1; renderStepButtons(); }
+    function checkQuiz(){ let score=0; if(document.querySelector('input[name="q1"]:checked')?.value==="a") score++; if(document.querySelector('input[name="q2"]:checked')?.value==="a") score++; if(document.querySelector('input[name="q3"]:checked')?.value==="a") score++; document.getElementById("quizResult").textContent=`You got ${score} out of 3 correct.`; }
+    document.getElementById("prevBtn").addEventListener("click",()=>{ if(currentStep>0){ currentStep--; renderLesson(); } });
+    document.getElementById("nextBtn").addEventListener("click",()=>{ if(currentStep<lessons.length-1){ currentStep++; renderLesson(); } });
+    renderLesson();
+  </script>
+</body>
+</html>
