@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Creative Commons Image Search</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --panel: #ffffff;
+      --soft: #f5f5f5;
+      --line: #111111;
+      --success: #1d6b37;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      min-height: 100vh;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px 18px 44px; }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 24px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .hero-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; position: relative; z-index: 1; }
+    .hero-copy { max-width: 760px; }
+    .brand-home { display: inline-block; line-height: 0; }
+    .brand-lockup { max-width: 170px; width: 100%; height: auto; }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 { margin: 0 0 10px; font-size: 2.25rem; line-height: 1.04; letter-spacing: -0.03em; }
+    .hero p { margin: 0; max-width: 68ch; line-height: 1.55; font-size: 1.02rem; }
+
+    .activity-menu { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; }
+    .activity-menu a, .button-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .activity-menu a.current, .button-link.primary { background: var(--brand); }
+
+    .layout { display: grid; grid-template-columns: 290px 1fr; gap: 18px; }
+    .side, .main { background: var(--panel); border: 1.5px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+    .side { padding: 18px; align-self: start; position: sticky; top: 18px; }
+    .side h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    .main { padding: 22px; }
+    .step-list { display: grid; gap: 10px; }
+
+    .step-button {
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--ink);
+      transition: transform 120ms ease, background 120ms ease;
+    }
+    .step-button:hover { transform: translateY(-1px); }
+    .step-button.active { background: var(--brand); }
+
+    .side-note { margin-top: 14px; padding: 12px; border-radius: 16px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; background: var(--brand); border: 1.5px solid var(--line); font-size: 0.84rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .lesson-title { margin: 0 0 10px; font-size: 1.9rem; line-height: 1.08; letter-spacing: -0.02em; }
+    .lesson-text { margin: 0 0 16px; line-height: 1.55; color: #2e2e28; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0 18px; }
+    .card, .check-panel, .notice { border: 1.5px solid var(--line); border-radius: 18px; background: #ffffff; padding: 16px; }
+    .card h3, .check-panel h3, .notice h3 { margin: 0 0 8px; font-size: 1.08rem; }
+    .card p, .notice p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .notice { background: #fffdf0; margin: 14px 0; }
+    .task-list { display: grid; gap: 10px; margin: 12px 0 0; }
+
+    label { display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; color: #242424; }
+    input[type="checkbox"] { width: 20px; height: 20px; flex: 0 0 20px; margin-top: 1px; accent-color: var(--success); }
+    .response-box { width: 100%; min-height: 74px; border: 1.5px solid var(--line); border-radius: 14px; padding: 12px; font: inherit; resize: vertical; background: #fff; margin-top: 8px; }
+
+    .table-wrap { overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; min-width: 640px; background: #fff; }
+    th, td { border: 1.5px solid #d9d9d9; text-align: left; padding: 11px; vertical-align: top; line-height: 1.45; }
+    th { background: var(--soft); }
+    .credit-example { display: block; padding: 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--soft); font-weight: 800; line-height: 1.55; white-space: pre-line; margin: 10px 0; }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    @media (max-width: 860px) {
+      .hero-top { flex-direction: column-reverse; }
+      .brand-lockup { max-width: 150px; }
+      h1 { font-size: 2rem; }
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Finding a Creative Commons Image</h1>
+          <p>Use Google Image Search to find a Grand Canyon image, filter by Creative Commons licences, check the original source, and write a simple image credit.</p>
+        </div>
+        <a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Activity navigation">
+      <a href="../">Home</a>
+      <a href="../google-alerts-practice/">Google Alerts</a>
+      <a class="current" href="./">Creative Commons Images</a>
+      <a href="../winter-travel-comparison/">Travel Comparison</a>
+      <a href="../transport-data-entry-challenge/">Data Entry</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity Steps</h2>
+        <div class="step-list">
+          <button class="step-button active" data-screen="overview">1. Start here</button>
+          <button class="step-button" data-screen="search">2. Search images</button>
+          <button class="step-button" data-screen="filter">3. Use licence filter</button>
+          <button class="step-button" data-screen="check">4. Check source</button>
+          <button class="step-button" data-screen="credit">5. Write credit</button>
+          <button class="step-button" data-screen="discuss">6. Discuss</button>
+          <button class="step-button" data-screen="evidence">7. Evidence</button>
+        </div>
+        <div class="side-note">Key idea: Google helps us find images, but Google does not own the images. Always check the source and licence.</div>
+      </aside>
+
+      <main class="main">
+        <section id="overview" class="screen active">
+          <span class="tag">20-30 minutes</span>
+          <h2 class="lesson-title">Purpose of the Task</h2>
+          <p class="lesson-text">In this activity, you will learn how to search for an image online and check whether it has a Creative Commons licence. The goal is not just to find a nice picture. The goal is to choose an image that is safer to reuse in a document, slideshow, poster, or class activity.</p>
+          <div class="card-grid">
+            <article class="card"><h3>Digital literacy focus</h3><p>Search skills, image licensing, copyright awareness, and safe reuse of online content.</p></article>
+            <article class="card"><h3>Example search term</h3><p>Grand Canyon</p></article>
+          </div>
+          <div class="notice"><h3>Teaching point</h3><p>Google says the Usage rights filter shows images with licence information attached, but users should still confirm the licence details on the original host website.</p></div>
+          <a class="button-link primary" href="https://images.google.com/" target="_blank" rel="noopener">Open Google Images</a>
+        </section>
+
+        <section id="search" class="screen">
+          <span class="tag">Step 1</span>
+          <h2 class="lesson-title">Open Google Images</h2>
+          <p class="lesson-text">Open your web browser and go to Google Images. In the search box, type the search words below and press Enter.</p>
+          <code class="credit-example">Grand Canyon</code>
+          <div class="check-panel">
+            <h3>Checklist</h3>
+            <div class="task-list">
+              <label><input type="checkbox"> I opened Google Images.</label>
+              <label><input type="checkbox"> I searched for Grand Canyon.</label>
+              <label><input type="checkbox"> I can see image results.</label>
+            </div>
+          </div>
+        </section>
+
+        <section id="filter" class="screen">
+          <span class="tag">Steps 2 and 3</span>
+          <h2 class="lesson-title">Open Tools and Choose Usage Rights</h2>
+          <p class="lesson-text">After the image results appear, click Tools. Then click Usage rights and choose Creative Commons licences.</p>
+          <div class="check-panel">
+            <h3>Do this slowly</h3>
+            <div class="task-list">
+              <label><input type="checkbox"> I clicked Tools.</label>
+              <label><input type="checkbox"> I clicked Usage rights.</label>
+              <label><input type="checkbox"> I chose Creative Commons licences.</label>
+            </div>
+          </div>
+          <div class="notice"><h3>What this means</h3><p>Creative Commons images are often free to use, but they usually still require credit. Some may have conditions, such as non-commercial use only or do not modify.</p></div>
+        </section>
+
+        <section id="check" class="screen">
+          <span class="tag">Steps 4 and 5</span>
+          <h2 class="lesson-title">Choose an Image and Check the Licence</h2>
+          <p class="lesson-text">Choose one Grand Canyon image that looks suitable for a classroom task or presentation. Do not download the first image automatically. First, check where the image comes from.</p>
+          <div class="check-panel">
+            <h3>Check these details</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>What to check</th><th>Student answer</th></tr></thead>
+                <tbody>
+                  <tr><td>Image title</td><td><textarea class="response-box" aria-label="Image title"></textarea></td></tr>
+                  <tr><td>Website/source</td><td><textarea class="response-box" aria-label="Website or source"></textarea></td></tr>
+                  <tr><td>Creator/photographer</td><td><textarea class="response-box" aria-label="Creator or photographer"></textarea></td></tr>
+                  <tr><td>Licence type</td><td><textarea class="response-box" aria-label="Licence type"></textarea></td></tr>
+                  <tr><td>Can I reuse it?</td><td><textarea class="response-box" aria-label="Can I reuse it"></textarea></td></tr>
+                  <tr><td>Do I need to give credit?</td><td><textarea class="response-box" aria-label="Do I need credit"></textarea></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="notice"><h3>Look for these links</h3><p>Click Licence details if it appears. You may also need to click Visit and check the original website where the image is hosted.</p></div>
+        </section>
+
+        <section id="credit" class="screen">
+          <span class="tag">Final task</span>
+          <h2 class="lesson-title">Write a Simple Image Credit</h2>
+          <p class="lesson-text">Create a simple image credit underneath the image. Use the format below.</p>
+          <code class="credit-example">Image: Grand Canyon
+Creator: [name of creator]
+Source: [website name]
+Licence: [Creative Commons licence type]</code>
+          <h3>Your image credit</h3>
+          <textarea class="response-box" aria-label="Write your image credit" placeholder="Image: Grand Canyon&#10;Creator:&#10;Source:&#10;Licence:"></textarea>
+          <div class="notice"><h3>Example</h3><p>Image: Grand Canyon. Creator: National Park Service. Source: Wikimedia Commons. Licence: Creative Commons Attribution.</p></div>
+        </section>
+
+        <section id="discuss" class="screen">
+          <span class="tag">Class discussion</span>
+          <h2 class="lesson-title">Discussion Questions</h2>
+          <div class="check-panel">
+            <div class="task-list">
+              <label><input type="checkbox"> Why should we not copy any image from Google without checking the licence?</label>
+              <label><input type="checkbox"> What does Creative Commons mean?</label>
+              <label><input type="checkbox"> Why is it important to credit the creator?</label>
+              <label><input type="checkbox"> What could happen if a business or website used an image without permission?</label>
+              <label><input type="checkbox"> Was it easy or difficult to find the licence information?</label>
+            </div>
+          </div>
+          <div class="notice"><h3>Lower-literacy option</h3><p>Ask students to complete only three fields: What image did I choose? Where did it come from? Can I use it: Yes, No, or Not sure?</p></div>
+        </section>
+
+        <section id="evidence" class="screen">
+          <span class="tag">Evidence</span>
+          <h2 class="lesson-title">Evidence of Completion</h2>
+          <div class="card-grid">
+            <div class="check-panel">
+              <h3>Students should show</h3>
+              <div class="task-list">
+                <label><input type="checkbox"> A screenshot of Google Images using the Creative Commons licences filter.</label>
+                <label><input type="checkbox"> One selected image.</label>
+                <label><input type="checkbox"> The source website.</label>
+                <label><input type="checkbox"> The licence details.</label>
+                <label><input type="checkbox"> A simple image credit.</label>
+              </div>
+            </div>
+            <div class="check-panel">
+              <h3>Success criteria</h3>
+              <div class="task-list">
+                <label><input type="checkbox"> Search Google Images using Grand Canyon.</label>
+                <label><input type="checkbox"> Open the Tools menu.</label>
+                <label><input type="checkbox"> Filter by Creative Commons licences.</label>
+                <label><input type="checkbox"> Visit the original source page.</label>
+                <label><input type="checkbox"> Write a basic image credit.</label>
+              </div>
+            </div>
+          </div>
+          <div class="notice"><h3>Extension task</h3><p>Stronger students can compare a Creative Commons image with an image under another licence and explain the difference.</p></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.step-button');
+    const screens = document.querySelectorAll('.screen');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.screen;
+        buttons.forEach((item) => item.classList.remove('active'));
+        screens.forEach((screen) => screen.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
