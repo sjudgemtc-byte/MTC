@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Google Alerts Practice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --line: #111111;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --soft: #f5f5f5;
+      --ok: #1d6b37;
+      --warn: #8a5a00;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 18px 44px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 24px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy { max-width: 720px; }
+
+    .hero-kicker {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-home { display: inline-block; line-height: 0; }
+    .brand-lockup { max-width: 170px; width: 100%; height: auto; }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2.35rem;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 64ch;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a, .button-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .activity-menu a.current, .button-link.primary { background: var(--brand); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+    }
+
+    .side, .main {
+      background: var(--panel);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .side {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .side h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    .main { padding: 22px; }
+
+    .step-list { display: grid; gap: 10px; }
+
+    .step-button {
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--ink);
+      transition: transform 120ms ease, background 120ms ease;
+    }
+
+    .step-button:hover { transform: translateY(-1px); }
+    .step-button.active { background: var(--brand); }
+
+    .side-note {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--brand);
+      border: 1.5px solid var(--line);
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .lesson-title {
+      margin: 0 0 10px;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .lesson-text {
+      margin: 0 0 16px;
+      line-height: 1.55;
+      color: #2e2e28;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0 18px;
+    }
+
+    .card, .check-panel, .notice {
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      background: #ffffff;
+      padding: 16px;
+    }
+
+    .card h3, .check-panel h3, .notice h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+    }
+
+    .card p, .notice p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .notice {
+      background: #fffdf0;
+      margin: 14px 0;
+    }
+
+    .task-list { display: grid; gap: 10px; margin: 12px 0 0; }
+
+    label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+      color: #242424;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      margin-top: 1px;
+      accent-color: var(--ok);
+    }
+
+    .response-box {
+      width: 100%;
+      min-height: 92px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      font: inherit;
+      resize: vertical;
+      background: #fff;
+    }
+
+    .prompt-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .prompt-chip {
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: var(--soft);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .table-wrap { overflow-x: auto; margin: 14px 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+      background: #fff;
+    }
+
+    th, td {
+      border: 1.5px solid #d9d9d9;
+      text-align: left;
+      padding: 12px;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    th { background: var(--soft); }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    @media (max-width: 860px) {
+      .hero-top { flex-direction: column-reverse; }
+      .brand-lockup { max-width: 150px; }
+      h1 { font-size: 2rem; }
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .card-grid, .prompt-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Google Alerts Practice</h1>
+          <p>Learn how to create a simple Google Alert, choose safe settings, and use email updates to follow a topic for study, work, or everyday life.</p>
+        </div>
+        <a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Activity navigation">
+      <a href="../">Home</a>
+      <a href="../google-tasks-practice/">Google Tasks</a>
+      <a class="current" href="./">Google Alerts</a>
+      <a href="../apps-everyday-life/">Everyday Apps</a>
+      <a href="../transport-data-entry-challenge/">Data Entry</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity Steps</h2>
+        <div class="step-list">
+          <button class="step-button active" data-screen="overview">1. Start here</button>
+          <button class="step-button" data-screen="privacy">2. Safety check</button>
+          <button class="step-button" data-screen="create">3. Create alert</button>
+          <button class="step-button" data-screen="options">4. Choose options</button>
+          <button class="step-button" data-screen="review">5. Review</button>
+        </div>
+        <div class="side-note">Work slowly. You can watch the trainer first, then complete the same steps on your own device.</div>
+      </aside>
+
+      <main class="main">
+        <section id="overview" class="screen active">
+          <span class="tag">Beginner to ACSF Level 2</span>
+          <h2 class="lesson-title">Set Up a Google Alert</h2>
+          <p class="lesson-text">A Google Alert sends email updates when Google finds new results for a topic you choose. It can help you follow jobs, weather, local news, study topics, scams, hobbies, or workplace information.</p>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Learning goals</h3>
+              <p>Open Google Alerts, choose a safe topic, create an alert, and explain what the alert will send.</p>
+            </article>
+            <article class="card">
+              <h3>What you need</h3>
+              <p>A browser, internet access, and a Google account if you want to save an alert.</p>
+            </article>
+          </div>
+          <div class="notice">
+            <h3>Trainer note</h3>
+            <p>Students may observe the demonstration instead of signing in. Do not require students to show their personal email inbox.</p>
+          </div>
+          <a class="button-link primary" href="https://www.google.com.au/alerts" target="_blank" rel="noopener">Open Google Alerts</a>
+        </section>
+
+        <section id="privacy" class="screen">
+          <span class="tag">Safety first</span>
+          <h2 class="lesson-title">Choose a Safe Topic</h2>
+          <p class="lesson-text">Do not create alerts for private personal information. Use general, low-risk examples.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Good practice topics</th><th>Do not use</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Redfern weather, Sydney public transport, digital literacy jobs, online safety tips, local library events</td><td>Your full name, address, phone number, passport, Medicare, banking details, health details, passwords</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="prompt-row">
+            <div class="prompt-chip">Redfern community news</div>
+            <div class="prompt-chip">online safety Australia</div>
+            <div class="prompt-chip">entry level warehouse jobs Sydney</div>
+          </div>
+          <div class="check-panel">
+            <h3>Privacy checklist</h3>
+            <div class="task-list">
+              <label><input type="checkbox"> My topic is not private.</label>
+              <label><input type="checkbox"> My topic is useful for study, work, or everyday life.</label>
+              <label><input type="checkbox"> I understand that alerts may send emails to my account.</label>
+            </div>
+          </div>
+        </section>
+
+        <section id="create" class="screen">
+          <span class="tag">Main task</span>
+          <h2 class="lesson-title">Create the Alert</h2>
+          <p class="lesson-text">Follow these steps. Ask for help if your screen looks different.</p>
+          <div class="check-panel">
+            <h3>Step-by-step</h3>
+            <div class="task-list">
+              <label><input type="checkbox"> Go to <strong>google.com.au/alerts</strong>.</label>
+              <label><input type="checkbox"> Type a safe topic in the box at the top.</label>
+              <label><input type="checkbox"> Look at the preview results.</label>
+              <label><input type="checkbox"> Click <strong>Show options</strong> if you can see it.</label>
+              <label><input type="checkbox"> Choose settings that are suitable for you.</label>
+              <label><input type="checkbox"> Click <strong>Create Alert</strong>.</label>
+            </div>
+          </div>
+          <div class="notice">
+            <h3>If you are not signed in</h3>
+            <p>You may need to sign in to a Google account before saving an alert. You can also watch the trainer demonstration instead.</p>
+          </div>
+        </section>
+
+        <section id="options" class="screen">
+          <span class="tag">Settings</span>
+          <h2 class="lesson-title">Choose Alert Options</h2>
+          <p class="lesson-text">Google says you can change how often you get alerts, the sources, language, region, number of results, and delivery account.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Option</th><th>Plain English meaning</th><th>Class suggestion</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>How often</td><td>How many emails you may receive.</td><td>Choose at most once a day or once a week.</td></tr>
+                <tr><td>Sources</td><td>Where results come from, such as news, blogs, web, video, books, discussions, or finance.</td><td>Leave on Automatic for beginners.</td></tr>
+                <tr><td>Language and region</td><td>The language and part of the world for results.</td><td>Choose English and Australia if useful.</td></tr>
+                <tr><td>How many</td><td>Whether you receive only the best results or all results.</td><td>Choose only the best results.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="check-panel">
+            <h3>My alert settings</h3>
+            <textarea class="response-box" aria-label="Write your alert settings" placeholder="My topic is... My alert will send emails... I chose these options because..."></textarea>
+          </div>
+        </section>
+
+        <section id="review" class="screen">
+          <span class="tag">Reflection</span>
+          <h2 class="lesson-title">Check Your Understanding</h2>
+          <p class="lesson-text">Complete the reflection in your own words. You can use short sentences.</p>
+          <div class="check-panel">
+            <h3>Reflection questions</h3>
+            <div class="task-list">
+              <label><input type="checkbox"> I can explain what a Google Alert does.</label>
+              <label><input type="checkbox"> I created an alert or watched the trainer demonstration.</label>
+              <label><input type="checkbox"> I chose a safe topic and did not use private information.</label>
+              <label><input type="checkbox"> I know how to edit or delete an alert if I do not want the emails anymore.</label>
+            </div>
+          </div>
+          <h3>Sentence frame</h3>
+          <textarea class="response-box" aria-label="Student reflection" placeholder="A Google Alert helps me... My alert topic was... This is useful because... One safety rule is..."></textarea>
+          <div class="notice">
+            <h3>Evidence note for trainer</h3>
+            <p>The participant practised using Google Alerts with support. The participant selected a safe topic, reviewed alert options, and explained how email alerts can support everyday information seeking.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.step-button');
+    const screens = document.querySelectorAll('.screen');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.screen;
+        buttons.forEach((item) => item.classList.remove('active'));
+        screens.forEach((screen) => screen.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
