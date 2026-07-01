@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MTC Brisbane Travel Planning Challenge</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root { --ink:#111111; --muted:#4e4e4e; --brand:#fef153; --panel:#ffffff; --line:#111111; --soft:#f6f6f6; --warn:#fff7d1; --ok:#1d6b37; --danger:#9b1c1c; --shadow:0 18px 38px rgba(17,17,17,0.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Rethink Sans", Arial, sans-serif; color:var(--ink); background:radial-gradient(circle at top right, rgba(254,241,83,0.55), transparent 24%), linear-gradient(180deg, #ffffff 0%, #fafafa 100%); min-height:100vh; }
+    .wrap { max-width:1180px; margin:0 auto; padding:24px 18px 44px; }
+    .hero { background:linear-gradient(135deg, rgba(254,241,83,0.98) 0%, rgba(254,241,83,0.9) 68%, rgba(255,255,255,0.95) 68%, rgba(255,255,255,0.95) 100%); border:2px solid var(--line); border-radius:28px; padding:28px 24px 26px; box-shadow:var(--shadow); margin-bottom:20px; position:relative; overflow:hidden; }
+    .hero::after { content:""; position:absolute; right:-60px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:rgba(17,17,17,0.06); }
+    .hero-top { display:flex; justify-content:space-between; align-items:flex-start; gap:18px; position:relative; z-index:1; }
+    .hero-copy { max-width:760px; }
+    .hero-kicker { display:inline-block; margin-bottom:12px; padding:7px 12px; border-radius:999px; border:1.5px solid var(--line); background:rgba(255,255,255,0.72); font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; }
+    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.02; letter-spacing:-0.03em; }
+    .hero p { margin:0; max-width:68ch; line-height:1.55; font-size:1.02rem; }
+    .brand { flex:0 0 auto; min-width:150px; min-height:92px; border:2px solid var(--line); border-radius:22px; background:rgba(255,255,255,0.82); display:grid; place-items:center; padding:14px; text-align:center; color:var(--ink); text-decoration:none; box-shadow:0 10px 22px rgba(17,17,17,0.08); }
+    .brand strong { display:block; font-size:1.02rem; line-height:1.05; }
+    .brand span { display:inline-block; margin-top:8px; padding:4px 8px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-size:0.72rem; font-weight:800; letter-spacing:0.08em; }
+    .activity-menu { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
+    .activity-menu a { display:inline-block; padding:10px 14px; border-radius:999px; border:1.5px solid var(--line); background:#ffffff; color:var(--ink); text-decoration:none; font-weight:800; }
+    .activity-menu a.current { background:var(--brand); }
+    .layout { display:grid; grid-template-columns:300px 1fr; gap:18px; }
+    .side, .main { background:var(--panel); border:1.5px solid var(--line); border-radius:22px; box-shadow:var(--shadow); }
+    .side { padding:18px; align-self:start; position:sticky; top:18px; }
+    .side h2 { margin:0 0 12px; font-size:1.05rem; }
+    .step-list { display:grid; gap:10px; }
+    .step-button { width:100%; text-align:left; border:1.5px solid var(--line); background:#ffffff; border-radius:16px; padding:12px 14px; cursor:pointer; font-size:0.96rem; font-weight:800; color:var(--ink); }
+    .step-button:hover { transform:translateY(-1px); }
+    .step-button.active { background:var(--brand); }
+    .side-note { margin-top:14px; padding:12px; border-radius:16px; background:var(--soft); border:1px solid var(--line); color:var(--muted); font-size:0.92rem; line-height:1.45; }
+    .main { padding:22px; }
+    .tag { display:inline-block; padding:6px 10px; border-radius:999px; background:var(--brand); border:1.5px solid var(--line); font-size:0.84rem; font-weight:800; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em; }
+    .lesson-title { margin:0 0 10px; font-size:1.9rem; line-height:1.08; letter-spacing:-0.02em; }
+    .lesson-text { margin:0 0 16px; line-height:1.55; color:#2e2e28; }
+    .card-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px; margin:14px 0 18px; }
+    .card, .practice-box, .result-box { border:1.5px solid var(--line); border-radius:18px; background:#ffffff; padding:14px; }
+    .card h3, .practice-box h3, .result-box h3 { margin:0 0 8px; font-size:1.02rem; }
+    .card p, .card li, .practice-box li, .result-box p { line-height:1.5; margin:0; }
+    .card ul, .practice-box ol, .practice-box ul { margin:0; padding-left:20px; line-height:1.55; }
+    .practice-box, .result-box { margin-top:18px; }
+    .link-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+    .resource-link { display:block; padding:14px; border:1.5px solid var(--line); border-radius:18px; color:var(--ink); background:#ffffff; font-weight:800; text-decoration-thickness:2px; text-underline-offset:3px; }
+    label { font-weight:800; }
+    input, select, textarea { width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:14px; font:inherit; background:#ffffff; }
+    textarea { min-height:92px; resize:vertical; }
+    .field-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:12px; }
+    .field-row { display:grid; gap:7px; margin:10px 0; }
+    .budget-grid { display:grid; gap:10px; margin-top:12px; }
+    .budget-row { display:grid; grid-template-columns:minmax(180px, 1fr) 150px; gap:10px; align-items:center; padding:10px; border:1.5px solid var(--line); border-radius:16px; background:#ffffff; }
+    .total-box { margin-top:14px; padding:16px; border:2px solid var(--line); border-radius:18px; background:var(--warn); font-weight:800; }
+    .total-box.good { background:#effaf1; color:var(--ok); }
+    .total-box.over { background:#fff0f0; color:var(--danger); }
+    .checklist { display:grid; gap:10px; margin:14px 0 18px; }
+    .check-row { display:flex; align-items:flex-start; gap:10px; padding:12px; border-radius:16px; background:#ffffff; border:1.5px solid var(--line); line-height:1.4; }
+    .check-row input { width:auto; margin-top:3px; transform:scale(1.2); }
+    .copy-box { margin-top:14px; padding:14px; border-radius:16px; border:1.5px dashed var(--line); background:#ffffff; white-space:pre-wrap; line-height:1.55; }
+    .action-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    button { border:1.5px solid var(--line); border-radius:999px; padding:12px 18px; font-size:0.98rem; font-weight:800; cursor:pointer; background:#ffffff; color:var(--ink); }
+    button:disabled { opacity:0.55; cursor:not-allowed; }
+    .primary { background:var(--brand); }
+    .footer-note { margin-top:18px; padding-top:14px; border-top:2px solid var(--line); font-size:0.92rem; color:var(--muted); }
+    @media (max-width:920px) { .layout { grid-template-columns:1fr; } .side { position:static; } .card-grid, .field-grid, .link-grid { grid-template-columns:1fr; } .budget-row { grid-template-columns:1fr; } .hero-top { flex-direction:column-reverse; } h1 { font-size:2rem; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Brisbane Travel Planning Challenge</h1>
+          <p>Plan a practical training trip from MTC Redfern to MTC South Brisbane using maps, transport websites, accommodation research, and a $1,500 budget.</p>
+        </div>
+        <a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="../">All activities</a>
+      <a href="../google-tasks-practice/">Google Tasks Practice</a>
+      <a href="../google-alerts-practice/">Google Alerts Practice</a>
+      <a href="../apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+      <a href="../creative-commons-image-search/">Creative Commons Image Search</a>
+      <a href="../winter-travel-comparison/">Winter Travel Comparison 2026</a>
+      <a href="./" class="current">Brisbane Travel Planning</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note">Use fictional or classroom-only notes. Do not type private personal information, banking details, passwords, or ID numbers into travel websites.</div>
+      </aside>
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">This activity builds digital literacy skills in map search, online research, public transport planning, budgeting, checking details, and explaining a decision.</div>
+        <div class="action-row" style="justify-content:space-between; margin-top:22px;"><button id="prevBtn">Previous</button><button id="nextBtn" class="primary">Next</button></div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const budgetLimit = 1500;
+    const state = { travelMode:"", leaveDate:"Monday 6 July", arriveTime:"", hotel:"", hotelDistance:"", notes:"", costs:{ sydneyTransport:40, mainTravel:300, brisbaneTransport:80, accommodation:600, meals:280, snacks:50, emergency:150 } };
+    const resources = [["Google Maps","https://www.google.com/maps"],["Google Earth","https://earth.google.com/web/"],["Transport for NSW Trip Planner","https://transportnsw.info/trip"],["Translink Journey Planner","https://jp.translink.com.au/plan-your-journey/journey-planner"],["Sydney Airport","https://www.sydneyairport.com.au/"],["Accommodation search","https://www.google.com/travel/hotels"]];
+    const lessons = [
+      { title:"Understand the trip", text:"Read the scenario and check the key facts before you start searching.", render(){ return `<div class="card-grid"><div class="card"><h3>Start</h3><p>MTC Redfern<br>130 Redfern Street<br>Redfern NSW</p></div><div class="card"><h3>Destination</h3><p>MTC South Brisbane<br>39 Grey Street<br>South Brisbane QLD</p></div><div class="card"><h3>Course</h3><p>Effective Travel Planning with Google<br>Tuesday 7 July to Thursday 9 July<br>9:00am to 5:00pm each day</p></div><div class="card"><h3>Budget</h3><p>Maximum budget: <strong>$1,500</strong><br>Plan to arrive before 9:00am Tuesday.</p></div></div><div class="practice-box"><h3>First check</h3><ol><li>Why is Monday 6 July a safer travel day?</li><li>How many nights of accommodation will you probably need?</li><li>What could go wrong if you arrive Tuesday morning?</li></ol></div>`; } },
+      { title:"Open the tools", text:"Open the websites you need. Keep useful tabs open while you work.", render(){ return `<div class="link-grid">${resources.map(([label,url]) => `<a class="resource-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("")}</div><div class="practice-box"><h3>Trainer check</h3><ul><li>Show your trainer both MTC locations on a map.</li><li>Find the nearest useful train station or landmark for each site.</li><li>Check whether your search result is the correct address.</li></ul></div>`; } },
+      { title:"Plan the route", text:"Break the trip into smaller parts so the travel plan is easier to check.", render(){ return `<div class="field-grid"><div class="field-row"><label for="travelMode">Main travel option</label><select id="travelMode" onchange="saveField('travelMode', this.value)"><option value="">Choose one</option><option>Flight</option><option>Train</option><option>Coach</option><option>Other</option></select></div><div class="field-row"><label for="leaveDate">Leave date</label><input id="leaveDate" value="${escapeHtml(state.leaveDate)}" oninput="saveField('leaveDate', this.value)"></div><div class="field-row"><label for="arriveTime">Planned arrival time in Brisbane</label><input id="arriveTime" value="${escapeHtml(state.arriveTime)}" placeholder="Example: Monday 6:30pm" oninput="saveField('arriveTime', this.value)"></div><div class="field-row"><label for="hotelDistance">Hotel to course travel time</label><input id="hotelDistance" value="${escapeHtml(state.hotelDistance)}" placeholder="Example: 12 minute walk" oninput="saveField('hotelDistance', this.value)"></div></div><div class="practice-box"><h3>Route legs</h3><ol><li>Redfern to Sydney Airport or Central Station.</li><li>Sydney to Brisbane.</li><li>Brisbane arrival point to South Brisbane.</li><li>Accommodation to 39 Grey Street each course day.</li></ol></div>`; } },
+      { title:"Choose accommodation and meals", text:"Find a sensible place to stay and estimate food costs for the trip.", render(){ return `<div class="field-row"><label for="hotel">Accommodation choice</label><input id="hotel" value="${escapeHtml(state.hotel)}" placeholder="Type the hotel or accommodation name" oninput="saveField('hotel', this.value)"></div><div class="card-grid"><div class="card"><h3>Accommodation guide</h3><ul><li>Three nights: Monday, Tuesday, Wednesday.</li><li>Try to stay near South Brisbane.</li><li>Check walking time or public transport time.</li><li>Look for a realistic total cost.</li></ul></div><div class="card"><h3>Meal guide</h3><ul><li>Breakfast: $15 to $25.</li><li>Lunch: $20 to $30.</li><li>Dinner: $30 to $45.</li><li>Snacks and water: $10 to $15 per day.</li></ul></div></div><div class="practice-box"><h3>Decision rule</h3><p>Choose the option that is safe, close enough, and still keeps the total trip under $1,500.</p></div>`; } },
+      { title:"Build the budget", text:"Enter realistic costs and check whether your plan stays under $1,500.", render(){ const labels = [["sydneyTransport","Sydney local transport"],["mainTravel","Sydney to Brisbane return travel"],["brisbaneTransport","Brisbane local transport"],["accommodation","Accommodation: 3 nights"],["meals","Meals"],["snacks","Snacks and water"],["emergency","Emergency money"]]; return `<div class="budget-grid">${labels.map(([key,label]) => `<div class="budget-row"><label for="${key}">${label}</label><input id="${key}" type="number" min="0" step="1" value="${state.costs[key]}" oninput="saveCost('${key}', this.value)"></div>`).join("")}</div><div class="total-box" id="totalBox"></div><div class="action-row"><button class="primary" onclick="calculateBudget()">Calculate budget</button></div>`; }, afterRender(){ calculateBudget(); } },
+      { title:"Prepare your final answer", text:"Use your notes to explain your plan clearly.", render(){ return `<div class="field-row"><label for="notes">Extra notes</label><textarea id="notes" placeholder="Add one reason for your travel choice." oninput="saveField('notes', this.value)">${escapeHtml(state.notes)}</textarea></div><div class="result-box"><h3>Final summary</h3><p>Check your summary before you show your trainer.</p><div class="copy-box" id="summaryBox">${buildSummary()}</div><div class="action-row"><button class="primary" onclick="copySummary()">Copy summary</button><button onclick="refreshSummary()">Refresh summary</button></div></div>`; } },
+      { title:"Evidence checklist", text:"Tick each item when you can show evidence to your trainer.", render(){ const checks = ["I found MTC Redfern on a map.","I found MTC South Brisbane on a map.","I chose a travel option from Sydney to Brisbane.","I checked local transport in Sydney and Brisbane.","I chose accommodation for three nights.","I included meals, snacks, and emergency money.","I checked that I arrive before 9:00am Tuesday.","I checked whether my total is under $1,500.","I can explain my final travel plan."]; return `<div class="checklist">${checks.map(item => `<label class="check-row"><input type="checkbox"><span>${item}</span></label>`).join("")}</div>`; } }
+    ];
+    let currentStep = 0;
+    function escapeHtml(value){ return String(value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;"); }
+    function saveField(key, value){ state[key] = value; if (key === "notes") refreshSummary(); }
+    function saveCost(key, value){ state.costs[key] = Number(value) || 0; calculateBudget(); }
+    function getTotal(){ return Object.values(state.costs).reduce((sum, value) => sum + (Number(value) || 0), 0); }
+    function calculateBudget(){ const total = getTotal(); const box = document.getElementById("totalBox"); if (!box) return; const remaining = budgetLimit - total; box.className = "total-box"; if (remaining >= 0) box.classList.add("good"); if (remaining < 0) box.classList.add("over"); box.textContent = remaining >= 0 ? `Total: $${total}. You are $${remaining} under the $1,500 budget.` : `Total: $${total}. You are $${Math.abs(remaining)} over the $1,500 budget. Revise your plan.`; }
+    function buildSummary(){ const total = getTotal(); const result = total <= budgetLimit ? "under" : "over"; return `I planned a trip from MTC Redfern to MTC South Brisbane.\n\nI will travel by: ${state.travelMode || "____________________"}.\nI will leave on: ${state.leaveDate || "____________________"}.\nI will arrive in Brisbane at: ${state.arriveTime || "____________________"}.\nI will stay at: ${state.hotel || "____________________"}.\nMy accommodation to course travel time is: ${state.hotelDistance || "____________________"}.\nMy total budget is: $${total}.\nMy plan is ${result} the $1,500 budget.\n\nReason for my choice: ${state.notes || "____________________"}`; }
+    function refreshSummary(){ const box = document.getElementById("summaryBox"); if (box) box.textContent = buildSummary(); }
+    function copySummary(){ refreshSummary(); navigator.clipboard.writeText(buildSummary()).then(() => alert("Summary copied.")).catch(() => alert("Could not copy automatically. Please copy the text manually.")); }
+    function renderStepList(){ const stepList = document.getElementById("stepList"); stepList.innerHTML = ""; lessons.forEach((lesson, index) => { const button = document.createElement("button"); button.className = "step-button" + (index === currentStep ? " active" : ""); button.textContent = `${index + 1}. ${lesson.title}`; button.addEventListener("click", () => { currentStep = index; renderLesson(); }); stepList.appendChild(button); }); }
+    function renderLesson(){ const lesson = lessons[currentStep]; document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`; document.getElementById("lessonTitle").textContent = lesson.title; document.getElementById("lessonText").textContent = lesson.text; document.getElementById("lessonContent").innerHTML = lesson.render(); document.getElementById("prevBtn").disabled = currentStep === 0; document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1; renderStepList(); if (lesson.afterRender) lesson.afterRender(); }
+    document.getElementById("prevBtn").addEventListener("click", () => { if (currentStep > 0) { currentStep--; renderLesson(); } });
+    document.getElementById("nextBtn").addEventListener("click", () => { if (currentStep < lessons.length - 1) { currentStep++; renderLesson(); } });
+    renderLesson();
+  </script>
+</body>
+</html>
