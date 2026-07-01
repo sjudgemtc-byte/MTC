@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Branding Website with Gemini</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root { --ink:#111111; --muted:#4e4e4e; --brand:#fef153; --panel:#ffffff; --line:#111111; --soft:#f6f6f6; --ok:#1d6b37; --shadow:0 18px 38px rgba(17,17,17,0.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:"Rethink Sans", Arial, sans-serif; color:var(--ink); background:radial-gradient(circle at top right, rgba(254,241,83,0.55), transparent 24%), linear-gradient(180deg, #ffffff 0%, #fafafa 100%); min-height:100vh; }
+    .wrap { max-width:1180px; margin:0 auto; padding:24px 18px 44px; }
+    .hero { background:linear-gradient(135deg, rgba(254,241,83,0.98) 0%, rgba(254,241,83,0.9) 68%, rgba(255,255,255,0.95) 68%, rgba(255,255,255,0.95) 100%); border:2px solid var(--line); border-radius:28px; padding:28px 24px 26px; box-shadow:var(--shadow); margin-bottom:20px; position:relative; overflow:hidden; }
+    .hero::after { content:""; position:absolute; right:-60px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:rgba(17,17,17,0.06); }
+    .hero-top { display:flex; justify-content:space-between; align-items:flex-start; gap:18px; position:relative; z-index:1; }
+    .hero-copy { max-width:770px; }
+    .hero-kicker { display:inline-block; margin-bottom:12px; padding:7px 12px; border-radius:999px; border:1.5px solid var(--line); background:rgba(255,255,255,0.72); font-size:0.82rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; }
+    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.02; letter-spacing:-0.03em; }
+    .hero p { margin:0; max-width:68ch; line-height:1.55; font-size:1.02rem; }
+    .brand { flex:0 0 auto; min-width:150px; min-height:92px; border:2px solid var(--line); border-radius:22px; background:rgba(255,255,255,0.82); display:grid; place-items:center; padding:14px; text-align:center; color:var(--ink); text-decoration:none; box-shadow:0 10px 22px rgba(17,17,17,0.08); }
+    .brand strong { display:block; font-size:1.02rem; line-height:1.05; }
+    .brand span { display:inline-block; margin-top:8px; padding:4px 8px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-size:0.72rem; font-weight:800; letter-spacing:0.08em; }
+    .activity-menu { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
+    .activity-menu a { display:inline-block; padding:10px 14px; border-radius:999px; border:1.5px solid var(--line); background:#ffffff; color:var(--ink); text-decoration:none; font-weight:800; }
+    .activity-menu a.current { background:var(--brand); }
+    .layout { display:grid; grid-template-columns:300px 1fr; gap:18px; }
+    .side, .main { background:var(--panel); border:1.5px solid var(--line); border-radius:22px; box-shadow:var(--shadow); }
+    .side { padding:18px; align-self:start; position:sticky; top:18px; }
+    .side h2 { margin:0 0 12px; font-size:1.05rem; }
+    .step-list { display:grid; gap:10px; }
+    .step-button { width:100%; text-align:left; border:1.5px solid var(--line); background:#ffffff; border-radius:16px; padding:12px 14px; cursor:pointer; font-size:0.96rem; font-weight:800; color:var(--ink); }
+    .step-button.active { background:var(--brand); }
+    .side-note { margin-top:14px; padding:12px; border-radius:16px; background:var(--soft); border:1px solid var(--line); color:var(--muted); font-size:0.92rem; line-height:1.45; }
+    .main { padding:22px; }
+    .tag { display:inline-block; padding:6px 10px; border-radius:999px; background:var(--brand); border:1.5px solid var(--line); font-size:0.84rem; font-weight:800; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em; }
+    .lesson-title { margin:0 0 10px; font-size:1.9rem; line-height:1.08; letter-spacing:-0.02em; }
+    .lesson-text { margin:0 0 16px; line-height:1.55; color:#2e2e28; }
+    .card-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px; margin:14px 0 18px; }
+    .card, .practice-box, .result-box, .prompt-box { border:1.5px solid var(--line); border-radius:18px; background:#ffffff; padding:14px; }
+    .card h3, .practice-box h3, .result-box h3, .prompt-box h3 { margin:0 0 8px; font-size:1.02rem; }
+    .card p, .card li, .practice-box li, .result-box p { line-height:1.5; margin:0; }
+    .card ul, .practice-box ol, .practice-box ul { margin:0; padding-left:20px; line-height:1.55; }
+    .practice-box, .result-box, .prompt-box { margin-top:18px; }
+    .link-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+    .resource-link { display:block; padding:14px; border:1.5px solid var(--line); border-radius:18px; color:var(--ink); background:#ffffff; font-weight:800; text-decoration-thickness:2px; text-underline-offset:3px; }
+    label { font-weight:800; }
+    input, select, textarea { width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:14px; font:inherit; background:#ffffff; }
+    textarea { min-height:92px; resize:vertical; }
+    .field-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:12px; }
+    .field-row { display:grid; gap:7px; margin:10px 0; }
+    .checklist { display:grid; gap:10px; margin:14px 0 18px; }
+    .check-row { display:flex; align-items:flex-start; gap:10px; padding:12px; border-radius:16px; background:#ffffff; border:1.5px solid var(--line); line-height:1.4; }
+    .check-row input { width:auto; margin-top:3px; transform:scale(1.2); }
+    .copy-box { margin-top:14px; padding:14px; border-radius:16px; border:1.5px dashed var(--line); background:#ffffff; white-space:pre-wrap; line-height:1.55; }
+    .action-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    button { border:1.5px solid var(--line); border-radius:999px; padding:12px 18px; font-size:0.98rem; font-weight:800; cursor:pointer; background:#ffffff; color:var(--ink); }
+    button:disabled { opacity:0.55; cursor:not-allowed; }
+    .primary { background:var(--brand); }
+    .footer-note { margin-top:18px; padding-top:14px; border-top:2px solid var(--line); font-size:0.92rem; color:var(--muted); }
+    @media (max-width:920px) { .layout { grid-template-columns:1fr; } .side { position:static; } .card-grid, .field-grid, .link-grid { grid-template-columns:1fr; } .hero-top { flex-direction:column-reverse; } h1 { font-size:2rem; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">AI and Employability Skills</div>
+          <h1>Personal Branding Website with Gemini</h1>
+          <p>Use the free Gemini web app to plan, draft and improve a simple personal branding website while protecting private information.</p>
+        </div>
+        <a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Student activities menu">
+      <a href="../">All activities</a>
+      <a href="../google-tasks-practice/">Google Tasks Practice</a>
+      <a href="../google-alerts-practice/">Google Alerts Practice</a>
+      <a href="../apps-everyday-life/">Apps to Make Everyday Life Easier</a>
+      <a href="../creative-commons-image-search/">Creative Commons Image Search</a>
+      <a href="../brisbane-travel-planning/">Brisbane Travel Planning</a>
+      <a href="./" class="current">Personal Branding Website</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note"><strong>Privacy rule:</strong> use fictional or low-risk examples. Do not enter full date of birth, home address, phone number, passport details, Medicare details, banking details, passwords, or private family information.</div>
+      </aside>
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">This activity builds skills in AI prompting, workplace communication, web page planning, editing, privacy awareness and presenting a professional online identity.</div>
+        <div class="action-row" style="justify-content:space-between; margin-top:22px;"><button id="prevBtn">Previous</button><button id="nextBtn" class="primary">Next</button></div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const state = { role:"", strengths:"", audience:"", tone:"friendly and professional", sections:"About me, Skills, Experience, Contact", codePrompt:"" };
+    const resources = [["Open Gemini", "https://gemini.google.com/"], ["Gemini Privacy Hub", "https://support.google.com/gemini/answer/13594961"], ["Manage Gemini activity", "https://support.google.com/gemini/answer/13278892"]];
+    const lessons = [
+      { title:"Understand the task", text:"You will use Gemini to help design a simple personal branding website. The website can be real, fictional or practice-only.", render(){ return `<div class="card-grid"><div class="card"><h3>What is personal branding?</h3><p>A personal brand is the professional message people see about you: your skills, strengths, work interests and communication style.</p></div><div class="card"><h3>Today you will create</h3><ul><li>a safe profile idea</li><li>a website plan</li><li>AI draft text</li><li>a simple website prompt</li><li>a final checklist</li></ul></div><div class="card"><h3>Beginner option</h3><p>Create a simple one-page profile for a fictional job seeker.</p></div><div class="card"><h3>Extension option</h3><p>Ask Gemini for HTML and CSS, then test or improve the design with your trainer.</p></div></div>`; } },
+      { title:"Open Gemini safely", text:"Open Gemini and check what information is safe to type before you begin.", render(){ return `<div class="link-grid">${resources.map(([label,url]) => `<a class="resource-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("")}</div><div class="practice-box"><h3>Safety check</h3><ul><li>Use the official Gemini website only.</li><li>Use a fictional name or first name only for practice.</li><li>Do not upload private photos or documents.</li><li>Check your work before copying anything into another website.</li></ul></div>`; } },
+      { title:"Plan the profile", text:"Choose the professional message for the website before asking Gemini to write anything.", render(){ return `<div class="field-grid"><div class="field-row"><label for="role">Job or study goal</label><input id="role" value="${escapeHtml(state.role)}" placeholder="Example: cafe assistant, cleaner, admin assistant" oninput="saveField('role', this.value)"></div><div class="field-row"><label for="strengths">Three strengths</label><input id="strengths" value="${escapeHtml(state.strengths)}" placeholder="Example: reliable, organised, friendly" oninput="saveField('strengths', this.value)"></div><div class="field-row"><label for="audience">Who is the website for?</label><input id="audience" value="${escapeHtml(state.audience)}" placeholder="Example: employer, teacher, customer" oninput="saveField('audience', this.value)"></div><div class="field-row"><label for="tone">Tone</label><select id="tone" onchange="saveField('tone', this.value)"><option>friendly and professional</option><option>confident and direct</option><option>simple and clear</option><option>warm and helpful</option></select></div></div><div class="practice-box"><h3>Class discussion</h3><ol><li>What information is useful for an employer?</li><li>What information should stay private?</li><li>What makes a website look trustworthy?</li></ol></div>`; } },
+      { title:"Copy a safe Gemini prompt", text:"Use this prompt to ask Gemini for a website plan without sharing private information.", render(){ return `<div class="prompt-box"><h3>Prompt 1: website plan</h3><div class="copy-box" id="planPrompt">${buildPlanPrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('planPrompt')">Copy prompt</button><button onclick="refreshPrompts()">Refresh prompt</button></div></div><div class="practice-box"><h3>After Gemini responds</h3><ul><li>Check that the headings are useful.</li><li>Remove anything too personal.</li><li>Ask for simpler language if needed.</li></ul></div>`; } },
+      { title:"Ask for website text", text:"Use Gemini to create short website text, then edit it so it sounds accurate and safe.", render(){ return `<div class="prompt-box"><h3>Prompt 2: website text</h3><div class="copy-box" id="textPrompt">${buildTextPrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('textPrompt')">Copy prompt</button></div></div><div class="card-grid"><div class="card"><h3>Check the draft</h3><ul><li>Is it true or clearly fictional?</li><li>Is the language simple?</li><li>Does it avoid private details?</li><li>Does it sound professional?</li></ul></div><div class="card"><h3>Useful edit prompt</h3><p>Please rewrite this in plain English for an adult learner. Keep it professional and under 80 words.</p></div></div>`; } },
+      { title:"Ask for simple website code", text:"If your trainer says yes, ask Gemini for a simple one-page HTML website that can be tested safely.", render(){ return `<div class="field-row"><label for="sections">Website sections</label><input id="sections" value="${escapeHtml(state.sections)}" oninput="saveField('sections', this.value)"></div><div class="prompt-box"><h3>Prompt 3: simple website code</h3><div class="copy-box" id="codePrompt">${buildCodePrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('codePrompt')">Copy prompt</button><button onclick="refreshPrompts()">Refresh prompt</button></div></div><div class="practice-box"><h3>Important</h3><p>Do not publish the website online unless your trainer checks the content first.</p></div>`; } },
+      { title:"Review the website", text:"Use this checklist before showing or publishing anything.", render(){ const checks = ["I used Gemini safely and did not share private information.","My website has a clear name or heading.","My website explains a job or study goal.","My website lists useful skills or strengths.","The language is respectful and professional.","I removed private contact details.","I checked the spelling and layout.","I can explain what Gemini helped me do."]; return `<div class="checklist">${checks.map(item => `<label class="check-row"><input type="checkbox"><span>${item}</span></label>`).join("")}</div><div class="result-box"><h3>Final sentence frame</h3><div class="copy-box">I used Gemini to help plan and draft a personal branding website. I checked the information, removed private details, and edited the text so it was professional and safe to share.</div></div>`; } }
+    ];
+    let currentStep = 0;
+    function escapeHtml(value){ return String(value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;"); }
+    function saveField(key, value){ state[key] = value; refreshPrompts(); }
+    function buildPlanPrompt(){ return `I am creating a practice personal branding website. Please help me plan a simple one-page website.\n\nJob or study goal: ${state.role || "[type a safe job or study goal]"}\nStrengths: ${state.strengths || "[type three strengths]"}\nAudience: ${state.audience || "[type the audience]"}\nTone: ${state.tone}\n\nDo not ask me for private information. Suggest safe sections, short headings and simple content ideas.`; }
+    function buildTextPrompt(){ return `Please write short, professional website text for a practice personal branding website.\n\nJob or study goal: ${state.role || "[safe job or study goal]"}\nStrengths: ${state.strengths || "[three strengths]"}\nAudience: ${state.audience || "[audience]"}\nTone: ${state.tone}\n\nUse plain English. Include an About Me paragraph, 4 skills and a short closing sentence. Do not include address, phone number, date of birth or private details.`; }
+    function buildCodePrompt(){ return `Create a simple one-page personal branding website using only HTML and CSS in one file.\n\nUse these sections: ${state.sections || "About me, Skills, Experience, Contact"}.\nStyle: clean, readable, professional and mobile friendly.\nUse placeholder contact text only, such as \"Contact details available on request\".\nDo not include real phone numbers, home addresses, passwords, banking details or private information.\nAfter the code, list three things I should check before publishing.`; }
+    function refreshPrompts(){ const plan = document.getElementById("planPrompt"); if (plan) plan.textContent = buildPlanPrompt(); const text = document.getElementById("textPrompt"); if (text) text.textContent = buildTextPrompt(); const code = document.getElementById("codePrompt"); if (code) code.textContent = buildCodePrompt(); }
+    function copyText(id){ const text = document.getElementById(id)?.textContent || ""; navigator.clipboard.writeText(text).then(() => alert("Prompt copied.")).catch(() => alert("Could not copy automatically. Please copy the text manually.")); }
+    function renderStepList(){ const stepList = document.getElementById("stepList"); stepList.innerHTML = ""; lessons.forEach((lesson, index) => { const button = document.createElement("button"); button.className = "step-button" + (index === currentStep ? " active" : ""); button.textContent = `${index + 1}. ${lesson.title}`; button.addEventListener("click", () => { currentStep = index; renderLesson(); }); stepList.appendChild(button); }); }
+    function renderLesson(){ const lesson = lessons[currentStep]; document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`; document.getElementById("lessonTitle").textContent = lesson.title; document.getElementById("lessonText").textContent = lesson.text; document.getElementById("lessonContent").innerHTML = lesson.render(); document.getElementById("prevBtn").disabled = currentStep === 0; document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1; renderStepList(); }
+    document.getElementById("prevBtn").addEventListener("click", () => { if (currentStep > 0) { currentStep--; renderLesson(); } });
+    document.getElementById("nextBtn").addEventListener("click", () => { if (currentStep < lessons.length - 1) { currentStep++; renderLesson(); } });
+    renderLesson();
+  </script>
+</body>
+</html>
