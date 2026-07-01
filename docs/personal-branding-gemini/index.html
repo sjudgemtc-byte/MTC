@@ -46,6 +46,8 @@
     label { font-weight:800; }
     input, select, textarea { width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:14px; font:inherit; background:#ffffff; }
     textarea { min-height:92px; resize:vertical; }
+    .code-area { min-height:260px; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:0.92rem; line-height:1.45; }
+    .preview-frame { width:100%; height:420px; border:1.5px solid var(--line); border-radius:18px; background:#ffffff; margin-top:14px; }
     .field-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-top:12px; }
     .field-row { display:grid; gap:7px; margin:10px 0; }
     .checklist { display:grid; gap:10px; margin:14px 0 18px; }
@@ -67,7 +69,7 @@
         <div class="hero-copy">
           <div class="hero-kicker">AI and Employability Skills</div>
           <h1>Personal Branding Website with Gemini</h1>
-          <p>Use the free Gemini web app to plan, draft and improve a simple personal branding website while protecting private information.</p>
+          <p>Use the free Gemini web app to plan, draft, test and improve a simple personal branding website while protecting private information.</p>
         </div>
         <a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a>
       </div>
@@ -94,32 +96,74 @@
         <h2 class="lesson-title" id="lessonTitle"></h2>
         <p class="lesson-text" id="lessonText"></p>
         <div id="lessonContent"></div>
-        <div class="footer-note">This activity builds skills in AI prompting, workplace communication, web page planning, editing, privacy awareness and presenting a professional online identity.</div>
+        <div class="footer-note">This activity builds skills in AI prompting, workplace communication, web page planning, testing, editing, privacy awareness and presenting a professional online identity.</div>
         <div class="action-row" style="justify-content:space-between; margin-top:22px;"><button id="prevBtn">Previous</button><button id="nextBtn" class="primary">Next</button></div>
       </main>
     </div>
   </div>
 
   <script>
-    const state = { role:"", strengths:"", audience:"", tone:"friendly and professional", sections:"About me, Skills, Experience, Contact", codePrompt:"" };
+    const sampleHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Personal Brand</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; color:#1f2933; background:#f6f7fb; }
+    header { background:#fef153; padding:40px 24px; border-bottom:4px solid #111; }
+    main { max-width:900px; margin:0 auto; padding:24px; }
+    section { background:white; border:2px solid #111; border-radius:14px; padding:20px; margin:16px 0; }
+    h1, h2 { margin-top:0; }
+    .skills { display:flex; flex-wrap:wrap; gap:10px; padding:0; list-style:none; }
+    .skills li { border:1.5px solid #111; border-radius:999px; padding:8px 12px; background:#fffde8; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Practice Personal Brand</h1>
+    <p>Reliable, friendly and ready to learn.</p>
+  </header>
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>I am practising how to present my skills in a professional and safe way.</p>
+    </section>
+    <section>
+      <h2>Skills</h2>
+      <ul class="skills"><li>Communication</li><li>Teamwork</li><li>Organisation</li><li>Digital skills</li></ul>
+    </section>
+    <section>
+      <h2>Contact</h2>
+      <p>Contact details available on request.</p>
+    </section>
+  </main>
+</body>
+</html>`;
+    const state = { role:"", strengths:"", audience:"", tone:"friendly and professional", sections:"About me, Skills, Experience, Contact" };
     const resources = [["Open Gemini", "https://gemini.google.com/"], ["Gemini Privacy Hub", "https://support.google.com/gemini/answer/13594961"], ["Manage Gemini activity", "https://support.google.com/gemini/answer/13278892"]];
     const lessons = [
-      { title:"Understand the task", text:"You will use Gemini to help design a simple personal branding website. The website can be real, fictional or practice-only.", render(){ return `<div class="card-grid"><div class="card"><h3>What is personal branding?</h3><p>A personal brand is the professional message people see about you: your skills, strengths, work interests and communication style.</p></div><div class="card"><h3>Today you will create</h3><ul><li>a safe profile idea</li><li>a website plan</li><li>AI draft text</li><li>a simple website prompt</li><li>a final checklist</li></ul></div><div class="card"><h3>Beginner option</h3><p>Create a simple one-page profile for a fictional job seeker.</p></div><div class="card"><h3>Extension option</h3><p>Ask Gemini for HTML and CSS, then test or improve the design with your trainer.</p></div></div>`; } },
+      { title:"Understand the task", text:"You will use Gemini to help design a simple personal branding website. The website can be real, fictional or practice-only.", render(){ return `<div class="card-grid"><div class="card"><h3>What is personal branding?</h3><p>A personal brand is the professional message people see about you: your skills, strengths, work interests and communication style.</p></div><div class="card"><h3>Today you will create</h3><ul><li>a safe profile idea</li><li>a website plan</li><li>AI draft text</li><li>simple website code</li><li>a tested preview</li></ul></div><div class="card"><h3>Beginner option</h3><p>Create a simple one-page profile for a fictional job seeker.</p></div><div class="card"><h3>Extension option</h3><p>Ask Gemini for HTML and CSS, then paste it into the safe tester on this page.</p></div></div>`; } },
       { title:"Open Gemini safely", text:"Open Gemini and check what information is safe to type before you begin.", render(){ return `<div class="link-grid">${resources.map(([label,url]) => `<a class="resource-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`).join("")}</div><div class="practice-box"><h3>Safety check</h3><ul><li>Use the official Gemini website only.</li><li>Use a fictional name or first name only for practice.</li><li>Do not upload private photos or documents.</li><li>Check your work before copying anything into another website.</li></ul></div>`; } },
       { title:"Plan the profile", text:"Choose the professional message for the website before asking Gemini to write anything.", render(){ return `<div class="field-grid"><div class="field-row"><label for="role">Job or study goal</label><input id="role" value="${escapeHtml(state.role)}" placeholder="Example: cafe assistant, cleaner, admin assistant" oninput="saveField('role', this.value)"></div><div class="field-row"><label for="strengths">Three strengths</label><input id="strengths" value="${escapeHtml(state.strengths)}" placeholder="Example: reliable, organised, friendly" oninput="saveField('strengths', this.value)"></div><div class="field-row"><label for="audience">Who is the website for?</label><input id="audience" value="${escapeHtml(state.audience)}" placeholder="Example: employer, teacher, customer" oninput="saveField('audience', this.value)"></div><div class="field-row"><label for="tone">Tone</label><select id="tone" onchange="saveField('tone', this.value)"><option>friendly and professional</option><option>confident and direct</option><option>simple and clear</option><option>warm and helpful</option></select></div></div><div class="practice-box"><h3>Class discussion</h3><ol><li>What information is useful for an employer?</li><li>What information should stay private?</li><li>What makes a website look trustworthy?</li></ol></div>`; } },
       { title:"Copy a safe Gemini prompt", text:"Use this prompt to ask Gemini for a website plan without sharing private information.", render(){ return `<div class="prompt-box"><h3>Prompt 1: website plan</h3><div class="copy-box" id="planPrompt">${buildPlanPrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('planPrompt')">Copy prompt</button><button onclick="refreshPrompts()">Refresh prompt</button></div></div><div class="practice-box"><h3>After Gemini responds</h3><ul><li>Check that the headings are useful.</li><li>Remove anything too personal.</li><li>Ask for simpler language if needed.</li></ul></div>`; } },
       { title:"Ask for website text", text:"Use Gemini to create short website text, then edit it so it sounds accurate and safe.", render(){ return `<div class="prompt-box"><h3>Prompt 2: website text</h3><div class="copy-box" id="textPrompt">${buildTextPrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('textPrompt')">Copy prompt</button></div></div><div class="card-grid"><div class="card"><h3>Check the draft</h3><ul><li>Is it true or clearly fictional?</li><li>Is the language simple?</li><li>Does it avoid private details?</li><li>Does it sound professional?</li></ul></div><div class="card"><h3>Useful edit prompt</h3><p>Please rewrite this in plain English for an adult learner. Keep it professional and under 80 words.</p></div></div>`; } },
-      { title:"Ask for simple website code", text:"If your trainer says yes, ask Gemini for a simple one-page HTML website that can be tested safely.", render(){ return `<div class="field-row"><label for="sections">Website sections</label><input id="sections" value="${escapeHtml(state.sections)}" oninput="saveField('sections', this.value)"></div><div class="prompt-box"><h3>Prompt 3: simple website code</h3><div class="copy-box" id="codePrompt">${buildCodePrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('codePrompt')">Copy prompt</button><button onclick="refreshPrompts()">Refresh prompt</button></div></div><div class="practice-box"><h3>Important</h3><p>Do not publish the website online unless your trainer checks the content first.</p></div>`; } },
-      { title:"Review the website", text:"Use this checklist before showing or publishing anything.", render(){ const checks = ["I used Gemini safely and did not share private information.","My website has a clear name or heading.","My website explains a job or study goal.","My website lists useful skills or strengths.","The language is respectful and professional.","I removed private contact details.","I checked the spelling and layout.","I can explain what Gemini helped me do."]; return `<div class="checklist">${checks.map(item => `<label class="check-row"><input type="checkbox"><span>${item}</span></label>`).join("")}</div><div class="result-box"><h3>Final sentence frame</h3><div class="copy-box">I used Gemini to help plan and draft a personal branding website. I checked the information, removed private details, and edited the text so it was professional and safe to share.</div></div>`; } }
+      { title:"Ask for simple website code", text:"Ask Gemini for one complete HTML file that can be copied into the tester.", render(){ return `<div class="field-row"><label for="sections">Website sections</label><input id="sections" value="${escapeHtml(state.sections)}" oninput="saveField('sections', this.value)"></div><div class="prompt-box"><h3>Prompt 3: simple website code</h3><div class="copy-box" id="codePrompt">${buildCodePrompt()}</div><div class="action-row"><button class="primary" onclick="copyText('codePrompt')">Copy prompt</button><button onclick="refreshPrompts()">Refresh prompt</button></div></div><div class="practice-box"><h3>What to copy from Gemini</h3><p>Copy the full HTML code. It may start with <strong>&lt;!DOCTYPE html&gt;</strong>. Do not copy extra explanation unless your trainer asks for it.</p></div>`; } },
+      { title:"Test your website safely", text:"Paste Gemini's HTML code below and preview it before saving or publishing anything.", render(){ return `<div class="prompt-box"><h3>Website tester</h3><div class="field-row"><label for="websiteCode">Paste HTML code here</label><textarea id="websiteCode" class="code-area" placeholder="Paste the complete HTML from Gemini here"></textarea></div><div class="action-row"><button class="primary" onclick="previewWebsite()">Preview website</button><button onclick="loadSampleWebsite()">Use sample website</button><button onclick="clearTester()">Clear</button></div><iframe id="websitePreview" class="preview-frame" sandbox="" title="Website preview"></iframe></div><div class="practice-box"><h3>Testing checklist</h3><ul><li>Can I read the heading clearly?</li><li>Does it work on a small screen?</li><li>Are the colours easy to read?</li><li>Did I remove private contact details?</li><li>Does every section make sense?</li></ul></div><div class="side-note">This tester is for classroom preview only. Scripts are blocked and the website is not published online.</div>`; } },
+      { title:"Review the website", text:"Use this checklist before showing or publishing anything.", render(){ const checks = ["I used Gemini safely and did not share private information.","I pasted the HTML into the classroom tester.","My website has a clear name or heading.","My website explains a job or study goal.","My website lists useful skills or strengths.","The language is respectful and professional.","I removed private contact details.","I checked the spelling and layout.","I can explain what Gemini helped me do."]; return `<div class="checklist">${checks.map(item => `<label class="check-row"><input type="checkbox"><span>${item}</span></label>`).join("")}</div><div class="result-box"><h3>Final sentence frame</h3><div class="copy-box">I used Gemini to help plan, draft and test a personal branding website. I checked the information, removed private details, previewed the page safely, and edited the text so it was professional and safe to share.</div></div>`; } }
     ];
     let currentStep = 0;
     function escapeHtml(value){ return String(value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;"); }
     function saveField(key, value){ state[key] = value; refreshPrompts(); }
     function buildPlanPrompt(){ return `I am creating a practice personal branding website. Please help me plan a simple one-page website.\n\nJob or study goal: ${state.role || "[type a safe job or study goal]"}\nStrengths: ${state.strengths || "[type three strengths]"}\nAudience: ${state.audience || "[type the audience]"}\nTone: ${state.tone}\n\nDo not ask me for private information. Suggest safe sections, short headings and simple content ideas.`; }
     function buildTextPrompt(){ return `Please write short, professional website text for a practice personal branding website.\n\nJob or study goal: ${state.role || "[safe job or study goal]"}\nStrengths: ${state.strengths || "[three strengths]"}\nAudience: ${state.audience || "[audience]"}\nTone: ${state.tone}\n\nUse plain English. Include an About Me paragraph, 4 skills and a short closing sentence. Do not include address, phone number, date of birth or private details.`; }
-    function buildCodePrompt(){ return `Create a simple one-page personal branding website using only HTML and CSS in one file.\n\nUse these sections: ${state.sections || "About me, Skills, Experience, Contact"}.\nStyle: clean, readable, professional and mobile friendly.\nUse placeholder contact text only, such as \"Contact details available on request\".\nDo not include real phone numbers, home addresses, passwords, banking details or private information.\nAfter the code, list three things I should check before publishing.`; }
+    function buildCodePrompt(){ return `Create a simple one-page personal branding website using only HTML and CSS in one file.\n\nUse these sections: ${state.sections || "About me, Skills, Experience, Contact"}.\nStyle: clean, readable, professional and mobile friendly.\nUse placeholder contact text only, such as \"Contact details available on request\".\nDo not include real phone numbers, home addresses, passwords, banking details or private information.\nReturn only one complete HTML file that starts with <!DOCTYPE html>. After the code, list three things I should check before publishing.`; }
     function refreshPrompts(){ const plan = document.getElementById("planPrompt"); if (plan) plan.textContent = buildPlanPrompt(); const text = document.getElementById("textPrompt"); if (text) text.textContent = buildTextPrompt(); const code = document.getElementById("codePrompt"); if (code) code.textContent = buildCodePrompt(); }
     function copyText(id){ const text = document.getElementById(id)?.textContent || ""; navigator.clipboard.writeText(text).then(() => alert("Prompt copied.")).catch(() => alert("Could not copy automatically. Please copy the text manually.")); }
+    function cleanGeminiCode(code){ return String(code || "").replace(/^```html\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim(); }
+    function previewWebsite(){ const codeBox = document.getElementById("websiteCode"); const frame = document.getElementById("websitePreview"); const code = cleanGeminiCode(codeBox.value); if (!code) { alert("Paste HTML code first, or use the sample website."); return; } frame.srcdoc = code; }
+    function loadSampleWebsite(){ const codeBox = document.getElementById("websiteCode"); codeBox.value = sampleHtml; previewWebsite(); }
+    function clearTester(){ const codeBox = document.getElementById("websiteCode"); const frame = document.getElementById("websitePreview"); codeBox.value = ""; frame.srcdoc = ""; }
     function renderStepList(){ const stepList = document.getElementById("stepList"); stepList.innerHTML = ""; lessons.forEach((lesson, index) => { const button = document.createElement("button"); button.className = "step-button" + (index === currentStep ? " active" : ""); button.textContent = `${index + 1}. ${lesson.title}`; button.addEventListener("click", () => { currentStep = index; renderLesson(); }); stepList.appendChild(button); }); }
     function renderLesson(){ const lesson = lessons[currentStep]; document.getElementById("lessonTag").textContent = `Step ${currentStep + 1}`; document.getElementById("lessonTitle").textContent = lesson.title; document.getElementById("lessonText").textContent = lesson.text; document.getElementById("lessonContent").innerHTML = lesson.render(); document.getElementById("prevBtn").disabled = currentStep === 0; document.getElementById("nextBtn").disabled = currentStep === lessons.length - 1; renderStepList(); }
     document.getElementById("prevBtn").addEventListener("click", () => { if (currentStep > 0) { currentStep--; renderLesson(); } });
