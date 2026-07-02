@@ -6,28 +6,9 @@
   <title>Student Activities</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
-
-    :root {
-      --bg: #ffffff;
-      --ink: #111111;
-      --muted: #4e4e4e;
-      --brand: #fef153;
-      --panel: #ffffff;
-      --line: #111111;
-      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
-    }
-
+    :root { --bg: #ffffff; --ink: #111111; --muted: #4e4e4e; --brand: #fef153; --panel: #ffffff; --line: #111111; --shadow: 0 18px 38px rgba(17, 17, 17, 0.08); }
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Rethink Sans", Arial, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
-        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-      color: var(--ink);
-    }
-
+    body { margin: 0; font-family: "Rethink Sans", Arial, sans-serif; background: radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%), linear-gradient(180deg, #ffffff 0%, #fafafa 100%); color: var(--ink); }
     .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 18px 44px; }
     .hero { background: linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%); border: 2px solid var(--line); border-radius: 28px; padding: 28px 24px 26px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
     .hero::after { content: ""; position: absolute; right: -60px; bottom: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(17, 17, 17, 0.06); }
@@ -55,14 +36,10 @@
   <div class="wrap">
     <section class="hero"><div class="hero-top"><div class="hero-copy"><div class="hero-kicker">Digital Skills Practice</div><h1>Student Activities</h1><p>Simple browser-based learning activities for students. These pages are designed for practical digital literacy teaching and easy colleague testing.</p></div><div class="placeholder-logo" aria-label="Testing placeholder logo"><strong>Digital Skills<br>Lab</strong><span>TEST</span></div></div></section>
     <div class="menu-note">This is the master menu page. Students can return here at any time from an activity page. New apps should be grouped under the most suitable heading below as the site grows.</div>
-
     <section class="category"><h2 class="section-title">Digital Tools</h2><p class="section-copy">Activities that teach students how to use common digital tools, organise tasks, and build everyday device confidence.</p><div class="grid"><article class="card"><h2>Google Tasks Practice</h2><p>Learn how to open Google Tasks, create tasks, add details, mark tasks complete, and check understanding with a short quiz.</p><a href="./google-tasks-practice/">Open activity</a></article><article class="card"><h2>Google Alerts Practice</h2><p>Learn how to create a Google Alert, choose safe settings, and use email updates to follow a useful topic.</p><a href="./google-alerts-practice/">Open activity</a></article><article class="card"><h2>Apps to Make Everyday Life Easier</h2><p>Explore useful apps for medication reminders, getting around, and saving money, with safety tips and practical discussion tasks.</p><a href="./apps-everyday-life/">Open activity</a></article></div></section>
-
     <section class="category"><h2 class="section-title">Culture And Exploration</h2><p class="section-copy">Activities that help students enter online spaces, explore digital experiences, and talk about what they discover.</p><div class="grid"><article class="card"><h2>Virtual Gallery Practice</h2><p>Learn how to enter a Google Arts &amp; Culture virtual gallery, move around the space, and talk about artworks with confidence.</p><a href="./virtual-gallery-practice/">Open activity</a></article></div></section>
-
     <section class="category"><h2 class="section-title">Research And Comparison</h2><p class="section-copy">Activities that ask students to find information, compare choices, check source details, and make a clear recommendation using evidence.</p><div class="grid"><article class="card"><h2>Creative Commons Image Search</h2><p>Use Google Image Search to find a Creative Commons image, check the original source, and write a simple image credit.</p><a href="./creative-commons-image-search/">Open activity</a></article><article class="card"><h2>Winter Travel Comparison 2026</h2><p>Compare two destinations for Australian winter 2026, use the spreadsheet template, and make a recommendation based on research.</p><a href="./winter-travel-comparison/">Open activity</a></article><article class="card"><h2>Brisbane Travel Planning Challenge</h2><p>Plan a training trip from MTC Redfern to MTC South Brisbane using maps, transport websites, accommodation research, and a $1,500 budget.</p><a href="./brisbane-travel-planning/">Open activity</a></article></div></section>
-
-    <section class="category"><h2 class="section-title">Workplace Skills</h2><p class="section-copy">Activities that build practical workplace habits such as accurate data entry, following instructions, checking work, file naming, and responsible AI use.</p><div class="grid"><article class="card"><h2>Student Check-In</h2><p>Trainer tool for quick local student check-ins, support notes, attendance observations, and copy-ready Salesforce summaries.</p><a href="./student-check-in/">Open tool</a></article><article class="card"><h2>Personal Branding Website with Gemini</h2><p>Use the free Gemini web app to plan, draft and review a simple personal branding website while protecting private information.</p><a href="./personal-branding-gemini/">Open activity</a></article><article class="card"><h2>Transport And Logistics Data Entry Challenge</h2><p>Copy a workplace-style data table accurately, complete checking tasks, save the file correctly, and use AI only for editing after the first attempt.</p><a href="./transport-data-entry-challenge/">Open activity</a></article></div></section>
+    <section class="category"><h2 class="section-title">Workplace Skills</h2><p class="section-copy">Activities that build practical workplace habits such as accurate data entry, following instructions, checking work, file naming, and responsible AI use.</p><div class="grid"><article class="card"><h2>Computer Sign-Out</h2><p>Trainer tool for tracking classroom computer or laptop sign-out, return status, condition, and copy-ready device summaries.</p><a href="./computer-signout/">Open tool</a></article><article class="card"><h2>Student Check-In</h2><p>Trainer tool for quick local student check-ins, support notes, attendance observations, and copy-ready Salesforce summaries.</p><a href="./student-check-in/">Open tool</a></article><article class="card"><h2>Personal Branding Website with Gemini</h2><p>Use the free Gemini web app to plan, draft and review a simple personal branding website while protecting private information.</p><a href="./personal-branding-gemini/">Open activity</a></article><article class="card"><h2>Transport And Logistics Data Entry Challenge</h2><p>Copy a workplace-style data table accurately, complete checking tasks, save the file correctly, and use AI only for editing after the first attempt.</p><a href="./transport-data-entry-challenge/">Open activity</a></article></div></section>
   </div>
 </body>
 </html>
