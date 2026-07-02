@@ -14,46 +14,23 @@
   <div class="wrap">
     <section class="hero"><div class="hero-top"><div><div class="hero-kicker">Trainer Tool</div><h1>Student Check-In</h1><p>Record quick classroom check-ins locally on this device, then copy an audit-safe summary for Salesforce or daily notes.</p></div><a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a></div></section>
     <nav class="menu"><a href="../">All activities</a><a href="./" class="current">Student Check-In</a></nav>
-    <div class="layout">
-      <aside class="panel">
-        <span class="pill">Local only</span>
-        <h2 class="section-title">Session details</h2>
-        <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
-        <div class="field"><label for="className">Class</label><input id="className" value="RED-01 Pathway"></div>
-        <div class="field"><label for="trainer">Trainer</label><input id="trainer" value="Simon Judge"></div>
-        <div class="field"><label for="focus">Session focus</label><input id="focus" placeholder="Example: Gemini personal branding website"></div>
-        <div class="actions"><button class="primary" onclick="addStudent()">Add student</button><button onclick="buildSummary()">Build summary</button><button onclick="copySummary()">Copy summary</button><button class="danger" onclick="clearAll()">Clear</button></div>
-        <div class="side-note"><strong>Privacy:</strong> this page does not send or save data online. It stores rows only in this browser on this device. Use first names, initials, or student codes when possible.</div>
-      </aside>
-      <main class="panel">
-        <h2 class="section-title">Check-in rows</h2>
-        <p class="small">Use short, neutral notes. Record what was observed, what support was provided, and any follow-up needed. Avoid sensitive details unless required by MTC process.</p>
-        <div id="students" class="students"></div>
-        <div class="summary" id="summary">Summary will appear here.</div>
-      </main>
-    </div>
+    <div class="layout"><aside class="panel"><span class="pill">Local only</span><h2 class="section-title">Session details</h2><div class="field"><label for="date">Date</label><input id="date" type="date"></div><div class="field"><label for="className">Class</label><input id="className" value="RED-01 Pathway"></div><div class="field"><label for="trainer">Trainer</label><input id="trainer" value="Simon Judge"></div><div class="field"><label for="focus">Session focus</label><input id="focus" placeholder="Example: Gemini personal branding website"></div><div class="actions"><button class="primary" onclick="addStudent()">Add student</button><button onclick="buildSummary()">Build summary</button><button onclick="copySummary()">Copy summary</button><button class="danger" onclick="clearAll()">Clear</button></div><div class="side-note"><strong>Privacy:</strong> this page does not send or save data online. It stores rows only in this browser on this device. Use first names, initials, or student codes when possible.</div></aside><main class="panel"><h2 class="section-title">Check-in rows</h2><p class="small">Use short, neutral notes. Record what was observed, what support was provided, and any follow-up needed. Avoid sensitive details unless required by MTC process.</p><div id="students" class="students"></div><div class="summary" id="summary">Summary will appear here.</div></main></div>
   </div>
-  <template id="rowTemplate">
-    <div class="row">
-      <div class="field"><label>Name / initials</label><input class="student-name" placeholder="First name or initials"></div>
-      <div class="field"><label>Attendance</label><select class="attendance"><option>Present</option><option>Late</option><option>Left early</option><option>Absent</option><option>Partial attendance</option></select></div>
-      <div class="field"><label>Engagement</label><select class="engagement"><option>Engaged</option><option>Quiet</option><option>Needed support</option><option>Agitated</option><option>Withdrawn</option><option>Not observed</option></select></div>
-      <div class="field"><label>Neutral note</label><textarea class="note" placeholder="Example: Participant engaged with activity after staged instructions."></textarea></div>
-      <button onclick="removeRow(this)">Remove</button>
-    </div>
-  </template>
+  <template id="rowTemplate"><div class="row"><div class="field"><label>Name / initials</label><input class="student-name" placeholder="First name or initials"></div><div class="field"><label>Attendance</label><select class="attendance"><option>Present</option><option>Late</option><option>Left early</option><option>Absent</option><option>Partial attendance</option></select></div><div class="field"><label>Engagement</label><select class="engagement"><option>Engaged</option><option>Quiet</option><option>Needed support</option><option>Agitated</option><option>Withdrawn</option><option>Not observed</option></select></div><div class="field"><label>Neutral note</label><textarea class="note" placeholder="Example: Participant engaged with activity after staged instructions."></textarea></div><button onclick="removeRow(this)">Remove</button></div></template>
   <script>
-    const storeKey='mtc-student-check-in-v2';
+    const storeKey='mtc-student-check-in-v3';
     const els={date:document.getElementById('date'),className:document.getElementById('className'),trainer:document.getElementById('trainer'),focus:document.getElementById('focus'),students:document.getElementById('students'),summary:document.getElementById('summary')};
     els.date.valueAsDate=new Date();
-    function rowData(row){return{name:row.querySelector('.student-name').value.trim(),attendance:row.querySelector('.attendance').value,engagement:row.querySelector('.engagement').value,note:row.querySelector('.note').value.trim()}}
+    const textValue=el=>el&&typeof el.value==='string'?el.value:'';
+    const safeText=value=>String(value??'').trim();
+    function rowData(row){return{name:safeText(row.querySelector('.student-name')?.value),attendance:textValue(row.querySelector('.attendance'))||'Present',engagement:textValue(row.querySelector('.engagement'))||'Not observed',note:safeText(row.querySelector('.note')?.value)}}
     function allRows(){return[...document.querySelectorAll('.row')]}
-    function save(){const data={date:els.date.value,className:els.className.value,trainer:els.trainer.value,focus:els.focus.value,rows:allRows().map(rowData)};localStorage.setItem(storeKey,JSON.stringify(data))}
-    function load(){const raw=localStorage.getItem(storeKey);if(!raw){addStudent();return}try{const data=JSON.parse(raw);els.date.value=data.date||els.date.value;els.className.value=data.className||els.className.value;els.trainer.value=data.trainer||els.trainer.value;els.focus.value=data.focus||'';(data.rows&&data.rows.length?data.rows:[{}]).forEach(addStudentFromData)}catch{addStudent()}}
+    function save(){const data={date:textValue(els.date),className:textValue(els.className),trainer:textValue(els.trainer),focus:textValue(els.focus),rows:allRows().map(rowData)};localStorage.setItem(storeKey,JSON.stringify(data))}
+    function load(){const raw=localStorage.getItem(storeKey);if(!raw){addStudent();return}try{const data=JSON.parse(raw);els.date.value=data.date||els.date.value;els.className.value=data.className||els.className.value;els.trainer.value=data.trainer||els.trainer.value;els.focus.value=data.focus||'';(Array.isArray(data.rows)&&data.rows.length?data.rows:[{}]).forEach(addStudentFromData)}catch{addStudent()}}
     function addStudentFromData(data={}){const tpl=document.getElementById('rowTemplate');const row=tpl.content.firstElementChild.cloneNode(true);els.students.appendChild(row);row.querySelector('.student-name').value=data.name||'';row.querySelector('.attendance').value=data.attendance||'Present';row.querySelector('.engagement').value=data.engagement||'Engaged';row.querySelector('.note').value=data.note||'';row.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',save));save()}
     function addStudent(){addStudentFromData({})}
     function removeRow(btn){btn.closest('.row').remove();if(!allRows().length)addStudent();save();buildSummary()}
-    function buildSummary(){save();const rows=allRows().map(rowData).filter(r=>r.name||r.note);const lines=[];lines.push(`Date: ${els.date.value || 'Not recorded'}`);lines.push(`Class: ${els.className.value || 'Not recorded'}`);lines.push(`Trainer: ${els.trainer.value || 'Not recorded'}`);if(els.focus.value.trim())lines.push(`Session focus: ${els.focus.value.trim()}`);lines.push('');lines.push('Student check-in summary:');if(!rows.length){lines.push('No student check-in rows recorded.')}else{rows.forEach(r=>{const name=r.name||'Unnamed participant';let line=`- ${name}: ${r.attendance}; engagement observed as ${r.engagement.toLowerCase()}.`;if(r.note)line+=` Note: ${r.note}`;lines.push(line)})}lines.push('');lines.push('General note: Information recorded as trainer observation. Follow-up to be completed where required according to MTC process.');els.summary.textContent=lines.join('\n')}
+    function buildSummary(){save();const rows=allRows().map(rowData).filter(r=>r.name||r.note);const lines=[];lines.push(`Date: ${textValue(els.date)||'Not recorded'}`);lines.push(`Class: ${textValue(els.className)||'Not recorded'}`);lines.push(`Trainer: ${textValue(els.trainer)||'Not recorded'}`);const sessionFocus=safeText(textValue(els.focus));if(sessionFocus)lines.push(`Session focus: ${sessionFocus}`);lines.push('');lines.push('Student check-in summary:');if(!rows.length){lines.push('No student check-in rows recorded.')}else{rows.forEach(r=>{const name=r.name||'Unnamed participant';let line=`- ${name}: ${r.attendance}; engagement observed as ${String(r.engagement).toLowerCase()}.`;if(r.note)line+=` Note: ${r.note}`;lines.push(line)})}lines.push('');lines.push('General note: Information recorded as trainer observation. Follow-up to be completed where required according to MTC process.');els.summary.textContent=lines.join('\n')}
     function copySummary(){buildSummary();navigator.clipboard.writeText(els.summary.textContent).then(()=>alert('Summary copied.')).catch(()=>alert('Could not copy automatically. Please select and copy the summary manually.'))}
     function clearAll(){if(!confirm('Clear all check-in rows on this device?'))return;localStorage.removeItem(storeKey);els.students.innerHTML='';els.focus.value='';addStudent();els.summary.textContent='Summary will appear here.'}
     ['date','className','trainer','focus'].forEach(id=>document.getElementById(id).addEventListener('input',save));
