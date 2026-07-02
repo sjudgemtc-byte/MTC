@@ -1,19 +1,632 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ABC Website Activity</title>
-<style>@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');:root{--ink:#111;--muted:#4e4e4e;--brand:#fef153;--panel:#fff;--line:#111;--soft:#f6f6f6;--shadow:0 18px 38px rgba(17,17,17,.08)}*{box-sizing:border-box}body{margin:0;font-family:"Rethink Sans",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff 0%,#fafafa 100%);min-height:100vh}.wrap{max-width:1180px;margin:0 auto;padding:24px 18px 44px}.hero{background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%,rgba(255,255,255,.95) 100%);border:2px solid var(--line);border-radius:28px;padding:28px 24px 26px;box-shadow:var(--shadow);margin-bottom:20px}.hero-top{display:flex;justify-content:space-between;gap:18px}.brand-home{display:inline-block;line-height:0;flex:0 0 auto}.brand-lockup{max-width:170px;width:100%;height:auto}.hero-kicker,.tag{display:inline-block;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.72);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.hero-kicker{margin-bottom:12px}h1{margin:0 0 10px;font-size:2.35rem;line-height:1.02;letter-spacing:0}.hero p{margin:0;max-width:66ch;line-height:1.55}.activity-menu{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}.activity-menu a,.primary-link,button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font:inherit;font-weight:800;cursor:pointer}.activity-menu a.current,.primary-link,button.primary{background:var(--brand)}.layout{display:grid;grid-template-columns:300px 1fr;gap:18px}.side,.main,.card,.trainer-panel{background:var(--panel);border:1.5px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}.side{padding:18px;align-self:start;position:sticky;top:18px}.main{padding:22px}.step-list{display:grid;gap:10px}.step-button{width:100%;justify-content:flex-start;text-align:left;border-radius:16px;background:#fff}.step-button.active{background:var(--brand)}.side-note,.callout{margin-top:14px;padding:12px;border-radius:16px;background:var(--soft);border:1px solid var(--line);color:var(--muted);line-height:1.45}.callout strong{color:var(--ink)}.stage{display:none}.stage.active{display:block}.tag{background:var(--brand);margin-bottom:10px}h2{margin:0 0 10px;font-size:1.55rem;letter-spacing:0}h3{margin:0 0 8px;font-size:1.1rem}p,li{line-height:1.55}ul,ol{padding-left:1.35rem}.cards,.check-grid,.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.card{padding:16px;box-shadow:none}.tick{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1.5px solid var(--line);border-radius:16px;background:#fff;font-weight:800}.tick input{width:auto;margin-top:4px}label{display:grid;gap:7px;font-weight:800}input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:14px;font:inherit;background:#fff}textarea{min-height:92px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.result{margin-top:14px;padding:14px;border:1.5px dashed var(--line);border-radius:18px;background:#fff;white-space:pre-wrap;line-height:1.55}.small{color:var(--muted);font-size:.93rem}.trainer-panel{margin-top:18px;padding:18px}.yes-no{display:grid;gap:10px;margin-top:14px}.yes-no-row{display:grid;grid-template-columns:1fr 170px;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line);border-radius:16px;background:#fff}@media(max-width:900px){.hero-top{flex-direction:column-reverse}.layout,.cards,.check-grid,.field-grid,.yes-no-row{grid-template-columns:1fr}.side{position:static}h1{font-size:2rem}}</style>
-</head><body><div class="wrap">
-<section class="hero"><div class="hero-top"><div><div class="hero-kicker">MTC FutureReady Digital Skills</div><h1>Using the ABC Website</h1><p>Practise opening a trusted Australian website, using menus and search, reading online information, and recording useful facts.</p></div><a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page"><img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo"></a></div></section>
-<nav class="activity-menu"><a href="../">All activities</a><a class="current" href="./">ABC Website Activity</a></nav>
-<div class="layout"><aside class="side"><h2>Lesson steps</h2><div class="step-list"><button class="step-button active" data-stage="open">1. Open ABC</button><button class="step-button" data-stage="sections">2. Find sections</button><button class="step-button" data-stage="article">3. Read an article</button><button class="step-button" data-stage="search">4. Use search</button><button class="step-button" data-stage="reliable">5. Check reliability</button><button class="step-button" data-stage="reflect">6. Reflect</button></div><div class="side-note"><strong>Approx. time:</strong> 90-120 minutes.<br><strong>Skills:</strong> internet navigation, search, reading, note-taking, short written answers and partner discussion.</div></aside>
-<main class="main">
-<section id="open" class="stage active"><span class="tag">Part A</span><h2>Open the ABC website</h2><p>The ABC website has news, videos, radio, podcasts, local information, sport, lifestyle, quizzes and emergency information.</p><ol><li>Open Chrome or another browser.</li><li>Click in the address bar at the top.</li><li>Type <strong>www.abc.net.au</strong></li><li>Press Enter.</li></ol><div class="actions"><a class="primary-link" href="https://www.abc.net.au/" target="_blank" rel="noopener noreferrer">Open ABC Website</a><button class="primary" data-next="sections">Next step</button></div><div class="callout"><strong>Class question:</strong> Where do you normally get your news or everyday information?</div></section>
-<section id="sections" class="stage"><span class="tag">Part B</span><h2>Find these ABC sections</h2><p>Look around the ABC website. Tick each section when you find it.</p><div class="check-grid"><label class="tick"><input type="checkbox" data-section="ABC News"> ABC News</label><label class="tick"><input type="checkbox" data-section="ABC iview"> ABC iview</label><label class="tick"><input type="checkbox" data-section="ABC listen"> ABC listen</label><label class="tick"><input type="checkbox" data-section="Kids & Students"> Kids &amp; Students</label><label class="tick"><input type="checkbox" data-section="Indigenous"> Indigenous</label><label class="tick"><input type="checkbox" data-section="Sport"> Sport</label><label class="tick"><input type="checkbox" data-section="Lifestyle"> Lifestyle</label><label class="tick"><input type="checkbox" data-section="Local News"> Local News</label><label class="tick"><input type="checkbox" data-section="Search"> Search</label><label class="tick"><input type="checkbox" data-section="Emergency"> Emergency</label></div><label>Partner sentence<input id="foundSentence" placeholder="Example: I found ABC News on the ABC website."></label><div class="actions"><button data-next="open">Back</button><button class="primary" data-next="article">Next step</button></div></section>
-<section id="article" class="stage"><span class="tag">Part C</span><h2>Choose and read one article</h2><p>Choose one article from News, Sport, Lifestyle, Science, Local News, Weather or Emergency information.</p><div class="field-grid"><label>Article headline<input id="headline" placeholder="Type the article headline"></label><label>Topic<input id="topic" placeholder="Example: weather, sport, health"></label><label>Date published<input id="publishedDate" placeholder="Example: 2 July 2026"></label><label>One new word<input id="newWord" placeholder="Type one new word"></label></div><label>One key fact from the article<textarea id="keyFact" placeholder="Write one important fact from the article."></textarea></label><label>Meaning of the new word<textarea id="wordMeaning" placeholder="Write the meaning in your own words, or ask a partner/trainer."></textarea></label><label>Why did you choose this article?<textarea id="whyChoose" placeholder="Example: I chose this article because it is useful for my family."></textarea></label><div class="actions"><button data-next="sections">Back</button><button class="primary" data-next="search">Next step</button></div></section>
-<section id="search" class="stage"><span class="tag">Part D</span><h2>Use ABC search</h2><p>Use the ABC search bar to search for one useful topic.</p><div class="field-grid"><label>My search words<input id="searchWords" placeholder="Example: Sydney weather"></label><label>I searched for<select id="searchType"><option>news</option><option>weather</option><option>sport</option><option>health</option><option>money</option><option>local information</option><option>other</option></select></label></div><label>One useful result I found<textarea id="usefulResult" placeholder="Write the result you clicked and what it was about."></textarea></label><div class="callout"><strong>Search ideas:</strong> Sydney weather, Centrelink, jobs, health, scams, sport, food, rent or transport.</div><div class="actions"><button data-next="article">Back</button><button class="primary" data-next="reliable">Next step</button></div></section>
-<section id="reliable" class="stage"><span class="tag">Extension</span><h2>Reliable information check</h2><p>Answer Yes or No for the article you chose.</p><div class="yes-no"><div class="yes-no-row"><strong>Does the article show a date?</strong><select id="reliableDate"><option>Yes</option><option>No</option><option>Not sure</option></select></div><div class="yes-no-row"><strong>Does the article have a clear headline?</strong><select id="reliableHeadline"><option>Yes</option><option>No</option><option>Not sure</option></select></div><div class="yes-no-row"><strong>Is the article from a known Australian website?</strong><select id="reliableSource"><option>Yes</option><option>No</option><option>Not sure</option></select></div><div class="yes-no-row"><strong>Is the information useful to me?</strong><select id="reliableUseful"><option>Yes</option><option>No</option><option>Not sure</option></select></div><div class="yes-no-row"><strong>Would I share this information with someone else?</strong><select id="reliableShare"><option>Yes</option><option>No</option><option>Not sure</option></select></div></div><div class="actions"><button data-next="search">Back</button><button class="primary" data-next="reflect">Next step</button></div></section>
-<section id="reflect" class="stage"><span class="tag">Part E</span><h2>Reflection</h2><p>Answer in one or two sentences.</p><label>How could the ABC website help you in everyday life?<textarea id="reflection" placeholder="Example: The ABC website could help me check news, weather and emergency information."></textarea></label><div class="actions"><button onclick="buildSummary()">Build my worksheet summary</button><button onclick="copySummary()">Copy summary</button><button data-next="reliable">Back</button></div><div id="summary" class="result">Your worksheet summary will appear here.</div></section>
-</main></div>
-<section class="trainer-panel"><span class="tag">Trainer guide</span><h2>Using the ABC Website for News, Information and Everyday Learning</h2><p><strong>Suggested timing:</strong> 90-120 minutes. <strong>Class:</strong> Adult Digital Literacy / SEE.</p><div class="cards"><article class="card"><h3>SMART learning objectives</h3><ul><li>Open the ABC website by typing www.abc.net.au into a browser.</li><li>Identify at least three main sections of the ABC website.</li><li>Use ABC search to find information on one topic.</li><li>Open one article and record the headline, topic, date and one key fact.</li><li>Explain whether the information is useful, reliable or relevant.</li></ul></article><article class="card"><h3>Evidence opportunities</h3><ul><li>Completed online or printed worksheet notes</li><li>Trainer observation checklist</li><li>Screenshot of article found</li><li>Short written summary</li><li>Oral explanation to partner</li><li>Search terms recorded by student</li></ul></article></div><h3>Whiteboard instructions</h3><ol><li>Open Chrome.</li><li>Type www.abc.net.au</li><li>Find ABC News.</li><li>Choose one article.</li><li>Write the headline, topic, date, one fact and one new word.</li><li>Use Search to find one topic.</li><li>Tell your partner what you learned.</li></ol><p class="small">Suggested Salesforce wording: The participant practised navigating the ABC website, locating website sections, using search, reading an online article, and recording key information. The participant completed the task with trainer support as required.</p></section>
-</div><script>const stages=[...document.querySelectorAll('.stage')],buttons=[...document.querySelectorAll('.step-button')];function showStage(id){stages.forEach(s=>s.classList.toggle('active',s.id===id));buttons.forEach(b=>b.classList.toggle('active',b.dataset.stage===id));window.scrollTo({top:0,behavior:'smooth'})}buttons.forEach(b=>b.addEventListener('click',()=>showStage(b.dataset.stage)));document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>showStage(b.dataset.next)));function valueOf(id){return document.getElementById(id).value.trim()}function selectedSections(){return[...document.querySelectorAll('[data-section]:checked')].map(b=>b.dataset.section)}function buildSummary(){const sections=selectedSections(),lines=[];lines.push('ABC Website Activity Summary','','Sections found: '+(sections.length?sections.join(', '):'Not recorded'),'Partner sentence: '+(valueOf('foundSentence')||'Not recorded'),'','Article headline: '+(valueOf('headline')||'Not recorded'),'Topic: '+(valueOf('topic')||'Not recorded'),'Date published: '+(valueOf('publishedDate')||'Not recorded'),'One key fact: '+(valueOf('keyFact')||'Not recorded'),'One new word: '+(valueOf('newWord')||'Not recorded'),'Meaning: '+(valueOf('wordMeaning')||'Not recorded'),'Why I chose this article: '+(valueOf('whyChoose')||'Not recorded'),'','Search words: '+(valueOf('searchWords')||'Not recorded'),'Search type: '+valueOf('searchType'),'Useful result: '+(valueOf('usefulResult')||'Not recorded'),'','Reliable information check:','Shows a date: '+valueOf('reliableDate'),'Clear headline: '+valueOf('reliableHeadline'),'Known Australian website: '+valueOf('reliableSource'),'Useful to me: '+valueOf('reliableUseful'),'Would share: '+valueOf('reliableShare'),'','Reflection: '+(valueOf('reflection')||'Not recorded'));document.getElementById('summary').textContent=lines.join('\n')}function copySummary(){buildSummary();navigator.clipboard.writeText(document.getElementById('summary').textContent).then(()=>alert('Summary copied.')).catch(()=>alert('Please select and copy the summary manually.'))}</script></body></html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABC Website Activity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+
+    :root {
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --panel: #ffffff;
+      --line: #111111;
+      --soft: #f6f6f6;
+      --green: #1f6f43;
+      --red: #a42121;
+      --shadow: 0 18px 38px rgba(17, 17, 17, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(254, 241, 83, 0.55), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 18px 44px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(254, 241, 83, 0.98) 0%, rgba(254, 241, 83, 0.9) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%);
+      border: 2px solid var(--line);
+      border-radius: 28px;
+      padding: 28px 24px 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(17, 17, 17, 0.06);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy { max-width: 720px; }
+
+    .brand-home {
+      display: inline-block;
+      line-height: 0;
+      flex: 0 0 auto;
+    }
+
+    .brand-lockup {
+      max-width: 170px;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-kicker,
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-kicker { margin-bottom: 12px; }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 2.35rem;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 66ch;
+      line-height: 1.55;
+      font-size: 1.02rem;
+    }
+
+    .activity-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .activity-menu a,
+    .primary-link,
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      text-decoration: none;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .activity-menu a.current,
+    .primary-link,
+    button.primary {
+      background: var(--brand);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 18px;
+    }
+
+    .side,
+    .main,
+    .card,
+    .trainer-panel {
+      background: var(--panel);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .side {
+      padding: 18px;
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .main { padding: 22px; }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step-button {
+      width: 100%;
+      justify-content: flex-start;
+      text-align: left;
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    .step-button.active { background: var(--brand); }
+
+    .side-note,
+    .callout {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .callout strong { color: var(--ink); }
+
+    .stage { display: none; }
+    .stage.active { display: block; }
+
+    .tag {
+      background: var(--brand);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    p,
+    li { line-height: 1.55; }
+
+    ul,
+    ol { padding-left: 1.35rem; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .card {
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .tick {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      background: #ffffff;
+      font-weight: 800;
+    }
+
+    .tick span {
+      flex: 1;
+    }
+
+    .tick a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .tick input {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      font: inherit;
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .result {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1.5px dashed var(--line);
+      border-radius: 18px;
+      background: #ffffff;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .trainer-panel {
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .yes-no {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .yes-no-row {
+      display: grid;
+      grid-template-columns: 1fr 170px;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      background: #ffffff;
+    }
+
+    @media (max-width: 900px) {
+      .hero-top { flex-direction: column-reverse; }
+      .layout,
+      .cards,
+      .check-grid,
+      .field-grid,
+      .yes-no-row { grid-template-columns: 1fr; }
+      .side { position: static; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">MTC FutureReady Digital Skills</div>
+          <h1>Using the ABC Website</h1>
+          <p>Practise opening a trusted Australian website, using menus and search, reading online information, and recording useful facts.</p>
+        </div>
+        <a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page">
+          <img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo">
+        </a>
+      </div>
+    </section>
+
+    <nav class="activity-menu" aria-label="Activity navigation">
+      <a href="../">All activities</a>
+      <a class="current" href="./">ABC Website Activity</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Lesson steps</h2>
+        <div class="step-list">
+          <button class="step-button active" data-stage="open">1. Open ABC</button>
+          <button class="step-button" data-stage="sections">2. Find sections</button>
+          <button class="step-button" data-stage="article">3. Read an article</button>
+          <button class="step-button" data-stage="search">4. Use search</button>
+          <button class="step-button" data-stage="reliable">5. Check reliability</button>
+          <button class="step-button" data-stage="reflect">6. Reflect</button>
+        </div>
+        <div class="side-note">
+          <strong>Approx. time:</strong> 90-120 minutes.<br>
+          <strong>Skills:</strong> internet navigation, search, reading, note-taking, short written answers and partner discussion.
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="open" class="stage active">
+          <span class="tag">Part A</span>
+          <h2>Open the ABC website</h2>
+          <p>The ABC website has news, videos, radio, podcasts, local information, sport, lifestyle, quizzes and emergency information.</p>
+          <ol>
+            <li>Open Chrome or another browser.</li>
+            <li>Click in the address bar at the top.</li>
+            <li>Type <strong>www.abc.net.au</strong></li>
+            <li>Press Enter.</li>
+          </ol>
+          <div class="actions">
+            <a class="primary-link" href="https://www.abc.net.au/" target="_blank" rel="noopener noreferrer">Open ABC Website</a>
+            <button class="primary" data-next="sections">Next step</button>
+          </div>
+          <div class="callout"><strong>Class question:</strong> Where do you normally get your news or everyday information?</div>
+        </section>
+
+        <section id="sections" class="stage">
+          <span class="tag">Part B</span>
+          <h2>Find these ABC sections</h2>
+          <p>Look around the ABC website. Tick each section when you find it.</p>
+          <div class="check-grid">
+            <label class="tick"><input type="checkbox" data-section="ABC News"><span><a href="https://www.abc.net.au/news/" target="_blank" rel="noopener noreferrer">ABC News</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="ABC iview"><span><a href="https://iview.abc.net.au/" target="_blank" rel="noopener noreferrer">ABC iview</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="ABC listen"><span><a href="https://www.abc.net.au/listen/" target="_blank" rel="noopener noreferrer">ABC listen</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Kids & Students"><span><a href="https://www.abc.net.au/education/" target="_blank" rel="noopener noreferrer">Kids &amp; Students</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Indigenous"><span><a href="https://www.abc.net.au/news/indigenous/" target="_blank" rel="noopener noreferrer">Indigenous</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Sport"><span><a href="https://www.abc.net.au/news/sport/" target="_blank" rel="noopener noreferrer">Sport</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Lifestyle"><span><a href="https://www.abc.net.au/news/lifestyle/" target="_blank" rel="noopener noreferrer">Lifestyle</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Local News"><span><a href="https://www.abc.net.au/news/local/" target="_blank" rel="noopener noreferrer">Local News</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Search"><span><a href="https://www.abc.net.au/news/search/" target="_blank" rel="noopener noreferrer">Search</a></span></label>
+            <label class="tick"><input type="checkbox" data-section="Emergency"><span><a href="https://www.abc.net.au/emergency/" target="_blank" rel="noopener noreferrer">Emergency</a></span></label>
+          </div>
+          <label>Partner sentence
+            <input id="foundSentence" placeholder="Example: I found ABC News on the ABC website.">
+          </label>
+          <div class="actions">
+            <button data-next="open">Back</button>
+            <button class="primary" data-next="article">Next step</button>
+          </div>
+        </section>
+
+        <section id="article" class="stage">
+          <span class="tag">Part C</span>
+          <h2>Choose and read one article</h2>
+          <p>Choose one article from News, Sport, Lifestyle, Science, Local News, Weather or Emergency information.</p>
+          <div class="field-grid">
+            <label>Article headline
+              <input id="headline" placeholder="Type the article headline">
+            </label>
+            <label>Topic
+              <input id="topic" placeholder="Example: weather, sport, health">
+            </label>
+            <label>Date published
+              <input id="publishedDate" placeholder="Example: 2 July 2026">
+            </label>
+            <label>One new word
+              <input id="newWord" placeholder="Type one new word">
+            </label>
+          </div>
+          <label>One key fact from the article
+            <textarea id="keyFact" placeholder="Write one important fact from the article."></textarea>
+          </label>
+          <label>Meaning of the new word
+            <textarea id="wordMeaning" placeholder="Write the meaning in your own words, or ask a partner/trainer."></textarea>
+          </label>
+          <label>Why did you choose this article?
+            <textarea id="whyChoose" placeholder="Example: I chose this article because it is useful for my family."></textarea>
+          </label>
+          <div class="actions">
+            <button data-next="sections">Back</button>
+            <button class="primary" data-next="search">Next step</button>
+          </div>
+        </section>
+
+        <section id="search" class="stage">
+          <span class="tag">Part D</span>
+          <h2>Use ABC search</h2>
+          <p>Use the ABC search bar to search for one useful topic.</p>
+          <div class="field-grid">
+            <label>My search words
+              <input id="searchWords" placeholder="Example: Sydney weather">
+            </label>
+            <label>I searched for
+              <select id="searchType">
+                <option>news</option>
+                <option>weather</option>
+                <option>sport</option>
+                <option>health</option>
+                <option>money</option>
+                <option>local information</option>
+                <option>other</option>
+              </select>
+            </label>
+          </div>
+          <label>One useful result I found
+            <textarea id="usefulResult" placeholder="Write the result you clicked and what it was about."></textarea>
+          </label>
+          <div class="callout"><strong>Search ideas:</strong> Sydney weather, Centrelink, jobs, health, scams, sport, food, rent or transport.</div>
+          <div class="actions">
+            <button data-next="article">Back</button>
+            <button class="primary" data-next="reliable">Next step</button>
+          </div>
+        </section>
+
+        <section id="reliable" class="stage">
+          <span class="tag">Extension</span>
+          <h2>Reliable information check</h2>
+          <p>Answer Yes or No for the article you chose.</p>
+          <div class="yes-no">
+            <div class="yes-no-row"><strong>Does the article show a date?</strong><select id="reliableDate"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="yes-no-row"><strong>Does the article have a clear headline?</strong><select id="reliableHeadline"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="yes-no-row"><strong>Is the article from a known Australian website?</strong><select id="reliableSource"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="yes-no-row"><strong>Is the information useful to me?</strong><select id="reliableUseful"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            <div class="yes-no-row"><strong>Would I share this information with someone else?</strong><select id="reliableShare"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+          </div>
+          <div class="actions">
+            <button data-next="search">Back</button>
+            <button class="primary" data-next="reflect">Next step</button>
+          </div>
+        </section>
+
+        <section id="reflect" class="stage">
+          <span class="tag">Part E</span>
+          <h2>Reflection</h2>
+          <p>Answer in one or two sentences.</p>
+          <label>How could the ABC website help you in everyday life?
+            <textarea id="reflection" placeholder="Example: The ABC website could help me check news, weather and emergency information."></textarea>
+          </label>
+          <div class="actions">
+            <button onclick="buildSummary()">Build my worksheet summary</button>
+            <button onclick="copySummary()">Copy summary</button>
+            <button data-next="reliable">Back</button>
+          </div>
+          <div id="summary" class="result">Your worksheet summary will appear here.</div>
+        </section>
+      </main>
+    </div>
+
+    <section class="trainer-panel">
+      <span class="tag">Trainer guide</span>
+      <h2>Using the ABC Website for News, Information and Everyday Learning</h2>
+      <p><strong>Suggested timing:</strong> 90-120 minutes. <strong>Class:</strong> Adult Digital Literacy / SEE.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>SMART learning objectives</h3>
+          <ul>
+            <li>Open the ABC website by typing www.abc.net.au into a browser.</li>
+            <li>Identify at least three main sections of the ABC website.</li>
+            <li>Use ABC search to find information on one topic.</li>
+            <li>Open one article and record the headline, topic, date and one key fact.</li>
+            <li>Explain whether the information is useful, reliable or relevant.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Evidence opportunities</h3>
+          <ul>
+            <li>Completed online or printed worksheet notes</li>
+            <li>Trainer observation checklist</li>
+            <li>Screenshot of article found</li>
+            <li>Short written summary</li>
+            <li>Oral explanation to partner</li>
+            <li>Search terms recorded by student</li>
+          </ul>
+        </article>
+      </div>
+      <h3>Whiteboard instructions</h3>
+      <ol>
+        <li>Open Chrome.</li>
+        <li>Type www.abc.net.au</li>
+        <li>Find ABC News.</li>
+        <li>Choose one article.</li>
+        <li>Write the headline, topic, date, one fact and one new word.</li>
+        <li>Use Search to find one topic.</li>
+        <li>Tell your partner what you learned.</li>
+      </ol>
+      <p class="small">Suggested Salesforce wording: The participant practised navigating the ABC website, locating website sections, using search, reading an online article, and recording key information. The participant completed the task with trainer support as required.</p>
+    </section>
+  </div>
+
+  <script>
+    const stages = [...document.querySelectorAll(".stage")];
+    const buttons = [...document.querySelectorAll(".step-button")];
+
+    function showStage(id) {
+      stages.forEach(stage => stage.classList.toggle("active", stage.id === id));
+      buttons.forEach(button => button.classList.toggle("active", button.dataset.stage === id));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    buttons.forEach(button => button.addEventListener("click", () => showStage(button.dataset.stage)));
+    document.querySelectorAll("[data-next]").forEach(button => button.addEventListener("click", () => showStage(button.dataset.next)));
+
+    function valueOf(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function selectedSections() {
+      return [...document.querySelectorAll("[data-section]:checked")].map(box => box.dataset.section);
+    }
+
+    function buildSummary() {
+      const sections = selectedSections();
+      const lines = [];
+      lines.push("ABC Website Activity Summary");
+      lines.push("");
+      lines.push("Sections found: " + (sections.length ? sections.join(", ") : "Not recorded"));
+      lines.push("Partner sentence: " + (valueOf("foundSentence") || "Not recorded"));
+      lines.push("");
+      lines.push("Article headline: " + (valueOf("headline") || "Not recorded"));
+      lines.push("Topic: " + (valueOf("topic") || "Not recorded"));
+      lines.push("Date published: " + (valueOf("publishedDate") || "Not recorded"));
+      lines.push("One key fact: " + (valueOf("keyFact") || "Not recorded"));
+      lines.push("One new word: " + (valueOf("newWord") || "Not recorded"));
+      lines.push("Meaning: " + (valueOf("wordMeaning") || "Not recorded"));
+      lines.push("Why I chose this article: " + (valueOf("whyChoose") || "Not recorded"));
+      lines.push("");
+      lines.push("Search words: " + (valueOf("searchWords") || "Not recorded"));
+      lines.push("Search type: " + valueOf("searchType"));
+      lines.push("Useful result: " + (valueOf("usefulResult") || "Not recorded"));
+      lines.push("");
+      lines.push("Reliable information check:");
+      lines.push("Shows a date: " + valueOf("reliableDate"));
+      lines.push("Clear headline: " + valueOf("reliableHeadline"));
+      lines.push("Known Australian website: " + valueOf("reliableSource"));
+      lines.push("Useful to me: " + valueOf("reliableUseful"));
+      lines.push("Would share: " + valueOf("reliableShare"));
+      lines.push("");
+      lines.push("Reflection: " + (valueOf("reflection") || "Not recorded"));
+      document.getElementById("summary").textContent = lines.join("\n");
+    }
+
+    function copySummary() {
+      buildSummary();
+      navigator.clipboard.writeText(document.getElementById("summary").textContent)
+        .then(() => alert("Summary copied."))
+        .catch(() => alert("Please select and copy the summary manually."));
+    }
+  </script>
+</body>
+</html>
