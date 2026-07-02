@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Check-In</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root{--ink:#111;--muted:#4e4e4e;--brand:#fef153;--line:#111;--panel:#fff;--soft:#f6f6f6;--shadow:0 18px 38px rgba(17,17,17,.08)}
+    *{box-sizing:border-box}body{margin:0;font-family:"Rethink Sans",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff 0%,#fafafa 100%);min-height:100vh}.wrap{max-width:1180px;margin:0 auto;padding:24px 18px 44px}.hero{background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%,rgba(255,255,255,.95) 100%);border:2px solid var(--line);border-radius:28px;padding:28px 24px 26px;box-shadow:var(--shadow);margin-bottom:20px}.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px}.hero-kicker{display:inline-block;margin-bottom:12px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.72);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}h1{margin:0 0 10px;font-size:2.35rem;line-height:1.02;letter-spacing:-.03em}.hero p{margin:0;max-width:70ch;line-height:1.55}.brand{flex:0 0 auto;min-width:150px;min-height:92px;border:2px solid var(--line);border-radius:22px;background:rgba(255,255,255,.82);display:grid;place-items:center;padding:14px;text-align:center;color:var(--ink);text-decoration:none}.brand strong{display:block;line-height:1.05}.brand span{display:inline-block;margin-top:8px;padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--brand);font-size:.72rem;font-weight:800;letter-spacing:.08em}.menu{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}.menu a{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-weight:800}.menu a.current{background:var(--brand)}.layout{display:grid;grid-template-columns:340px 1fr;gap:18px}.panel{background:var(--panel);border:1.5px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:18px}.side-note{margin-top:14px;padding:12px;border-radius:16px;background:var(--soft);border:1px solid var(--line);color:var(--muted);line-height:1.45}.field{display:grid;gap:7px;margin:12px 0}label{font-weight:800}input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:14px;font:inherit;background:#fff}textarea{min-height:80px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button{border:1.5px solid var(--line);border-radius:999px;padding:11px 16px;font-size:.96rem;font-weight:800;cursor:pointer;background:#fff;color:var(--ink)}button.primary{background:var(--brand)}button.danger{background:#fff0f0}.students{display:grid;gap:12px}.row{display:grid;grid-template-columns:1.1fr .9fr .9fr 1.3fr auto;gap:10px;align-items:start;padding:12px;border:1.5px solid var(--line);border-radius:18px;background:#fff}.row button{padding:10px 12px}.summary{white-space:pre-wrap;line-height:1.55;border:1.5px dashed var(--line);border-radius:18px;padding:14px;background:#fff;margin-top:14px}.small{font-size:.9rem;color:var(--muted);line-height:1.45}.section-title{margin:0 0 10px}.pill{display:inline-block;padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--brand);font-size:.8rem;font-weight:800;margin-bottom:10px}@media(max-width:980px){.layout{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero-top{flex-direction:column-reverse}h1{font-size:2rem}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero"><div class="hero-top"><div><div class="hero-kicker">Trainer Tool</div><h1>Student Check-In</h1><p>Record quick classroom check-ins locally on this device, then copy an audit-safe summary for Salesforce or daily notes.</p></div><a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a></div></section>
+    <nav class="menu"><a href="../">All activities</a><a href="./" class="current">Student Check-In</a></nav>
+    <div class="layout">
+      <aside class="panel">
+        <span class="pill">Local only</span>
+        <h2 class="section-title">Session details</h2>
+        <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
+        <div class="field"><label for="className">Class</label><input id="className" value="RED-01 Pathway"></div>
+        <div class="field"><label for="trainer">Trainer</label><input id="trainer" value="Simon Judge"></div>
+        <div class="field"><label for="focus">Session focus</label><input id="focus" placeholder="Example: Gemini personal branding website"></div>
+        <div class="actions"><button class="primary" onclick="addStudent()">Add student</button><button onclick="buildSummary()">Build summary</button><button onclick="copySummary()">Copy summary</button><button class="danger" onclick="clearAll()">Clear</button></div>
+        <div class="side-note"><strong>Privacy:</strong> this page does not send or save data online. It stores rows only in this browser on this device. Use first names, initials, or student codes when possible.</div>
+      </aside>
+      <main class="panel">
+        <h2 class="section-title">Check-in rows</h2>
+        <p class="small">Use short, neutral notes. Record what was observed, what support was provided, and any follow-up needed. Avoid sensitive details unless required by MTC process.</p>
+        <div id="students" class="students"></div>
+        <div class="summary" id="summary">Summary will appear here.</div>
+      </main>
+    </div>
+  </div>
+  <template id="rowTemplate">
+    <div class="row">
+      <div class="field"><label>Name / initials</label><input class="student-name" placeholder="First name or initials"></div>
+      <div class="field"><label>Attendance</label><select class="attendance"><option>Present</option><option>Late</option><option>Left early</option><option>Absent</option><option>Partial attendance</option></select></div>
+      <div class="field"><label>Engagement</label><select class="engagement"><option>Engaged</option><option>Quiet</option><option>Needed support</option><option>Agitated</option><option>Withdrawn</option><option>Not observed</option></select></div>
+      <div class="field"><label>Neutral note</label><textarea class="note" placeholder="Example: Participant engaged with activity after staged instructions."></textarea></div>
+      <button onclick="removeRow(this)">Remove</button>
+    </div>
+  </template>
+  <script>
+    const storeKey='mtc-student-check-in-v1';
+    const today=new Date();
+    document.getElementById('date').valueAsDate=today;
+    function rowData(row){return{name:row.querySelector('.student-name').value.trim(),attendance:row.querySelector('.attendance').value,engagement:row.querySelector('.engagement').value,note:row.querySelector('.note').value.trim()}}
+    function allRows(){return[...document.querySelectorAll('.row')]}
+    function save(){const data={date:date.value,className:className.value,trainer:trainer.value,focus:focus.value,rows:allRows().map(rowData)};localStorage.setItem(storeKey,JSON.stringify(data))}
+    function load(){const raw=localStorage.getItem(storeKey);if(!raw){addStudent();return}try{const data=JSON.parse(raw);date.value=data.date||date.value;className.value=data.className||className.value;trainer.value=data.trainer||trainer.value;focus.value=data.focus||'';(data.rows&&data.rows.length?data.rows:[{}]).forEach(addStudentFromData)}catch{addStudent()}}
+    function addStudentFromData(data={}){const tpl=document.getElementById('rowTemplate');const row=tpl.content.firstElementChild.cloneNode(true);students.appendChild(row);row.querySelector('.student-name').value=data.name||'';row.querySelector('.attendance').value=data.attendance||'Present';row.querySelector('.engagement').value=data.engagement||'Engaged';row.querySelector('.note').value=data.note||'';row.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',save));save()}
+    function addStudent(){addStudentFromData({})}
+    function removeRow(btn){btn.closest('.row').remove();if(!allRows().length)addStudent();save();buildSummary()}
+    function buildSummary(){save();const rows=allRows().map(rowData).filter(r=>r.name||r.note);const lines=[];lines.push(`Date: ${date.value || 'Not recorded'}`);lines.push(`Class: ${className.value || 'Not recorded'}`);lines.push(`Trainer: ${trainer.value || 'Not recorded'}`);if(focus.value.trim())lines.push(`Session focus: ${focus.value.trim()}`);lines.push('');lines.push('Student check-in summary:');if(!rows.length){lines.push('No student check-in rows recorded.')}else{rows.forEach(r=>{const name=r.name||'Unnamed participant';let line=`- ${name}: ${r.attendance}; engagement observed as ${r.engagement.toLowerCase()}.`;if(r.note)line+=` Note: ${r.note}`;lines.push(line)})}lines.push('');lines.push('General note: Information recorded as trainer observation. Follow-up to be completed where required according to MTC process.');summary.textContent=lines.join('\n')}
+    function copySummary(){buildSummary();navigator.clipboard.writeText(summary.textContent).then(()=>alert('Summary copied.')).catch(()=>alert('Could not copy automatically. Please select and copy the summary manually.'))}
+    function clearAll(){if(!confirm('Clear all check-in rows on this device?'))return;localStorage.removeItem(storeKey);students.innerHTML='';focus.value='';addStudent();summary.textContent='Summary will appear here.'}
+    ['date','className','trainer','focus'].forEach(id=>document.getElementById(id).addEventListener('input',save));
+    load();
+  </script>
+</body>
+</html>
