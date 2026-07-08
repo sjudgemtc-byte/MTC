@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Profile Setup Practice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root{--ink:#111;--muted:#4e4e4e;--brand:#fef153;--line:#111;--panel:#fff;--soft:#f6f6f6;--blue:#dff0ff;--green:#e9f8df;--pink:#ffe8ef;--shadow:0 18px 38px rgba(17,17,17,.08)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Rethink Sans",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff 0%,#fafafa 100%);min-height:100vh}
+    .wrap{max-width:1180px;margin:0 auto;padding:24px 18px 44px}
+    .hero{background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%,rgba(255,255,255,.95) 100%);border:2px solid var(--line);border-radius:28px;padding:28px 24px 26px;box-shadow:var(--shadow);margin-bottom:20px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:rgba(17,17,17,.06)}
+    .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;position:relative;z-index:1}
+    .hero-copy{max-width:760px}
+    .hero-kicker{display:inline-block;margin-bottom:12px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.72);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    h1{margin:0 0 10px;font-size:2.35rem;line-height:1.02;letter-spacing:0}
+    .hero p{margin:0;max-width:68ch;line-height:1.55;font-size:1.02rem}
+    .brand{flex:0 0 auto;min-width:150px;min-height:92px;border:2px solid var(--line);border-radius:22px;background:rgba(255,255,255,.82);display:grid;place-items:center;padding:14px;text-align:center;color:var(--ink);text-decoration:none;box-shadow:0 10px 22px rgba(17,17,17,.08)}
+    .brand strong{display:block;font-size:1.02rem;line-height:1.05}
+    .brand span{display:inline-block;margin-top:8px;padding:4px 8px;border:1.5px solid var(--line);border-radius:999px;background:var(--brand);font-size:.72rem;font-weight:800;letter-spacing:.08em}
+    .menu{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+    .menu a{display:inline-block;padding:10px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;font-weight:800}
+    .menu a.current{background:var(--brand)}
+    .notice{margin:0 0 18px;padding:14px 16px;border:1.5px solid var(--line);border-radius:18px;background:#fff;font-weight:700;line-height:1.45}
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:18px}
+    .side,.main,.preview-panel{background:var(--panel);border:1.5px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+    .side{padding:18px;align-self:start;position:sticky;top:18px}
+    .side h2{margin:0 0 12px;font-size:1.05rem}
+    .step-list{display:grid;gap:10px}
+    .step-button{width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:12px 14px;cursor:pointer;font-size:.96rem;font-weight:800;color:var(--ink)}
+    .step-button.active{background:var(--brand)}
+    .side-note{margin-top:14px;padding:12px;border-radius:16px;background:var(--soft);border:1px solid var(--line);color:var(--muted);font-size:.92rem;line-height:1.45}
+    .main{padding:22px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--brand);border:1.5px solid var(--line);font-size:.84rem;font-weight:800;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+    .lesson-title{margin:0 0 10px;font-size:1.9rem;line-height:1.08;letter-spacing:0}
+    .lesson-text{margin:0 0 16px;line-height:1.55;color:#2e2e28}
+    .panel-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+    .card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0 18px}
+    .card,.practice-box,.result-box{border:1.5px solid var(--line);border-radius:18px;background:#fff;padding:14px}
+    .card h3,.practice-box h3,.result-box h3{margin:0 0 8px;font-size:1.02rem}
+    .card p,.card li,.practice-box li,.result-box p{line-height:1.5;margin:0}
+    .card ul,.practice-box ol,.practice-box ul{margin:0;padding-left:20px;line-height:1.55}
+    .practice-box,.result-box{margin-top:18px}
+    .field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+    .field-row{display:grid;gap:7px;margin:10px 0}
+    label{font-weight:800}
+    input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:14px;font:inherit;background:#fff}
+    textarea{min-height:92px;resize:vertical}
+    .count{font-size:.86rem;color:var(--muted);font-weight:800;text-align:right}
+    .choice-list{display:grid;gap:10px;margin:12px 0}
+    .choice-row{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:16px;background:#fff;border:1.5px solid var(--line);line-height:1.4}
+    .choice-row input{width:auto;margin-top:3px;transform:scale(1.2)}
+    .copy-box{margin-top:14px;padding:14px;border-radius:16px;border:1.5px dashed var(--line);background:#fff;white-space:pre-wrap;line-height:1.55}
+    .action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    button{border:1.5px solid var(--line);border-radius:999px;padding:12px 18px;font-size:.98rem;font-weight:800;cursor:pointer;background:#fff;color:var(--ink)}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .primary{background:var(--brand)}
+    .preview-panel{overflow:hidden}
+    .mock-top{height:86px;background:linear-gradient(135deg,#111 0%,#2f80ed 48%,#fef153 48%,#fef153 100%);border-bottom:1.5px solid var(--line)}
+    .mock-body{padding:0 16px 16px;background:#fff}
+    .avatar{width:94px;height:94px;border-radius:50%;border:3px solid var(--line);background:var(--blue);display:grid;place-items:center;font-weight:800;font-size:2rem;margin-top:-47px}
+    .mock-name{margin:10px 0 4px;font-size:1.35rem;letter-spacing:0}
+    .mock-handle{margin:0 0 10px;color:var(--muted);font-weight:800}
+    .mock-bio{line-height:1.45;margin:0 0 12px;min-height:42px}
+    .mock-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .pill{display:inline-block;padding:6px 9px;border:1.5px solid var(--line);border-radius:999px;background:#fff;font-weight:800;font-size:.84rem}
+    .post-box{border:1.5px solid var(--line);border-radius:16px;padding:12px;background:var(--soft)}
+    .post-box p{margin:0;line-height:1.45}
+    .privacy-score{margin-top:12px;padding:12px;border:1.5px solid var(--line);border-radius:16px;background:var(--green);font-weight:800}
+    .warning{background:var(--pink)}
+    .footer-note{margin-top:18px;padding-top:14px;border-top:2px solid var(--line);font-size:.92rem;color:var(--muted);line-height:1.45}
+    @media(max-width:980px){.layout,.panel-grid{grid-template-columns:1fr}.side{position:static}.card-grid,.field-grid{grid-template-columns:1fr}.hero-top{flex-direction:column-reverse}h1{font-size:2rem}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="hero-kicker">Online Safety And Employability</div>
+          <h1>Social Profile Setup Practice</h1>
+          <p>Practise setting up a social media-style profile in a safe simulator. This activity uses common ideas from X, Facebook and LinkedIn, but it does not create a real account or publish anything online.</p>
+        </div>
+        <a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a>
+      </div>
+    </section>
+    <nav class="menu" aria-label="Student activities menu">
+      <a href="../">All activities</a>
+      <a href="../personal-branding-gemini/">Personal Branding Website</a>
+      <a href="../computer-signout-lesson/">Computer Sign-Out Lesson</a>
+      <a href="./" class="current">Social Profile Setup</a>
+    </nav>
+    <p class="notice">Classroom rule: use fictional or low-risk details. Do not type a real date of birth, home address, phone number, password, banking details, Medicare details, passport details, private family information, or workplace confidential information.</p>
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list" id="stepList"></div>
+        <div class="side-note"><strong>Low-stakes practice:</strong> this page keeps everything in the browser. It does not send the form anywhere and it does not publish a profile.</div>
+      </aside>
+      <main class="main">
+        <div class="tag" id="lessonTag">Step 1</div>
+        <h2 class="lesson-title" id="lessonTitle"></h2>
+        <p class="lesson-text" id="lessonText"></p>
+        <div id="lessonContent"></div>
+        <div class="footer-note">This activity builds skills in online forms, profile setup, privacy choices, digital identity, security awareness, review before posting, and plain English workplace communication.</div>
+        <div class="action-row" style="justify-content:space-between;margin-top:22px">
+          <button id="prevBtn">Previous</button>
+          <button id="nextBtn" class="primary">Next</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const state={displayName:"Alex Practice",username:"alexpractice",purpose:"work",bio:"Reliable learner building digital skills for work and study.",headline:"Ready to learn, work and contribute",location:"Sydney, Australia",website:"",audience:"Friends or approved contacts",findability:"People I approve",tagging:"Review tags first",twoFactor:false,recovery:false,post:"I am practising how to create a safe and professional online profile."};
+    const steps=[
+      {title:"Understand the setup process",text:"Most social media sites ask for similar information. Your job is to make safe choices before anything is shared.",render(){return `<div class="card-grid"><div class="card"><h3>Common setup steps</h3><ul><li>create or sign in to an account</li><li>choose a display name and username</li><li>add a photo or banner</li><li>write a short bio or headline</li><li>choose audience and privacy settings</li><li>check security and review the profile</li></ul></div><div class="card"><h3>Inspired by real platforms</h3><p>X uses profile names, handles, bios and profile images. Facebook focuses strongly on audience and privacy settings. LinkedIn focuses on professional photos, headlines, experience and skills.</p></div><div class="card"><h3>What you will practise</h3><p>You will complete a mock setup page, see a live profile preview, and explain which privacy choices you made.</p></div><div class="card"><h3>What you will not do</h3><p>You will not create a real account, publish a real profile, upload private documents or share private contact details.</p></div></div>`}},
+      {title:"Choose a safe profile type",text:"Decide why the profile exists. This changes what information is useful and what should stay private.",render(){return `<div class="choice-list"><label class="choice-row"><input type="radio" name="purpose" value="work" ${state.purpose==="work"?"checked":""} onchange="setValue('purpose',this.value)"><span><strong>Work or study profile</strong><br>Good for practising LinkedIn-style professional wording.</span></label><label class="choice-row"><input type="radio" name="purpose" value="community" ${state.purpose==="community"?"checked":""} onchange="setValue('purpose',this.value)"><span><strong>Community profile</strong><br>Good for a hobby group, volunteering or local community page.</span></label><label class="choice-row"><input type="radio" name="purpose" value="private" ${state.purpose==="private"?"checked":""} onchange="setValue('purpose',this.value)"><span><strong>Private social profile</strong><br>Good for practising privacy settings and careful sharing.</span></label></div><div class="practice-box"><h3>Discussion</h3><ol><li>Which profile type needs the most privacy?</li><li>Which profile type should sound the most professional?</li><li>What information should never be public?</li></ol></div>`}},
+      {title:"Set up name and username",text:"Practise choosing a clear name and username without using sensitive personal information.",render(){return `<div class="panel-grid"><div><div class="field-row"><label for="displayName">Display name</label><input id="displayName" value="${safe(state.displayName)}" placeholder="Example: Alex Practice" oninput="setValue('displayName',this.value)"></div><div class="field-row"><label for="username">Username or handle</label><input id="username" value="${safe(state.username)}" placeholder="Example: alexpractice" oninput="setUsername(this.value)"></div><div class="practice-box"><h3>Safe username tips</h3><ul><li>Keep it short and respectful.</li><li>Avoid full date of birth.</li><li>Avoid home address, phone number or student ID.</li><li>Use letters, numbers or simple separators.</li></ul></div></div>${profilePreview()}</div>`}},
+      {title:"Build the profile content",text:"Write a short bio and headline. Keep it positive, simple and safe.",render(){return `<div class="panel-grid"><div><div class="field-row"><label for="headline">Headline</label><input id="headline" value="${safe(state.headline)}" maxlength="80" oninput="setValue('headline',this.value)"><div class="count" id="headlineCount">${state.headline.length}/80</div></div><div class="field-row"><label for="bio">Bio</label><textarea id="bio" maxlength="160" oninput="setValue('bio',this.value)">${safe(state.bio)}</textarea><div class="count" id="bioCount">${state.bio.length}/160</div></div><div class="field-grid"><div class="field-row"><label for="location">General location</label><input id="location" value="${safe(state.location)}" oninput="setValue('location',this.value)"></div><div class="field-row"><label for="website">Website, optional</label><input id="website" value="${safe(state.website)}" placeholder="Leave blank for practice" oninput="setValue('website',this.value)"></div></div><div class="practice-box"><h3>Bio sentence starters</h3><ul><li>I am learning...</li><li>I am interested in...</li><li>I bring strengths in...</li><li>I am looking for opportunities in...</li></ul></div></div>${profilePreview()}</div>`}},
+      {title:"Choose image placeholders",text:"Most platforms invite you to add a profile photo or banner. In class, practise with placeholders instead of uploading real photos.",render(){return `<div class="card-grid"><div class="card"><h3>Profile photo</h3><p>Use initials, a simple icon, a class-safe avatar, or leave it blank while practising.</p></div><div class="card"><h3>Banner image</h3><p>Use a plain colour, pattern, workplace theme or study theme. Do not use photos showing private people or documents.</p></div><div class="card"><h3>Professional photo check</h3><ul><li>clear and respectful</li><li>not blurry</li><li>plain background</li><li>no private location clues</li></ul></div><div class="card"><h3>Class task</h3><p>Look at the preview and decide whether the profile feels social, professional, private or public.</p></div></div><div class="panel-grid"><div class="practice-box"><h3>Why this matters</h3><p>Photos can reveal more than people intend, including location, other people, workplace details, school details or private documents in the background.</p></div>${profilePreview()}</div>`}},
+      {title:"Select privacy and audience",text:"Practise the privacy choices that decide who can see, find, contact or tag you.",render(){return `<div class="panel-grid"><div><div class="field-row"><label for="audience">Who can see my posts?</label><select id="audience" onchange="setValue('audience',this.value)"><option>Only me</option><option>Friends or approved contacts</option><option>Connections</option><option>Public</option></select></div><div class="field-row"><label for="findability">Who can find or contact me?</label><select id="findability" onchange="setValue('findability',this.value)"><option>People I approve</option><option>Friends of friends</option><option>Anyone on the platform</option><option>Search engines and public web</option></select></div><div class="field-row"><label for="tagging">Tagging and mentions</label><select id="tagging" onchange="setValue('tagging',this.value)"><option>Review tags first</option><option>Only approved contacts can tag me</option><option>Anyone can tag me</option></select></div><div class="practice-box"><h3>Safer choices</h3><ul><li>Use smaller audiences for personal updates.</li><li>Review tags before they appear.</li><li>Limit who can find you through search.</li><li>Think before posting photos of others.</li></ul></div></div>${profilePreview()}</div>`}},
+      {title:"Check security settings",text:"A real account setup often includes verification, password recovery and extra sign-in protection.",render(){return `<div class="choice-list"><label class="choice-row"><input type="checkbox" ${state.twoFactor?"checked":""} onchange="setValue('twoFactor',this.checked)"><span><strong>Turn on two-step verification</strong><br>Use an extra code or app to protect sign-in.</span></label><label class="choice-row"><input type="checkbox" ${state.recovery?"checked":""} onchange="setValue('recovery',this.checked)"><span><strong>Add recovery options</strong><br>Use a safe recovery email or phone number in a real account.</span></label></div><div class="card-grid"><div class="card"><h3>Never share</h3><ul><li>passwords</li><li>verification codes</li><li>screenshots of security codes</li><li>private login details</li></ul></div><div class="card"><h3>Strong password reminder</h3><p>Use a long password or passphrase. Do not reuse the same password everywhere.</p></div></div>`}},
+      {title:"Practise a first post",text:"Write a safe first post. Avoid private details and check who can see it.",render(){return `<div class="panel-grid"><div><div class="field-row"><label for="post">Practice post</label><textarea id="post" maxlength="220" oninput="setValue('post',this.value)">${safe(state.post)}</textarea><div class="count" id="postCount">${state.post.length}/220</div></div><div class="practice-box"><h3>Before posting</h3><ol><li>Who can see this?</li><li>Could this embarrass me later?</li><li>Does it mention another person?</li><li>Does it reveal private information?</li><li>Is the tone respectful?</li></ol></div></div>${profilePreview()}</div>`}},
+      {title:"Final review",text:"Use the checklist and copy a summary of your safe setup choices.",render(){return `<div class="choice-list"><label class="choice-row"><input type="checkbox"><span>I did not use private personal information.</span></label><label class="choice-row"><input type="checkbox"><span>I chose a safe audience for posts.</span></label><label class="choice-row"><input type="checkbox"><span>I reviewed tagging and findability settings.</span></label><label class="choice-row"><input type="checkbox"><span>I checked that my bio and post are respectful.</span></label><label class="choice-row"><input type="checkbox"><span>I understand this simulator does not create a real account.</span></label></div><div class="result-box"><h3>Copy-ready reflection</h3><div class="copy-box" id="summaryBox">${summaryText()}</div><div class="action-row"><button class="primary" onclick="copySummary()">Copy reflection</button></div></div>`}}
+    ];
+    let currentStep=0;
+    function safe(value){return String(value||"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
+    function setValue(key,value){state[key]=value;renderLesson()}
+    function setUsername(value){state.username=value.toLowerCase().replace(/[^a-z0-9._-]/g,"").slice(0,24);renderLesson()}
+    function initials(){return (state.displayName||"A P").split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0].toUpperCase()).join("")||"AP"}
+    function scoreClass(){return state.audience==="Public"||state.findability==="Search engines and public web"||state.tagging==="Anyone can tag me"?"privacy-score warning":"privacy-score"}
+    function privacyText(){const risk=[];if(state.audience==="Public")risk.push("posts are public");if(state.findability==="Search engines and public web")risk.push("profile may be easy to find");if(state.tagging==="Anyone can tag me")risk.push("tags are open");return risk.length?`Check privacy: ${risk.join(", ")}.`:"Privacy looks cautious for practice."}
+    function profilePreview(){return `<section class="preview-panel" aria-label="Mock social profile preview"><div class="mock-top"></div><div class="mock-body"><div class="avatar">${safe(initials())}</div><h3 class="mock-name">${safe(state.displayName||"Practice Name")}</h3><p class="mock-handle">@${safe(state.username||"username")}</p><p class="mock-bio"><strong>${safe(state.headline||"Practice headline")}</strong><br>${safe(state.bio||"Short bio will appear here.")}</p><div class="mock-meta"><span class="pill">${safe(state.location||"General location")}</span><span class="pill">${safe(state.audience)}</span><span class="pill">${safe(state.tagging)}</span></div><div class="post-box"><p>${safe(state.post||"Practice post will appear here.")}</p></div><div class="${scoreClass()}">${safe(privacyText())}</div></div></section>`}
+    function summaryText(){return `I practised setting up a social media-style profile in a safe simulator.\n\nDisplay name: ${state.displayName || "Not recorded"}\nUsername: @${state.username || "Not recorded"}\nProfile purpose: ${state.purpose}\nAudience choice: ${state.audience}\nFindability choice: ${state.findability}\nTagging choice: ${state.tagging}\nSecurity choices: ${state.twoFactor ? "two-step verification selected" : "two-step verification not selected"}, ${state.recovery ? "recovery option selected" : "recovery option not selected"}\n\nI checked that the profile did not include private information and that the post was respectful before sharing.`}
+    function renderStepList(){const list=document.getElementById("stepList");list.innerHTML="";steps.forEach((step,index)=>{const button=document.createElement("button");button.className="step-button"+(index===currentStep?" active":"");button.textContent=`${index+1}. ${step.title}`;button.addEventListener("click",()=>{currentStep=index;renderLesson()});list.appendChild(button)})}
+    function renderLesson(){const step=steps[currentStep];document.getElementById("lessonTag").textContent=`Step ${currentStep+1}`;document.getElementById("lessonTitle").textContent=step.title;document.getElementById("lessonText").textContent=step.text;document.getElementById("lessonContent").innerHTML=step.render();["audience","findability","tagging"].forEach(id=>{const el=document.getElementById(id);if(el)el.value=state[id]});document.getElementById("prevBtn").disabled=currentStep===0;document.getElementById("nextBtn").disabled=currentStep===steps.length-1;renderStepList()}
+    function copySummary(){navigator.clipboard.writeText(summaryText()).then(()=>alert("Reflection copied.")).catch(()=>alert("Could not copy automatically. Please copy the text manually."))}
+    document.getElementById("prevBtn").addEventListener("click",()=>{if(currentStep>0){currentStep--;renderLesson()}});
+    document.getElementById("nextBtn").addEventListener("click",()=>{if(currentStep<steps.length-1){currentStep++;renderLesson()}});
+    renderLesson();
+  </script>
+</body>
+</html>
