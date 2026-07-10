@@ -10,10 +10,11 @@ This first version is deliberately simple:
 - Main focus field
 - Follow-up list
 - Working note area
+- Draft student notes saved in this browser
 - Close-off journal text generator
 - Browser-only saving through local storage
 
-It does not read official records, send messages, upload files, or edit MTC documents.
+It does not read official records, send messages, upload files, or edit MTC documents. Student notes are draft working notes only until Simon reviews and transfers them into the correct official location.
 
 ## Open
 

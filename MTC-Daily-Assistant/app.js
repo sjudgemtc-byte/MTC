@@ -14,6 +14,13 @@ const elements = {
   followupList: document.querySelector("#followupList"),
   workingNote: document.querySelector("#workingNote"),
   clearNoteBtn: document.querySelector("#clearNoteBtn"),
+  studentName: document.querySelector("#studentName"),
+  studentNoteType: document.querySelector("#studentNoteType"),
+  studentObservation: document.querySelector("#studentObservation"),
+  studentSupport: document.querySelector("#studentSupport"),
+  studentFollowup: document.querySelector("#studentFollowup"),
+  addStudentNoteBtn: document.querySelector("#addStudentNoteBtn"),
+  studentNoteList: document.querySelector("#studentNoteList"),
   closeOffBtn: document.querySelector("#closeOffBtn"),
   journalOutput: document.querySelector("#journalOutput"),
   copyJournalBtn: document.querySelector("#copyJournalBtn"),
@@ -31,6 +38,7 @@ let state = {
     closeoff: false
   },
   followups: [],
+  studentNotes: [],
   workingNote: "",
   journalOutput: ""
 };
@@ -88,6 +96,7 @@ function syncInputs() {
   elements.workingNote.value = state.workingNote;
   elements.journalOutput.value = state.journalOutput;
   renderFollowups();
+  renderStudentNotes();
 }
 
 function renderFollowups() {
@@ -146,6 +155,75 @@ function addFollowup() {
   renderFollowups();
 }
 
+function addStudentNote() {
+  const studentName = elements.studentName.value.trim();
+  const observation = elements.studentObservation.value.trim();
+  if (!studentName || !observation) {
+    showStatus("Add a student name and observation first.");
+    return;
+  }
+
+  state.studentNotes.unshift({
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+    studentName,
+    type: elements.studentNoteType.value,
+    observation,
+    support: elements.studentSupport.value.trim(),
+    followup: elements.studentFollowup.value.trim()
+  });
+
+  elements.studentName.value = "";
+  elements.studentNoteType.value = "Support note";
+  elements.studentObservation.value = "";
+  elements.studentSupport.value = "";
+  elements.studentFollowup.value = "";
+  saveState();
+  renderStudentNotes();
+  showStatus("Student note saved locally.");
+}
+
+function renderStudentNotes() {
+  elements.studentNoteList.innerHTML = "";
+
+  if (state.studentNotes.length === 0) {
+    const empty = document.createElement("li");
+    empty.className = "student-note-item";
+    empty.innerHTML = "<div><strong>No student notes saved yet.</strong><span class=\"student-note-meta\">Draft notes will appear here.</span></div>";
+    elements.studentNoteList.append(empty);
+    return;
+  }
+
+  state.studentNotes.forEach((note) => {
+    const li = document.createElement("li");
+    li.className = "student-note-item";
+
+    const content = document.createElement("div");
+    const date = new Date(note.createdAt);
+    content.innerHTML = `
+      <strong></strong>
+      <div class="student-note-meta"></div>
+      <p></p>
+    `;
+    content.querySelector("strong").textContent = note.studentName;
+    content.querySelector(".student-note-meta").textContent = `${note.type} · ${formatDate(date)} ${formatTime(date)}`;
+    content.querySelector("p").textContent = note.observation;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "small-button";
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => {
+      state.studentNotes = state.studentNotes.filter((studentNote) => studentNote.id !== note.id);
+      saveState();
+      renderStudentNotes();
+    });
+
+    li.append(content, remove);
+    elements.studentNoteList.append(li);
+  });
+}
+
 function startDay() {
   state.dateStarted = new Date().toISOString();
   if (!state.mainFocus) {
@@ -162,6 +240,17 @@ function buildJournalEntry() {
   const now = new Date();
   const activeFollowups = state.followups.filter((item) => !item.done).map((item) => `- [ ] ${item.text}`);
   const completedFollowups = state.followups.filter((item) => item.done).map((item) => `- [x] ${item.text}`);
+  const studentNotes = state.studentNotes.map((note) => {
+    const date = new Date(note.createdAt);
+    return [
+      `#### ${note.studentName} - ${note.type}`,
+      `Timestamp: ${formatDate(date)} ${formatTime(date)} Sydney time`,
+      ``,
+      `Observation: ${note.observation}`,
+      `Support provided: ${note.support || "Not recorded."}`,
+      `Follow-up needed: ${note.followup || "Not recorded."}`
+    ].join("\n");
+  });
 
   const lines = [
     `## Close-Off Checkpoint`,
@@ -179,6 +268,9 @@ function buildJournalEntry() {
     ``,
     `### Completed Follow-Ups`,
     completedFollowups.length ? completedFollowups.join("\n") : "No completed follow-ups recorded.",
+    ``,
+    `### Student Notes`,
+    studentNotes.length ? studentNotes.join("\n\n") : "No student notes recorded.",
     ``,
     `### Start-Day Checks`,
     `- Calendar / teaching day checked: ${state.checks.calendar ? "Yes" : "No"}`,
@@ -207,6 +299,7 @@ function resetDay() {
       closeoff: false
     },
     followups: [],
+    studentNotes: [],
     workingNote: "",
     journalOutput: ""
   };
@@ -218,6 +311,7 @@ function resetDay() {
 function bindEvents() {
   elements.startDayBtn.addEventListener("click", startDay);
   elements.addFollowupBtn.addEventListener("click", addFollowup);
+  elements.addStudentNoteBtn.addEventListener("click", addStudentNote);
   elements.followupInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") addFollowup();
   });

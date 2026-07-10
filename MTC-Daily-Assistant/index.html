@@ -79,6 +79,51 @@
       <textarea id="workingNote" rows="10" placeholder="Write the useful facts here. Keep sensitive details brief and work-related."></textarea>
     </section>
 
+    <section class="panel student-panel" aria-labelledby="student-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Draft records</p>
+          <h2 id="student-heading">Student Notes</h2>
+        </div>
+        <button id="addStudentNoteBtn" type="button">Save note</button>
+      </div>
+
+      <p class="privacy-note">Draft only. Keep notes factual, observable, brief, and work-related. Do not enter passwords, medical details, banking details, or private family information.</p>
+
+      <div class="student-form">
+        <div>
+          <label for="studentName">Student name</label>
+          <input id="studentName" type="text" placeholder="e.g. Mark Williams">
+        </div>
+        <div>
+          <label for="studentNoteType">Note type</label>
+          <select id="studentNoteType">
+            <option value="Support note">Support note</option>
+            <option value="Assessment note">Assessment note</option>
+            <option value="Attendance follow-up">Attendance follow-up</option>
+            <option value="Classroom observation">Classroom observation</option>
+            <option value="Admin follow-up">Admin follow-up</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="studentObservation">What happened / what was observed</label>
+      <textarea id="studentObservation" rows="4" placeholder="Record what was visible, said, completed, or supported. Avoid guessing."></textarea>
+
+      <div class="student-form">
+        <div>
+          <label for="studentSupport">Support provided</label>
+          <textarea id="studentSupport" rows="3" placeholder="e.g. modelled steps, read instructions aloud, checked understanding"></textarea>
+        </div>
+        <div>
+          <label for="studentFollowup">Follow-up needed</label>
+          <textarea id="studentFollowup" rows="3" placeholder="e.g. complete page 17, check attendance, ask Bonnie"></textarea>
+        </div>
+      </div>
+
+      <ul id="studentNoteList" class="student-note-list" aria-live="polite"></ul>
+    </section>
+
     <section class="panel close-panel" aria-labelledby="close-heading">
       <div class="section-head">
         <div>
