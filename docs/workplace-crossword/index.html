@@ -3,136 +3,291 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workplace Digital Words Crossword</title>
+  <title>Level 1: Workplace digital words</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
-    :root { --ink:#111; --muted:#4e4e4e; --brand:#fef153; --line:#111; --panel:#fff; --soft:#fffdf0; --right:#dff4df; --wrong:#ffe4e4; --shadow:0 18px 38px rgba(17,17,17,.08); }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:"Rethink Sans", Arial, sans-serif; color:var(--ink); background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff 0%,#fafafa 100%); min-height:100vh; }
-    .wrap { max-width:1180px; margin:0 auto; padding:24px 18px 44px; }
-    .hero { background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%,rgba(255,255,255,.95) 100%); border:2px solid var(--line); border-radius:28px; padding:28px 24px 26px; box-shadow:var(--shadow); margin-bottom:20px; position:relative; overflow:hidden; }
-    .hero:after { content:""; position:absolute; right:-60px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:rgba(17,17,17,.06); }
-    .hero-top { display:flex; justify-content:space-between; align-items:flex-start; gap:18px; position:relative; z-index:1; }
-    .hero-copy { max-width:760px; }
-    .hero-kicker { display:inline-block; margin-bottom:12px; padding:7px 12px; border-radius:999px; border:1.5px solid var(--line); background:rgba(255,255,255,.72); font-size:.82rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; }
-    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.02; letter-spacing:0; }
-    h2, h3 { margin-top:0; }
-    p, li { line-height:1.55; }
-    .hero p { margin:0; max-width:68ch; line-height:1.55; font-size:1.02rem; }
-    .brand { flex:0 0 auto; min-width:150px; min-height:92px; border:2px solid var(--line); border-radius:22px; background:rgba(255,255,255,.82); display:grid; place-items:center; padding:14px; text-align:center; color:var(--ink); text-decoration:none; box-shadow:0 10px 22px rgba(17,17,17,.08); }
-    .brand strong { display:block; font-size:1.02rem; line-height:1.05; }
-    .brand span { display:inline-block; margin-top:8px; padding:4px 8px; border:1.5px solid var(--line); border-radius:999px; background:var(--brand); font-size:.72rem; font-weight:800; letter-spacing:.08em; }
-    .menu { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
-    .menu a { display:inline-block; padding:10px 14px; border-radius:999px; border:1.5px solid var(--line); background:#fff; color:var(--ink); text-decoration:none; font-weight:800; }
-    .menu a.current { background:var(--brand); }
-    .notice, .panel, .clues, .summary { background:var(--panel); border:1.5px solid var(--line); border-radius:22px; box-shadow:var(--shadow); }
-    .notice { margin:0 0 18px; padding:14px 16px; font-weight:700; line-height:1.45; }
-    .layout { display:grid; grid-template-columns:minmax(320px, 520px) 1fr; gap:18px; align-items:start; }
-    .panel, .clues, .summary { padding:18px; }
-    .crossword-wrap { display:grid; justify-items:center; gap:14px; }
-    .crossword { display:grid; grid-template-columns:repeat(12, minmax(28px, 42px)); grid-template-rows:repeat(6, minmax(28px, 42px)); gap:4px; width:100%; max-width:548px; }
-    .cell { position:relative; aspect-ratio:1; border:1.5px solid var(--line); background:#fff; border-radius:8px; overflow:hidden; }
-    .cell.block { background:#111; border-color:#111; }
-    .cell-number { position:absolute; left:4px; top:2px; font-size:.62rem; font-weight:800; line-height:1; pointer-events:none; }
-    .cell input { width:100%; height:100%; border:0; background:transparent; text-align:center; text-transform:uppercase; font:800 1.04rem "Rethink Sans", Arial, sans-serif; padding:10px 2px 2px; color:var(--ink); }
-    .cell input:focus { outline:3px solid var(--brand); outline-offset:-3px; }
-    .cell.correct { background:var(--right); }
-    .cell.incorrect { background:var(--wrong); }
-    .clue-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .clues ol { margin:0; padding-left:22px; }
-    .clues li { margin-bottom:10px; }
-    .tag { display:inline-block; padding:6px 10px; border-radius:999px; background:var(--brand); border:1.5px solid var(--line); font-size:.84rem; font-weight:800; margin-bottom:10px; text-transform:uppercase; letter-spacing:.06em; }
-    .muted { color:var(--muted); }
-    .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    button { border:1.5px solid var(--line); border-radius:999px; padding:12px 18px; font-size:.98rem; font-weight:800; cursor:pointer; background:#fff; color:var(--ink); }
-    button.primary { background:var(--brand); }
-    .score { min-height:28px; font-weight:800; text-align:center; }
-    .support { margin-top:16px; padding:14px; border:1.5px solid var(--line); border-radius:18px; background:var(--soft); }
-    .support ul { margin:8px 0 0; padding-left:20px; }
-    .summary { margin-top:18px; }
-    .copy-box { margin-top:12px; padding:14px; border-radius:16px; border:1.5px dashed var(--line); background:#fff; white-space:pre-wrap; line-height:1.55; }
-    @media(max-width:920px){ .layout,.clue-grid{grid-template-columns:1fr}.hero-top{flex-direction:column-reverse}h1{font-size:2rem}.crossword{grid-template-columns:repeat(12, minmax(22px, 1fr)); gap:3px}.cell{border-radius:6px}.cell input{font-size:.92rem}.cell-number{font-size:.54rem} }
+    :root {
+      --page: #ffffff;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --brand: #fef153;
+      --board: #111111;
+      --heading: #fef153;
+      --cell: #ffffff;
+      --line: #111111;
+      --right: #dff2e3;
+      --wrong: #ffdede;
+      --shadow: 0 18px 38px rgba(17, 17, 17, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Rethink Sans", Arial, sans-serif;
+      background: radial-gradient(circle at top right, rgba(254, 241, 83, .55), transparent 24%), linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+      color: var(--ink);
+    }
+    .wrap {
+      max-width: 1056px;
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin: 0 0 26px;
+      padding: 0 4px;
+    }
+    .home-link {
+      justify-self: start;
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 1.18rem;
+      line-height: 1.25;
+      color: var(--ink);
+      font-weight: 800;
+    }
+    .answer-link {
+      justify-self: end;
+      border: 0;
+      border-bottom: 3px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 0 3px;
+    }
+    .activity {
+      background: #ffffff;
+      border: 2px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .board {
+      min-height: 484px;
+      background: var(--board);
+      display: grid;
+      place-items: center;
+      padding: 44px 16px;
+    }
+    .crossword {
+      display: grid;
+      grid-template-columns: repeat(12, 44px);
+      grid-template-rows: repeat(6, 44px);
+      justify-content: center;
+      gap: 0;
+    }
+    .cell {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      background: var(--cell);
+      border: 1px solid var(--line);
+    }
+    .cell.block {
+      background: transparent;
+      border-color: transparent;
+    }
+    .cell-number {
+      position: absolute;
+      top: 4px;
+      left: 5px;
+      font-size: .64rem;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--ink);
+      pointer-events: none;
+    }
+    .cell input {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      text-align: center;
+      text-transform: uppercase;
+      font: 800 1.35rem "Rethink Sans", Arial, sans-serif;
+      padding: 12px 2px 2px;
+    }
+    .cell input:focus {
+      outline: 3px solid var(--brand);
+      outline-offset: -3px;
+    }
+    .cell.correct { background: var(--right); }
+    .cell.incorrect { background: var(--wrong); }
+    .clue-headings,
+    .clue-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .clue-headings div {
+      background: var(--heading);
+      color: var(--ink);
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 14px 16px;
+      border-right: 1.5px solid var(--line);
+      border-top: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+    }
+    .clue-headings div:last-child { border-right: 0; }
+    .clue-body {
+      padding: 18px 16px 20px;
+      column-gap: 34px;
+    }
+    .clue-body ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+    .clue-body li {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+    .clue-body li::marker { font-weight: 800; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 16px 20px;
+      border-top: 1px solid #d8e1ea;
+    }
+    .controls button {
+      border: 2px solid var(--line);
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      padding: 10px 14px;
+    }
+    .controls button.primary {
+      background: var(--brand);
+      color: var(--ink);
+    }
+    .score {
+      margin-left: auto;
+      min-height: 28px;
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+    .trainer-note {
+      max-width: 1056px;
+      margin: 18px auto 0;
+      background: rgba(255,255,255,.9);
+      border: 1.5px solid var(--line);
+      border-left: 8px solid var(--brand);
+      padding: 14px 16px;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+    .copy-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .copy-row button {
+      border: 2px solid #243852;
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 16px 10px 28px; }
+      .topbar {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+      }
+      .home-link,
+      .answer-link { justify-self: center; }
+      .board { min-height: 0; padding: 28px 8px; }
+      .crossword {
+        grid-template-columns: repeat(12, minmax(22px, 1fr));
+        width: 100%;
+      }
+      .cell {
+        width: auto;
+        height: auto;
+        aspect-ratio: 1;
+      }
+      .cell input { font-size: .95rem; padding-top: 9px; }
+      .cell-number { font-size: .54rem; top: 3px; left: 3px; }
+      .clue-headings,
+      .clue-body { grid-template-columns: 1fr; }
+      .clue-body { gap: 10px; }
+      .score { width: 100%; margin-left: 0; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
-      <div class="hero-top">
-        <div class="hero-copy">
-          <div class="hero-kicker">Workplace Vocabulary</div>
-          <h1>Workplace Digital Words Crossword</h1>
-          <p>Practise common digital literacy words used in class, work and online forms. Type one letter in each square, then check your answers.</p>
+    <header class="topbar">
+      <a class="home-link" href="../">All activities</a>
+      <h1>Level 1: Workplace digital words</h1>
+      <button class="answer-link" id="answerLink" type="button">See answers</button>
+    </header>
+
+    <main class="activity">
+      <section class="board" aria-label="Crossword board">
+        <div class="crossword" id="crossword" aria-label="Workplace digital words crossword"></div>
+      </section>
+
+      <section class="clue-headings" aria-hidden="true">
+        <div>Across words</div>
+        <div>Down words</div>
+      </section>
+
+      <section class="clue-body">
+        <div>
+          <ol>
+            <li value="1">Secret word or phrase used to sign in. (8)</li>
+            <li value="3">A message sent online, often for work or class. (5)</li>
+            <li value="4">A file sent with an email. (10)</li>
+          </ol>
         </div>
-        <a class="brand" href="../" aria-label="Return to all activities"><strong>Digital Skills<br>Lab</strong><span>MTC</span></a>
+        <div>
+          <ol>
+            <li value="2">Use Google or another tool to find information online. (6)</li>
+            <li value="5">A page open inside a web browser. (3)</li>
+            <li value="6">A short online conversation or message exchange. (4)</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Crossword controls">
+        <button class="primary" id="checkBtn" type="button">Check answers</button>
+        <button id="hintBtn" type="button">First letters</button>
+        <button id="resetBtn" type="button">Try again</button>
+        <div class="score" id="scoreText" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <aside class="trainer-note">
+      <strong>Classroom note:</strong> Use the clues only. Do not type real passwords, student numbers, banking details or private account information.
+      <div class="copy-row">
+        <button id="copyBtn" type="button">Copy evidence note</button>
+        <span id="copyStatus"></span>
       </div>
-    </section>
-    <nav class="menu" aria-label="Student activities menu">
-      <a href="../">All activities</a>
-      <a href="../google-tasks-practice/">Google Tasks</a>
-      <a href="../social-profile-setup/">Social Profile Setup</a>
-      <a href="./" class="current">Crossword</a>
-    </nav>
-    <p class="notice">Classroom rule: use the clues only. Do not type real passwords, private account details, student numbers, banking details or personal identity information.</p>
-    <div class="layout">
-      <main class="panel">
-        <span class="tag">Student activity</span>
-        <h2>Complete the crossword</h2>
-        <p class="muted">Use the clues on the right. If you get stuck, ask for a hint or work with a partner.</p>
-        <div class="crossword-wrap">
-          <div class="crossword" id="crossword" aria-label="Workplace digital words crossword"></div>
-          <div class="score" id="scoreText" aria-live="polite"></div>
-          <div class="actions">
-            <button class="primary" id="checkBtn">Check answers</button>
-            <button id="hintBtn">Show first letters</button>
-            <button id="revealBtn">Reveal answers</button>
-            <button id="resetBtn">Reset</button>
-          </div>
-        </div>
-        <div class="support">
-          <strong>Support option</strong>
-          <ul>
-            <li>Read each clue aloud.</li>
-            <li>Say the word before typing it.</li>
-            <li>Use the first letters if you need help starting.</li>
-          </ul>
-        </div>
-      </main>
-      <aside class="clues">
-        <span class="tag">Clues</span>
-        <div class="clue-grid">
-          <section>
-            <h2>Across</h2>
-            <ol>
-              <li value="1">A secret word or phrase used to sign in.</li>
-              <li value="3">A message sent online, often for work or class.</li>
-              <li value="4">A file sent with an email.</li>
-            </ol>
-          </section>
-          <section>
-            <h2>Down</h2>
-            <ol>
-              <li value="2">Use Google or another tool to find information online.</li>
-              <li value="5">A page open inside a web browser.</li>
-              <li value="6">A short online conversation or message exchange.</li>
-            </ol>
-          </section>
-        </div>
-        <div class="support">
-          <strong>Extension</strong>
-          <p class="muted">Choose two words and write one workplace sentence for each word.</p>
-        </div>
-      </aside>
-    </div>
-    <section class="summary">
-      <span class="tag">Evidence summary</span>
-      <h2>Copy-ready completion note</h2>
-      <p class="muted">Use this after the activity if you need a simple record of completion.</p>
-      <div class="copy-box" id="summaryBox">The participant completed a workplace digital vocabulary crossword. The activity included common digital literacy words such as password, email, attachment, search, tab and chat. The participant practised reading clues, typing letters accurately, checking answers, and discussing safe online information.</div>
-      <div class="actions" style="justify-content:flex-start;margin-top:12px">
-        <button class="primary" id="copyBtn">Copy note</button>
-      </div>
-    </section>
+    </aside>
   </div>
+
   <script>
     const rows = 6;
     const cols = 12;
@@ -146,6 +301,7 @@
     ];
     const solution = new Map();
     const starts = new Map();
+    const evidenceText = "The participant completed a workplace digital vocabulary crossword. The activity included common digital literacy words such as password, email, attachment, search, tab and chat. The participant practised reading clues, typing letters accurately, checking answers, and discussing safe online information.";
 
     function key(row, col) {
       return `${row}-${col}`;
@@ -233,7 +389,7 @@
         input.parentElement.classList.remove("incorrect");
         input.parentElement.classList.add("correct");
       });
-      document.getElementById("scoreText").textContent = "Answers revealed.";
+      document.getElementById("scoreText").textContent = "Answers are showing.";
     }
 
     function resetGrid() {
@@ -242,20 +398,20 @@
         input.parentElement.classList.remove("correct", "incorrect");
       });
       document.getElementById("scoreText").textContent = "";
+      document.getElementById("copyStatus").textContent = "";
     }
 
     function copySummary() {
-      const text = document.getElementById("summaryBox").textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        document.getElementById("scoreText").textContent = "Completion note copied.";
+      navigator.clipboard.writeText(evidenceText).then(() => {
+        document.getElementById("copyStatus").textContent = "Evidence note copied.";
       }).catch(() => {
-        document.getElementById("scoreText").textContent = "Copy did not work. Please select and copy the note manually.";
+        document.getElementById("copyStatus").textContent = evidenceText;
       });
     }
 
     document.getElementById("checkBtn").addEventListener("click", checkAnswers);
     document.getElementById("hintBtn").addEventListener("click", showFirstLetters);
-    document.getElementById("revealBtn").addEventListener("click", revealAnswers);
+    document.getElementById("answerLink").addEventListener("click", revealAnswers);
     document.getElementById("resetBtn").addEventListener("click", resetGrid);
     document.getElementById("copyBtn").addEventListener("click", copySummary);
     buildGrid();
