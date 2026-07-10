@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MTC Daily Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">MTC Australia · RED-01 Pathway</p>
+      <h1>MTC Daily Assistant</h1>
+    </div>
+    <div class="datebox">
+      <span id="todayLabel">Today</span>
+      <strong id="clockLabel">--:--</strong>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel focus-panel" aria-labelledby="today-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Start here</p>
+          <h2 id="today-heading">Today</h2>
+        </div>
+        <button id="startDayBtn" type="button">Start day</button>
+      </div>
+
+      <label for="mainFocus">Main focus</label>
+      <input id="mainFocus" type="text" placeholder="e.g. PA follow-ups, daily journal, learner support">
+
+      <div class="quick-grid" aria-label="Quick actions">
+        <label class="check-row">
+          <input id="checkCalendar" type="checkbox">
+          <span>Check calendar / teaching day</span>
+        </label>
+        <label class="check-row">
+          <input id="checkJournal" type="checkbox">
+          <span>Review yesterday's journal</span>
+        </label>
+        <label class="check-row">
+          <input id="checkFollowups" type="checkbox">
+          <span>Pick top follow-ups</span>
+        </label>
+        <label class="check-row">
+          <input id="checkCloseoff" type="checkbox">
+          <span>Close off before switching tasks</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="followups-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Carry-over</p>
+          <h2 id="followups-heading">Follow-ups</h2>
+        </div>
+        <button id="addFollowupBtn" type="button">Add</button>
+      </div>
+
+      <div class="add-row">
+        <input id="followupInput" type="text" placeholder="Add a practical next action">
+      </div>
+      <ul id="followupList" class="followup-list" aria-live="polite"></ul>
+    </section>
+
+    <section class="panel notes-panel" aria-labelledby="notes-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Working space</p>
+          <h2 id="notes-heading">Notes</h2>
+        </div>
+        <button id="clearNoteBtn" type="button" class="secondary">Clear note</button>
+      </div>
+
+      <label for="workingNote">Quick note</label>
+      <textarea id="workingNote" rows="10" placeholder="Write the useful facts here. Keep sensitive details brief and work-related."></textarea>
+    </section>
+
+    <section class="panel close-panel" aria-labelledby="close-heading">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Save as you go</p>
+          <h2 id="close-heading">Close-off</h2>
+        </div>
+        <button id="closeOffBtn" type="button">Make journal entry</button>
+      </div>
+
+      <label for="journalOutput">Journal text</label>
+      <textarea id="journalOutput" rows="10" readonly placeholder="Your close-off text will appear here."></textarea>
+
+      <div class="button-row">
+        <button id="copyJournalBtn" type="button">Copy journal text</button>
+        <button id="resetDayBtn" type="button" class="secondary">Reset day</button>
+      </div>
+      <p id="statusMessage" class="status" role="status"></p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
