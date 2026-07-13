@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A respectful, guided digital literacy activity exploring NAIDOC Week 2026 and the theme 50 Years of Deadly.">
+  <title>NAIDOC Week 2026 Digital Research Activity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;700;800&display=swap');
+    :root { --ink:#111; --muted:#4e4e4e; --brand:#fef153; --soft:#f5f5f5; --panel:#fff; --line:#111; --ochre:#b64d22; --green:#1d6b37; --shadow:0 18px 38px rgba(17,17,17,.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:"Rethink Sans",Arial,sans-serif; color:var(--ink); background:radial-gradient(circle at top right,rgba(254,241,83,.55),transparent 24%),linear-gradient(180deg,#fff 0%,#fafafa 100%); }
+    button,input,textarea { font:inherit; }
+    .wrap { max-width:1180px; margin:0 auto; padding:24px 18px 44px; }
+    .hero { position:relative; overflow:hidden; margin-bottom:20px; padding:28px 24px 26px; border:2px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(254,241,83,.98) 0%,rgba(254,241,83,.9) 68%,rgba(255,255,255,.95) 68%); box-shadow:var(--shadow); }
+    .hero::after { content:""; position:absolute; right:-60px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:rgba(182,77,34,.15); }
+    .hero-top { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:flex-start; gap:18px; }
+    .hero-copy { max-width:760px; }
+    .brand-home { flex:0 0 auto; display:inline-block; line-height:0; }
+    .brand-lockup { width:100%; max-width:170px; height:auto; }
+    .kicker,.tag { display:inline-block; padding:7px 12px; border:1.5px solid var(--line); border-radius:999px; background:rgba(255,255,255,.75); font-size:.82rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .kicker { margin-bottom:12px; }
+    h1 { margin:0 0 10px; font-size:2.35rem; line-height:1.02; }
+    .hero p { max-width:68ch; margin:0; font-size:1.02rem; line-height:1.55; }
+    .activity-menu { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px; }
+    .activity-menu a,.button-link,button { display:inline-flex; min-height:44px; align-items:center; justify-content:center; padding:10px 14px; border:1.5px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); font-weight:800; text-decoration:none; cursor:pointer; }
+    .activity-menu a.current,.button-link.primary,button.primary,.step-button.active { background:var(--brand); }
+    .layout { display:grid; grid-template-columns:300px 1fr; gap:18px; }
+    .side,.main,.card,.notice { border:1.5px solid var(--line); border-radius:22px; background:var(--panel); box-shadow:var(--shadow); }
+    .side { position:sticky; top:18px; align-self:start; padding:18px; }
+    .side h2 { margin:0 0 12px; font-size:1.05rem; }
+    .step-list { display:grid; gap:10px; }
+    .step-button { width:100%; justify-content:flex-start; border-radius:16px; text-align:left; }
+    .side-note { margin-top:14px; padding:12px; border:1px solid var(--line); border-radius:16px; background:var(--soft); color:var(--muted); line-height:1.45; }
+    .main { padding:22px; }
+    .stage { display:none; }
+    .stage.active { display:block; }
+    .tag { margin-bottom:10px; background:var(--brand); }
+    h2 { margin:0 0 10px; font-size:1.6rem; }
+    h3 { margin:0 0 8px; font-size:1.08rem; }
+    p,li { line-height:1.55; }
+    ul,ol { padding-left:1.35rem; }
+    .cards,.field-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:16px 0; }
+    .card { padding:16px; box-shadow:none; }
+    .card p { margin:0; color:var(--muted); }
+    .notice { margin:14px 0; padding:16px; border-left:8px solid var(--ochre); background:#fffaf3; box-shadow:none; }
+    .notice p { margin:0; }
+    .task-list { display:grid; gap:10px; margin:14px 0; }
+    .tick { display:flex; gap:10px; align-items:flex-start; padding:12px; border:1.5px solid var(--line); border-radius:16px; background:#fff; font-weight:700; }
+    input[type="checkbox"] { width:20px; height:20px; flex:0 0 20px; margin-top:2px; accent-color:var(--green); }
+    label.field { display:grid; gap:7px; font-weight:800; }
+    textarea,input[type="text"] { width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:14px; background:#fff; }
+    textarea { min-height:92px; resize:vertical; }
+    .source-list { display:grid; gap:12px; margin:16px 0; }
+    .source { padding:14px; border:1.5px solid var(--line); border-radius:16px; background:var(--soft); }
+    .source a { color:var(--ink); font-weight:800; text-underline-offset:3px; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    .status { min-height:24px; margin-top:12px; color:var(--green); font-weight:800; }
+    footer { margin-top:22px; color:var(--muted); font-size:.9rem; line-height:1.5; }
+    @media (max-width:860px) { .hero-top{flex-direction:column-reverse}.brand-lockup{max-width:150px}h1{font-size:2rem}.layout{grid-template-columns:1fr}.side{position:static}.cards,.field-grid{grid-template-columns:1fr} }
+    @media print { body{background:#fff}.activity-menu,.side,.actions{display:none}.layout{display:block}.main,.card,.notice{box-shadow:none}.stage{display:block!important;break-inside:avoid}.stage+.stage{margin-top:28px;border-top:2px solid #111;padding-top:20px}.wrap{max-width:none;padding:0}.hero{box-shadow:none} }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="hero-copy">
+          <div class="kicker">MTC FutureReady Digital Skills</div>
+          <h1>NAIDOC Week 2026: 50 Years of Deadly</h1>
+          <p>Explore the official NAIDOC website, learn what the 2026 theme means, and practise respectful online research. This activity is designed for adult learners and can be completed individually or with support.</p>
+        </div>
+        <a class="brand-home" href="../" aria-label="Return to MTC Student Activities home page"><img class="brand-lockup" src="../assets/MTC_Logo_Black_RGB.png" alt="MTC FutureReady logo"></a>
+      </div>
+    </header>
+
+    <nav class="activity-menu" aria-label="Activity navigation">
+      <a href="../">Home</a>
+      <a class="current" href="./">NAIDOC 2026</a>
+      <a href="../abc-website-activity/">ABC Website</a>
+      <a href="../virtual-gallery-practice/">Virtual Gallery</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Activity steps</h2>
+        <div class="step-list">
+          <button class="step-button active" data-stage="start">1. Start here</button>
+          <button class="step-button" data-stage="week">2. What is NAIDOC Week?</button>
+          <button class="step-button" data-stage="theme">3. Explore the 2026 theme</button>
+          <button class="step-button" data-stage="history">4. Look back at themes</button>
+          <button class="step-button" data-stage="create">5. Create and share</button>
+          <button class="step-button" data-stage="reflect">6. Reflection and evidence</button>
+          <button class="step-button" data-stage="sources">7. Official sources</button>
+        </div>
+        <div class="side-note"><strong>Key idea:</strong> Learn from First Nations-led and official sources. Listen carefully, use respectful language and do not copy artwork without permission.</div>
+      </aside>
+
+      <main class="main">
+        <section id="start" class="stage active">
+          <span class="tag">60–90 minutes</span>
+          <h2>Start here</h2>
+          <p>National NAIDOC Week celebrates and recognises the history, cultures and achievements of Aboriginal and Torres Strait Islander peoples. In 2026, it was held from <strong>5–12 July</strong>.</p>
+          <div class="cards">
+            <article class="card"><h3>Learning goals</h3><p>Navigate an official website, identify key information, take brief notes, compare themes and credit your sources.</p></article>
+            <article class="card"><h3>You will need</h3><p>A browser, this activity page, headphones if using audio, and a document or paper for extra notes.</p></article>
+          </div>
+          <div class="notice"><h3>Respectful-content notice</h3><p>The official NAIDOC website advises Aboriginal and Torres Strait Islander people that it may contain images and voices of deceased people. You may skip any item, ask the trainer for an alternative, or work with a partner.</p></div>
+          <div class="task-list">
+            <label class="tick"><input type="checkbox">I understand that “deadly” can be a positive Aboriginal English word meaning excellent, strong or impressive.</label>
+            <label class="tick"><input type="checkbox">I will use official or First Nations-led sources and respectful language.</label>
+            <label class="tick"><input type="checkbox">I will not copy or change First Nations artwork without checking permission and licence conditions.</label>
+          </div>
+          <a class="button-link primary" href="https://www.naidoc.org.au/" target="_blank" rel="noopener">Open the official NAIDOC website</a>
+        </section>
+
+        <section id="week" class="stage">
+          <span class="tag">Website research</span>
+          <h2>What is NAIDOC Week?</h2>
+          <ol>
+            <li>Open the official National NAIDOC Week page.</li>
+            <li>Find one sentence that explains the purpose of the week.</li>
+            <li>Rewrite the idea in your own words. Do not copy a full paragraph.</li>
+          </ol>
+          <a class="button-link primary" href="https://www.naidoc.org.au/about/naidoc-week" target="_blank" rel="noopener">Open National NAIDOC Week</a>
+          <div class="field-grid">
+            <label class="field">The purpose of NAIDOC Week, in my own words:<textarea data-save="purpose"></textarea></label>
+            <label class="field">One fact I learned:<textarea data-save="fact"></textarea></label>
+          </div>
+          <div class="notice"><h3>Support option</h3><p>Use the website's Listen feature, read one paragraph at a time, or ask the trainer to model how to find the main idea.</p></div>
+        </section>
+
+        <section id="theme" class="stage">
+          <span class="tag">2026 theme</span>
+          <h2>Explore “50 Years of Deadly”</h2>
+          <p>The official theme page describes the milestone as a tribute to Elders, organisers, artists and communities, and as a time to look back at stories, marches, languages, art and leadership.</p>
+          <a class="button-link primary" href="https://www.naidoc.org.au/about/naidoc-theme" target="_blank" rel="noopener">Open the official theme page</a>
+          <div class="field-grid">
+            <label class="field">What does the theme celebrate?<textarea data-save="theme-celebrate"></textarea></label>
+            <label class="field">Choose one key word from the page. Why is it important?<textarea data-save="theme-word"></textarea></label>
+          </div>
+          <h3>Check your understanding</h3>
+          <div class="task-list">
+            <label class="tick"><input type="checkbox">The theme marks five decades of NAIDOC Week.</label>
+            <label class="tick"><input type="checkbox">The theme looks at both past achievements and the future.</label>
+            <label class="tick"><input type="checkbox">NAIDOC is more than a single week of events.</label>
+          </div>
+        </section>
+
+        <section id="history" class="stage">
+          <span class="tag">Compare information</span>
+          <h2>Look back at earlier themes</h2>
+          <p>Open the official history of themes. Choose any two themes from different years. Read the titles and short explanations, then compare them.</p>
+          <a class="button-link primary" href="https://www.naidoc.org.au/about/history" target="_blank" rel="noopener">Open NAIDOC history</a>
+          <div class="field-grid">
+            <label class="field">Year and theme 1:<input type="text" data-save="history-one"><span>What was its main message?</span><textarea data-save="history-one-message"></textarea></label>
+            <label class="field">Year and theme 2:<input type="text" data-save="history-two"><span>What was its main message?</span><textarea data-save="history-two-message"></textarea></label>
+          </div>
+          <label class="field">One similarity or difference between the themes:<textarea data-save="history-compare"></textarea></label>
+          <div class="notice"><h3>Challenge option</h3><p>Explain how one earlier theme connects with “50 Years of Deadly”. Use two or three sentences.</p></div>
+        </section>
+
+        <section id="create" class="stage">
+          <span class="tag">Choose one activity</span>
+          <h2>Create and share respectfully</h2>
+          <div class="cards">
+            <article class="card"><h3>Option A: Digital timeline</h3><p>Create three timeline entries: an earlier NAIDOC theme, a middle year, and 2026. Add a short source credit.</p></article>
+            <article class="card"><h3>Option B: Theme word cloud</h3><p>Choose 8–12 respectful words from the official theme page. Highlight three and explain why they matter.</p></article>
+            <article class="card"><h3>Option C: Community event search</h3><p>Find a NAIDOC event from an official organisation. Record the organiser, location, date and source link.</p></article>
+            <article class="card"><h3>Option D: 60-second explanation</h3><p>Prepare a short spoken explanation of the 2026 theme using your own words and two accurate facts.</p></article>
+          </div>
+          <label class="field">My chosen activity and plan:<textarea data-save="create-plan"></textarea></label>
+          <div class="task-list">
+            <label class="tick"><input type="checkbox">My work uses my own words.</label>
+            <label class="tick"><input type="checkbox">I included the source title and website link.</label>
+            <label class="tick"><input type="checkbox">I checked spelling, respectful terminology and accuracy.</label>
+            <label class="tick"><input type="checkbox">I did not copy artwork or photos without permission.</label>
+          </div>
+        </section>
+
+        <section id="reflect" class="stage">
+          <span class="tag">Finish and review</span>
+          <h2>Reflection and evidence</h2>
+          <div class="field-grid">
+            <label class="field">One important thing I learned:<textarea data-save="reflection-learned"></textarea></label>
+            <label class="field">One digital skill I practised:<textarea data-save="reflection-skill"></textarea></label>
+            <label class="field">One question I still have:<textarea data-save="reflection-question"></textarea></label>
+            <label class="field">Support I used, if any:<textarea data-save="reflection-support"></textarea></label>
+          </div>
+          <h3>Evidence checklist</h3>
+          <div class="task-list">
+            <label class="tick"><input type="checkbox">I navigated the official NAIDOC website.</label>
+            <label class="tick"><input type="checkbox">I identified the 2026 dates and theme.</label>
+            <label class="tick"><input type="checkbox">I compared information from two years.</label>
+            <label class="tick"><input type="checkbox">I created or planned a respectful activity.</label>
+            <label class="tick"><input type="checkbox">I showed my completed work to the trainer.</label>
+          </div>
+          <div class="actions"><button class="primary" id="save-status" type="button">Save my progress</button><button id="print-page" type="button">Print or save as PDF</button><button id="clear-page" type="button">Clear my answers</button></div>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+        </section>
+
+        <section id="sources" class="stage">
+          <span class="tag">Cross-checked sources</span>
+          <h2>Official information used in this activity</h2>
+          <p>These links were checked when this activity was prepared. Use them instead of relying only on a general web search.</p>
+          <div class="source-list">
+            <div class="source"><a href="https://www.naidoc.org.au/about/naidoc-week" target="_blank" rel="noopener">National NAIDOC Week</a><br>Purpose, dates and general information.</div>
+            <div class="source"><a href="https://www.naidoc.org.au/about/naidoc-theme" target="_blank" rel="noopener">2026 National NAIDOC Theme</a><br>Official explanation of “50 Years of Deadly”.</div>
+            <div class="source"><a href="https://www.naidoc.org.au/resources/educational" target="_blank" rel="noopener">NAIDOC Educational Resources</a><br>Official and partner resources for educators and learners.</div>
+            <div class="source"><a href="https://www.naidoc.org.au/about/history" target="_blank" rel="noopener">NAIDOC history</a><br>Background information and earlier themes.</div>
+          </div>
+          <div class="notice"><h3>Trainer note</h3><p>Use this activity as guided learning, not as a test of a learner's identity or personal cultural knowledge. Accept verbal responses, shared navigation or scribed answers where appropriate.</p></div>
+        </section>
+      </main>
+    </div>
+    <footer>Prepared for MTC Australia SEE, Redfern RED-01 Pathway. Information cross-checked against the official National NAIDOC website on 14 July 2026. Learners should confirm current event details on the original source website.</footer>
+  </div>
+  <script>
+    const buttons = [...document.querySelectorAll('.step-button')];
+    const stages = [...document.querySelectorAll('.stage')];
+    const fields = [...document.querySelectorAll('[data-save]')];
+    const checks = [...document.querySelectorAll('input[type="checkbox"]')];
+    const storageKey = 'mtc-naidoc-2026-activity';
+
+    function showStage(id) {
+      stages.forEach(stage => stage.classList.toggle('active', stage.id === id));
+      buttons.forEach(button => button.classList.toggle('active', button.dataset.stage === id));
+      document.querySelector('.main').scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+    buttons.forEach(button => button.addEventListener('click', () => showStage(button.dataset.stage)));
+
+    function saveProgress(message = '') {
+      const data = { fields:{}, checks:checks.map(check => check.checked) };
+      fields.forEach(field => data.fields[field.dataset.save] = field.value);
+      localStorage.setItem(storageKey, JSON.stringify(data));
+      document.getElementById('status').textContent = message;
+    }
+    function loadProgress() {
+      try {
+        const data = JSON.parse(localStorage.getItem(storageKey));
+        if (!data) return;
+        fields.forEach(field => field.value = data.fields?.[field.dataset.save] || '');
+        checks.forEach((check,index) => check.checked = Boolean(data.checks?.[index]));
+      } catch (_) { localStorage.removeItem(storageKey); }
+    }
+    fields.forEach(field => field.addEventListener('input', () => saveProgress()));
+    checks.forEach(check => check.addEventListener('change', () => saveProgress()));
+    document.getElementById('save-status').addEventListener('click', () => saveProgress('Progress saved on this device.'));
+    document.getElementById('print-page').addEventListener('click', () => window.print());
+    document.getElementById('clear-page').addEventListener('click', () => {
+      if (!confirm('Clear all answers and ticked boxes on this device?')) return;
+      fields.forEach(field => field.value = '');
+      checks.forEach(check => check.checked = false);
+      localStorage.removeItem(storageKey);
+      document.getElementById('status').textContent = 'Answers cleared.';
+    });
+    loadProgress();
+  </script>
+</body>
+</html>
